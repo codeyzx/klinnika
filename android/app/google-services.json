@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "2407716269",
+    "project_id": "klinnika-5ea40",
+    "storage_bucket": "klinnika-5ea40.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2407716269:android:fdb3cf7b45202e637fbd24",
+        "android_client_info": {
+          "package_name": "com.example.klinnika"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2407716269-do84vbamgaj3kqv89g7vjk6ud25mpvgd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5R25w8nURGftVPO9btxLnU7lc7iNAcCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2407716269-do84vbamgaj3kqv89g7vjk6ud25mpvgd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
