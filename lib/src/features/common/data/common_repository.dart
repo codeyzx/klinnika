@@ -1,13 +1,36 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:klinnika/src/features/auth/data/responses/responses.dart';
 import 'package:klinnika/src/features/common/data/responses/responses.dart';
+import 'package:klinnika/src/features/common/domain/queue.dart';
 import 'package:klinnika/src/services/services.dart';
 
 class CommonRepository {
-  // final db = FirebaseFirestore.instance.collection('tickets').withConverter(
-  //       fromFirestore: (snapshot, _) => RequestTicket.fromJson(snapshot.data()!.toString()),
-  //       toFirestore: (RequestTicket ticket, _) => ticket.toJson(),
-  //     );
+  final queueDb = FirebaseFirestore.instance.collection('queue').withConverter(
+        fromFirestore: (snapshot, _) => Queue.fromJson(snapshot.data()!),
+        toFirestore: (Queue queue, _) => queue.toJson(),
+      );
+
+  Future<Result<List<Queue>>> fetchQueues({required String doctorId}) async {
+    try {
+      final data = await queueDb.where('doctorId', isEqualTo: doctorId).get();
+      final queueList = data.docs.map((e) => e.data()).toList();
+      return Result.success(queueList);
+    } catch (e, st) {
+      return Result.failure(NetworkExceptions.getFirebaseException(e), st);
+    }
+  }
+
+  Future<Result<String?>> postQueue(Queue queue) async {
+    try {
+      final ref = queueDb.doc();
+      final temp = queue.copyWith(id: ref.id);
+      await ref.set(temp);
+      return const Result.success('Success');
+    } catch (e, st) {
+      return Result.failure(NetworkExceptions.getFirebaseException(e), st);
+    }
+  }
 
   Future<Result<List<EventResponse>>> fetchEvents() async {
     try {
@@ -18,7 +41,7 @@ class CommonRepository {
 
       return const Result.success([]);
     } catch (e, st) {
-      return Result.failure(NetworkExceptions.getDioException(e), st);
+      return Result.failure(NetworkExceptions.getFirebaseException(e), st);
     }
   }
 
@@ -31,7 +54,7 @@ class CommonRepository {
 
       return const Result.success(EventResponse());
     } catch (e, st) {
-      return Result.failure(NetworkExceptions.getDioException(e), st);
+      return Result.failure(NetworkExceptions.getFirebaseException(e), st);
     }
   }
 
@@ -47,7 +70,7 @@ class CommonRepository {
   //     // await ref.set(temp);
   //     return const Result.success(ApiResponse(message: 'Success'));
   //   } catch (e, st) {
-  //     return Result.failure(NetworkExceptions.getDioException(e), st);
+  //     return Result.failure(NetworkExceptions.getFirebaseException(e), st);
   //   }
   // }
 
@@ -63,7 +86,7 @@ class CommonRepository {
       // final user = UserResponse.fromJson(resultBody);
       return const Result.success(UserResponse());
     } catch (e, st) {
-      return Result.failure(NetworkExceptions.getDioException(e), st);
+      return Result.failure(NetworkExceptions.getFirebaseException(e), st);
     }
   }
 
@@ -80,7 +103,7 @@ class CommonRepository {
       // return Result.success(user);
       return const Result.success(MyEventResponse());
     } catch (e, st) {
-      return Result.failure(NetworkExceptions.getDioException(e), st);
+      return Result.failure(NetworkExceptions.getFirebaseException(e), st);
     }
   }
 }

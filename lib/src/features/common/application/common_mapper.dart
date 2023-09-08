@@ -1,17 +1,18 @@
+import 'package:klinnika/src/features/common/domain/queue.dart';
 import 'package:klinnika/src/features/data.dart';
 import 'package:klinnika/src/features/domain.dart';
 import 'package:klinnika/src/services/services.dart';
 
 class CommonMapper {
   static Result<Home> mapToHome(
-    Result<List<EventResponse>> result,
+    Result<List<Queue>> result,
   ) {
     return result.when(
       success: (data) {
-        List<Event> event = [...data.map((e) => Event.fromResponse(e))];
+        List<Queue> queue = [...data];
         return Result.success(
           Home(
-            eventListItems: event,
+            queueList: queue,
           ),
         );
       },

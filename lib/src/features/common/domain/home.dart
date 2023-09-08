@@ -1,8 +1,8 @@
-import 'package:klinnika/src/features/common/domain/domain.dart';
+import 'package:klinnika/src/features/common/domain/queue.dart';
 
 class Home {
-  final List<Event> eventListItems;
+  final List<Queue> queueList;
   Home({
-    required this.eventListItems,
+    required this.queueList,
   });
 }

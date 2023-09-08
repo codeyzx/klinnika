@@ -19,7 +19,7 @@ enum Routes {
   register,
   home,
   eventDetail,
-  checkout,
+  checkup,
   ticketDetail,
 }
 
