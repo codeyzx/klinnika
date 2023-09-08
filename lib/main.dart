@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:klinnika/firebase_options.dart';
 import 'package:klinnika/src/constants/constants.dart';
-import 'package:klinnika/src/constants/themes/palette.dart';
 import 'package:klinnika/src/routes/routes.dart';
 
 void main() async {
@@ -96,7 +95,6 @@ final _appTheme = ThemeData(
     circularTrackColor: ColorApp.white,
     color: ColorApp.orange,
   ),
-  primarySwatch: Palette.color,
   dividerColor: Colors.transparent,
   fontFamily: 'Poppins',
   appBarTheme: AppBarTheme(
@@ -112,16 +110,16 @@ final _appTheme = ThemeData(
   iconTheme: const IconThemeData(
     color: Colors.white,
   ),
-  scaffoldBackgroundColor: Palette.colorWhite,
+  scaffoldBackgroundColor: ColorApp.white,
   textTheme: TextTheme(
     titleLarge: TextStyle(fontSize: ScreenUtil().setSp(18), fontWeight: FontWeight.w600, color: Colors.red),
     bodyLarge: TextStyle(fontSize: ScreenUtil().setSp(14), fontWeight: FontWeight.w600, color: Colors.yellow),
     bodyMedium: TextStyle(fontSize: ScreenUtil().setSp(14), fontWeight: FontWeight.w600, color: ColorApp.gray),
     labelLarge: TextStyle(fontSize: ScreenUtil().setSp(14), fontWeight: FontWeight.w600, color: Colors.blue),
   ),
-  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
     elevation: 1,
-    backgroundColor: Palette.colorWhite,
+    backgroundColor: ColorApp.white,
     selectedItemColor: ColorApp.primary,
     unselectedItemColor: ColorApp.gray,
     showUnselectedLabels: true,

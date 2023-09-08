@@ -8,6 +8,7 @@ class HomeState {
   final bool isExploreActive;
   final bool isEventsActive;
   final bool isProfileActive;
+  final bool isLastPage;
   final int currentIndex;
   final Widget currentScreen;
   final AsyncValue<Home?> homeValue;
@@ -20,6 +21,7 @@ class HomeState {
     this.isExploreActive = false,
     this.isEventsActive = false,
     this.isProfileActive = false,
+    this.isLastPage = false,
     this.currentIndex = 0,
     this.currentScreen = const HomePage(),
     this.homeValue = const AsyncLoading(),
@@ -33,6 +35,7 @@ class HomeState {
     bool? isExploreActive,
     bool? isEventsActive,
     bool? isProfileActive,
+    bool? isLastPage,
     int? currentIndex,
     Widget? currentScreen,
     AsyncValue<Home?>? homeValue,
@@ -45,6 +48,7 @@ class HomeState {
       isExploreActive: isExploreActive ?? this.isExploreActive,
       isEventsActive: isEventsActive ?? this.isEventsActive,
       isProfileActive: isProfileActive ?? this.isProfileActive,
+      isLastPage: isLastPage ?? this.isLastPage,
       currentIndex: currentIndex ?? this.currentIndex,
       currentScreen: currentScreen ?? this.currentScreen,
       homeValue: homeValue ?? this.homeValue,

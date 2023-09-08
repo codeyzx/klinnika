@@ -76,6 +76,12 @@ class HomeController extends StateNotifier<HomeState> {
     );
   }
 
+  void setLastPage(bool value) {
+    state = state.copyWith(
+      isLastPage: value,
+    );
+  }
+
   Widget _getScreen(index) {
     switch (index) {
       case 0:

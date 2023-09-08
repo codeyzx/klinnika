@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:klinnika/src/common_widgets/common_widgets.dart';
 import 'package:klinnika/src/constants/constants.dart';
-import 'package:klinnika/src/constants/themes/palette.dart';
 import 'package:klinnika/src/shared/extensions/extensions.dart';
 
 enum ButtonType {
@@ -72,7 +71,7 @@ class ButtonWidget extends StatelessWidget {
   Color getFocusColor() => color.isNotNull()
       ? color!.withOpacity(.7)
       : buttonType == ButtonType.primary
-          ? Palette.color.shade300
+          ? ColorApp.primary.withOpacity(.7)
           : ColorApp.gray;
 
   bool get isPrimary => buttonType == ButtonType.primary;
@@ -93,7 +92,7 @@ class ButtonWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.r),
           boxShadow: [
             BoxShadow(
-              color: Palette.color.shade200,
+              color: ColorApp.primary.withOpacity(.7),
               blurRadius: 35,
               offset: const Offset(0, 10),
             ),

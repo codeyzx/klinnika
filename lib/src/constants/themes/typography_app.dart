@@ -38,4 +38,40 @@ class TypographyApp {
     fontWeight: FontWeight.w300,
     color: ColorApp.black,
   );
+
+  static TextStyle splashLogoName = TextStyle(
+    color: ColorApp.secondary,
+    fontWeight: FontWeight.w700,
+    fontSize: 24.sp,
+  );
+
+  static TextStyle splashBy =
+      TextStyle(color: ColorApp.splash, fontWeight: FontWeight.w500, fontSize: 12.sp, letterSpacing: 0.6.sp);
+
+  static TextStyle splashTeamName =
+      TextStyle(color: ColorApp.primary, fontWeight: FontWeight.w600, fontSize: 16.sp, letterSpacing: 0.48.sp);
+
+  static TextStyle onBoardTitle = TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.w600,
+    fontSize: 20.sp,
+  );
+
+  static TextStyle onBoardSubTitle = TextStyle(
+    color: Colors.black.withOpacity(0.80),
+    fontWeight: FontWeight.w300,
+    fontSize: 16.sp,
+  );
+
+  static TextStyle onBoardBtnText = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.w600,
+    fontSize: 16.sp,
+  );
+
+  static TextStyle onBoardUnBtnText = TextStyle(
+    color: ColorApp.primary,
+    fontWeight: FontWeight.w600,
+    fontSize: 16.sp,
+  );
 }

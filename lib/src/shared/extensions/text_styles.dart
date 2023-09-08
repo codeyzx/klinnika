@@ -28,8 +28,6 @@ extension XTextStyle on TextStyle {
   TextStyle get grey => copyWith(color: ColorApp.gray);
   TextStyle get white => copyWith(color: ColorApp.white);
   TextStyle get black => copyWith(color: ColorApp.black);
-  TextStyle get red => copyWith(color: ColorApp.red);
-  TextStyle get darkRed => copyWith(color: ColorApp.red);
   TextStyle get green => copyWith(color: Colors.green);
 
   /// [INFO]

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:klinnika/src/features/common/presentation/home/home_botnavbar_page.dart';
+import 'package:klinnika/src/features/common/presentation/onboard/onboard_page.dart';
 
 import 'package:klinnika/src/features/common/presentation/splash/splash_page.dart';
 
@@ -11,6 +12,7 @@ import 'package:klinnika/src/routes/routes.dart';
 
 enum Routes {
   splash,
+  onboard,
   jailbreak,
   login,
   search,
@@ -36,6 +38,11 @@ final goRouterProvider = Provider<GoRouter>(
           path: '/splash',
           name: Routes.splash.name,
           builder: (context, state) => const SplashPage(),
+        ),
+        GoRoute(
+          path: '/onboard',
+          name: Routes.onboard.name,
+          builder: (context, state) => const OnboardPage(),
         ),
         GoRoute(
           path: '/home',

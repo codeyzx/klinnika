@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:klinnika/src/constants/constants.dart';
-import 'package:klinnika/src/constants/themes/palette.dart';
 import 'package:klinnika/src/shared/extensions/extensions.dart';
 
 enum InputFormType {
@@ -82,7 +81,7 @@ class InputFormWidget extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.r),
           borderSide: BorderSide(
-            color: Palette.colorGray.shade200,
+            color: ColorApp.gray.withOpacity(.7),
             width: 1.w,
           ),
         ),

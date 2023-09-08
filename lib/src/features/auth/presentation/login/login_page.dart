@@ -47,7 +47,7 @@ class LoginPage extends ConsumerWidget {
                 const LoginFormSection(),
                 Gap.h32,
                 const LoginButtonSection(),
-                const Spacer(),
+                Gap.h48,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

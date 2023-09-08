@@ -92,12 +92,49 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/ellipse_img_1.png
+  AssetGenImage get ellipseImg1 =>
+      const AssetGenImage('assets/images/ellipse_img_1.png');
+
+  /// File path: assets/images/ellipse_img_2.png
+  AssetGenImage get ellipseImg2 =>
+      const AssetGenImage('assets/images/ellipse_img_2.png');
+
+  /// File path: assets/images/ellipse_img_3.png
+  AssetGenImage get ellipseImg3 =>
+      const AssetGenImage('assets/images/ellipse_img_3.png');
+
   /// File path: assets/images/ic_launcher.png
   AssetGenImage get icLauncher =>
       const AssetGenImage('assets/images/ic_launcher.png');
 
+  /// File path: assets/images/klinnika_logo.png
+  AssetGenImage get klinnikaLogo =>
+      const AssetGenImage('assets/images/klinnika_logo.png');
+
+  /// File path: assets/images/onboard_img_1.png
+  AssetGenImage get onboardImg1 =>
+      const AssetGenImage('assets/images/onboard_img_1.png');
+
+  /// File path: assets/images/onboard_img_2.png
+  AssetGenImage get onboardImg2 =>
+      const AssetGenImage('assets/images/onboard_img_2.png');
+
+  /// File path: assets/images/onboard_img_3.png
+  AssetGenImage get onboardImg3 =>
+      const AssetGenImage('assets/images/onboard_img_3.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [icLauncher];
+  List<AssetGenImage> get values => [
+        ellipseImg1,
+        ellipseImg2,
+        ellipseImg3,
+        icLauncher,
+        klinnikaLogo,
+        onboardImg1,
+        onboardImg2,
+        onboardImg3
+      ];
 }
 
 class Assets {

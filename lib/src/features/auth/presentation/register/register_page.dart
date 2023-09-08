@@ -6,6 +6,7 @@ import 'package:klinnika/src/constants/constants.dart';
 import 'package:klinnika/src/features/presentation.dart';
 import 'package:klinnika/src/routes/routes.dart';
 import 'package:klinnika/src/services/services.dart';
+import 'package:klinnika/src/shared/extensions/build_context.dart';
 
 class RegisterPage extends ConsumerWidget {
   const RegisterPage({super.key});
@@ -35,13 +36,13 @@ class RegisterPage extends ConsumerWidget {
           child: PaddingWidget(
             child: Column(
               children: [
-                const Spacer(),
+                Gap.customGapHeight(context.screenHeightPercentage(.15)),
                 const TopBarWidget(),
                 Gap.h32,
                 const RegisterFormSection(),
                 Gap.h32,
                 const RegisterButtonSection(),
-                const Spacer(),
+                Gap.h32,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

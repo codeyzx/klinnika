@@ -28,7 +28,7 @@ class HomePage extends ConsumerWidget {
                       const Center(child: Text('Home Page')),
                       ElevatedButton(
                           onPressed: () async {
-                            context.pushNamed(Routes.login.name);
+                            context.pushNamed(Routes.onboard.name);
                           },
                           child: const Text('Go To Login Page'))
                     ],
