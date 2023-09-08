@@ -14,4 +14,5 @@ class ColorApp {
   static const Color gray = Color(0xFFE5E5E5);
   static const Color red = Color(0xFFF2583E);
   static Color splash = HexColor("#606060");
+  static Color secondaryBlue = HexColor("#094067");
 }
