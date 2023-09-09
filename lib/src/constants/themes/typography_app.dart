@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:klinnika/src/constants/constants.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TypographyApp {
   static TextStyle headline1 = TextStyle(
@@ -109,6 +110,56 @@ class TypographyApp {
   static TextStyle loginForgot= TextStyle(
     color: ColorApp.primary,
     fontWeight: FontWeight.w500,
+    fontSize: 14.sp,
+  );
+  static TextStyle queueAppbarSmall = GoogleFonts.montserrat(
+    color: ColorApp.secondaryBlue,
+    fontWeight: FontWeight.w700,
+    fontSize: 16.sp,
+  );
+  static TextStyle queueOnBtn = GoogleFonts.montserrat(
+    color: Colors.white,
+    fontWeight: FontWeight.w600,
+    fontSize: 16.sp,
+  );
+  static TextStyle queueDetName= GoogleFonts.montserrat(
+    color: ColorApp.secondaryBlue,
+    fontWeight: FontWeight.w700,
+    fontSize: 16.sp,
+  );
+  static TextStyle queueDetNum = GoogleFonts.montserrat(
+    color: ColorApp.secondaryBlue,
+    fontWeight: FontWeight.w500,
+    fontSize: 14.sp,
+  );
+  static TextStyle queueOnWhiteBtn = GoogleFonts.montserrat(
+    color: ColorApp.primary,
+    fontWeight: FontWeight.w600,
+    fontSize: 16.sp,
+  );
+  static TextStyle queueDetLabel = GoogleFonts.montserrat(
+    color: HexColor('#5F6C7B'),
+    fontWeight: FontWeight.w500,
+    fontSize: 14.sp,
+  );
+  static TextStyle queueDetValue = GoogleFonts.montserrat(
+    color: ColorApp.secondaryBlue,
+    fontWeight: FontWeight.w600,
+    fontSize: 14.sp,
+  );
+  static TextStyle queueDetTitle = GoogleFonts.montserrat(
+    color: ColorApp.secondaryBlue,
+    fontWeight: FontWeight.w600,
+    fontSize: 16.sp,
+  );
+  static TextStyle queueDetIll = GoogleFonts.montserrat(
+    color: ColorApp.primary,
+    fontWeight: FontWeight.w600,
+    fontSize: 12.sp,
+  );
+  static TextStyle queueDesc = GoogleFonts.montserrat(
+    color: HexColor('#5F6C7B'),
+    fontWeight: FontWeight.w400,
     fontSize: 14.sp,
   );
 }

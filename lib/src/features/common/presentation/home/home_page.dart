@@ -4,7 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:klinnika/src/common_widgets/common_widgets.dart';
 import 'package:klinnika/src/constants/constants.dart';
 import 'package:klinnika/src/features/common/presentation/home/home_controller.dart';
-import 'package:klinnika/src/routes/app_routes.dart';
+import 'package:klinnika/src/features/queue/presentation/detail_patient/detail_patient_page.dart';
+import 'package:klinnika/src/routes/routes.dart';
+import 'package:klinnika/src/shared/extensions/build_context.dart';
+
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -165,6 +168,13 @@ class HomePage extends ConsumerWidget {
                               ),
                             );
                           },
+                          child: const Text('Go To Login Page')),
+                      ElevatedButton(
+                          onPressed: () async {
+                           Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailPatientPage()));
+                          },
+                          child: const Text('Go To Detail Pasien Page'))
+                    ],
                         ),
                       ],
                     ),
