@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:klinnika/src/constants/constants.dart';
 import 'package:klinnika/src/shared/extensions/extensions.dart';
 
@@ -74,14 +75,17 @@ class InputFormWidget extends StatelessWidget {
       obscureText: isObscure,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: validator,
+      style: TypographyApp.loginOnInput,
+      keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
         errorText: errorText,
         hintText: hintText,
-        hintStyle: TypographyApp.text1.grey,
+        hintStyle: TypographyApp.loginOffInput,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(5.r),
           borderSide: BorderSide(
-            color: ColorApp.gray.withOpacity(.7),
+            color: HexColor('#9D9D9D'),
             width: 1.w,
           ),
         ),
@@ -91,15 +95,14 @@ class InputFormWidget extends StatelessWidget {
                 onTap: onObscureTap,
                 child: Icon(
                   !isObscure ? Icons.visibility_outlined : Icons.visibility_off_outlined,
-                  size: 26,
-                  color: Colors.grey.shade400,
+                  size: 23,
+                  color: HexColor('#9D9D9D'),
                 ),
               )
             : const SizedBox.shrink(),
       ),
       readOnly: readOnly,
       onTap: onTap,
-      style: TypographyApp.text1,
     );
   }
 }
