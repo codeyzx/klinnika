@@ -224,7 +224,7 @@ class OnboardPage extends ConsumerWidget {
                     ),
                     SizedBox(
                       width: 320.w,
-                      height: 42.h,
+                      height: 50.h,
                       child: TextButton(
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(ColorApp.primary),
@@ -274,7 +274,7 @@ class OnboardPage extends ConsumerWidget {
                       children: [
                         SizedBox(
                           width: 120.w,
-                          height: 42.h,
+                          height: 50.h,
                           child: TextButton(
                             onPressed: () {
                               controller.jumpToPage(2);
@@ -287,7 +287,7 @@ class OnboardPage extends ConsumerWidget {
                         ),
                         SizedBox(
                           width: 120.w,
-                          height: 42.h,
+                          height: 50.h,
                           child: TextButton(
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(ColorApp.primary),

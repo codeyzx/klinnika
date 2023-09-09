@@ -27,61 +27,23 @@ class LoginFormSection extends ConsumerWidget {
               style: TypographyApp.loginTitle,
             ),
             SizedBox(height: 24.h,),
-            TextFormField(
+            InputFormWidget(
               controller: controller.emailController,
-              keyboardType: TextInputType.emailAddress,
-              style: TypographyApp.loginOnInput,
-              decoration: InputDecoration(
-                hintText: 'Email',
-                hintStyle: TypographyApp.loginOffInput,
-                border: OutlineInputBorder(),
-                contentPadding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Email Required';
-                }else if(!EmailValidator.validate(value)){
-                  return 'Please enter correct email';
-                }else{
-                  return null;
-                }
-              },
+              onChanged: (value) {},
+              hintText: 'Email',
+              prefixIcon: Icons.email_outlined,
+              validator: controller.validateEmail,
             ),
             SizedBox(height: 16.h,),
-            TextFormField(
+            InputFormWidget.password(
               controller: controller.passwordController,
-              style: TypographyApp.loginOnInput,
-              obscureText: state.isObscure,
-              decoration: InputDecoration(
-                hintText: 'Password',
-                hintStyle: TypographyApp.loginOffInput,
-                border: OutlineInputBorder(),
-                contentPadding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Password Required';
-                }
-                return null;
-              },
+              onChanged: (value) {},
+              hintText: 'Password',
+              isObscure: state.isObscure,
+              prefixIcon: Icons.lock_outline,
+              onObscureTap: controller.onObscureTap,
+              validator: controller.validatePassword,
             ),
-            // InputFormWidget(
-            //   controller: controller.emailController,
-            //   onChanged: (value) {},
-            //   hintText: 'Email',
-            //   prefixIcon: Icons.email_outlined,
-            //   validator: controller.validateEmail,
-            // ),
-            // SizedBox(height: 16.h,),
-            // InputFormWidget.password(
-            //   controller: controller.passwordController,
-            //   onChanged: (value) {},
-            //   hintText: 'Password',
-            //   isObscure: state.isObscure,
-            //   prefixIcon: Icons.lock_outline,
-            //   onObscureTap: controller.onObscureTap,
-            //   validator: controller.validatePassword,
-            // ),
           ],
         ),
       ),

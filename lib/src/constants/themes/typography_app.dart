@@ -109,6 +109,6 @@ class TypographyApp {
   static TextStyle loginForgot= TextStyle(
     color: ColorApp.primary,
     fontWeight: FontWeight.w500,
-    fontSize: 16.sp,
+    fontSize: 14.sp,
   );
 }
