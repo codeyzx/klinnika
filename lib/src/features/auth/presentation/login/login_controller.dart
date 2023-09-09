@@ -17,7 +17,6 @@ class LoginController extends StateNotifier<LoginState> {
       return;
     }
 
-    // loading
     state = state.copyWith(
       loginValue: const AsyncLoading(),
     );
@@ -31,13 +30,11 @@ class LoginController extends StateNotifier<LoginState> {
 
     result.when(
       success: (data) {
-        // success
         state = state.copyWith(
           loginValue: AsyncData(data),
         );
       },
       failure: (error, stackTrace) {
-        // failure
         state = state.copyWith(
           loginValue: AsyncError(error, stackTrace),
         );
@@ -64,12 +61,6 @@ class LoginController extends StateNotifier<LoginState> {
   }
 
   void onObscureTap() {
-    // with setState in StatefulWidget
-    //setState(() {
-    //   isObscure = !isObscure;
-    // });
-
-    // with state.copyWith in Riverpod
     state = state.copyWith(
       isObscure: !state.isObscure,
     );

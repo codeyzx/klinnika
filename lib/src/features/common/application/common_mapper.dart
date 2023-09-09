@@ -32,36 +32,4 @@ class CommonMapper {
       },
     );
   }
-
-  static Result<User> mapToProfile(Result<UserResponse> result) {
-    return result.when(
-      success: (item) {
-        return Result.success(User.fromResponse(item));
-      },
-      failure: (error, stackTrace) {
-        return Result.failure(error, stackTrace);
-      },
-    );
-  }
-
-  // static Result<MyEvents> mapToMyEvents(
-  //   Result<MyEventResponse> result,
-  // ) {
-  //   return result.when(
-  //     success: (data) {
-  //       List<Ticket> upcomingEvents = [...data.upcomingEvents.map((e) => Ticket.fromResponse(e))];
-  //       List<Ticket> pastEvents = [...data.pastEvents.map((e) => Ticket.fromResponse(e))];
-
-  //       return Result.success(
-  //         MyEvents(
-  //           upcomingEvents: upcomingEvents,
-  //           pastEvents: pastEvents,
-  //         ),
-  //       );
-  //     },
-  //     failure: (error, stackTrace) {
-  //       return Result.failure(error, stackTrace);
-  //     },
-  //   );
-  // }
 }

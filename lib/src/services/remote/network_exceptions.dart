@@ -54,6 +54,60 @@ abstract class NetworkExceptions with _$NetworkExceptions {
         late NetworkExceptions networkExceptions;
         if (error is FirebaseException) {
           switch (error.code) {
+            case 'invalid-email':
+              networkExceptions = const NetworkExceptions.unauthorizedRequest(
+                'Invalid email',
+                true,
+              );
+              break;
+            case 'wrong-password':
+              networkExceptions = const NetworkExceptions.unauthorizedRequest(
+                'Wrong password',
+                true,
+              );
+              break;
+            case 'user-not-found':
+              networkExceptions = const NetworkExceptions.unauthorizedRequest(
+                'User not found',
+                true,
+              );
+              break;
+            case 'user-disabled':
+              networkExceptions = const NetworkExceptions.unauthorizedRequest(
+                'User disabled',
+                true,
+              );
+              break;
+            case 'too-many-requests':
+              networkExceptions = const NetworkExceptions.unauthorizedRequest(
+                'Too many requests',
+                true,
+              );
+              break;
+            case 'operation-not-allowed':
+              networkExceptions = const NetworkExceptions.unauthorizedRequest(
+                'Operation not allowed',
+                true,
+              );
+              break;
+            case 'email-already-in-use':
+              networkExceptions = const NetworkExceptions.unauthorizedRequest(
+                'Email already in use',
+                true,
+              );
+              break;
+            case 'weak-password':
+              networkExceptions = const NetworkExceptions.unauthorizedRequest(
+                'Weak password',
+                true,
+              );
+              break;
+            case 'invalid-credential':
+              networkExceptions = const NetworkExceptions.unauthorizedRequest(
+                'Invalid credential',
+                true,
+              );
+              break;
             case 'permission-denied':
               networkExceptions = const NetworkExceptions.unauthorizedRequest(
                 'Permission denied',

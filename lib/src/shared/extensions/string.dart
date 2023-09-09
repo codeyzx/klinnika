@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:klinnika/src/features/auth/domain/user.dart';
 import 'package:klinnika/src/features/data.dart';
 
 extension XString on String {
@@ -9,19 +10,6 @@ extension XString on String {
   bool get isPasswordValid => length > 8;
 
   String get capitalize => "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
-
-  StatusUser get statusUser {
-    switch (this) {
-      case 'VERIFIED':
-        return StatusUser.verified;
-      case 'REJECTED':
-        return StatusUser.rejected;
-      case 'PENDING':
-        return StatusUser.pending;
-      default:
-        return StatusUser.pending;
-    }
-  }
 
   IconData get filterIcon {
     switch (this) {
@@ -54,10 +42,12 @@ extension XString on String {
 
   RoleUser get roleUser {
     switch (this) {
-      case 'ADMIN':
-        return RoleUser.admin;
-      case 'EO':
-        return RoleUser.eo;
+      case 'USER':
+        return RoleUser.user;
+      case 'SUPERADMIN':
+        return RoleUser.superadmin;
+      case 'DOCTOR':
+        return RoleUser.doctor;
       default:
         return RoleUser.user;
     }
