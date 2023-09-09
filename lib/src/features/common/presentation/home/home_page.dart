@@ -168,7 +168,7 @@ class HomePage extends ConsumerWidget {
                               ),
                             );
                           },
-                          child: const Text('Go To Login Page')),
+                        ),
                       ElevatedButton(
                           onPressed: () async {
                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailPatientPage()));
@@ -176,10 +176,8 @@ class HomePage extends ConsumerWidget {
                           child: const Text('Go To Detail Pasien Page'))
                     ],
                         ),
-                      ],
                     ),
                   ),
-                ),
               ],
             ),
           ),
