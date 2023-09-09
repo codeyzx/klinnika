@@ -1,54 +1,114 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
+import 'package:klinnika/src/shared/extensions/extensions.dart';
 
-import 'package:klinnika/src/features/auth/data/responses/responses.dart';
+enum RoleUser {
+  user('USER'),
+  superadmin('SUPERADMIN'),
+  doctor('DOCTOR');
+
+  final String value;
+  const RoleUser(this.value);
+}
 
 class User {
-  final int id;
+  final String id;
+  final String name;
   final String email;
-  final String fullname;
-  final StatusUser status;
+  final String phone;
   final RoleUser role;
+  final DateTime createdAt;
+  final String profileUrl;
+  final String clinicId;
+  final bool isVerified;
 
   User({
     required this.id,
+    required this.name,
     required this.email,
-    required this.fullname,
-    this.status = StatusUser.pending,
-    this.role = RoleUser.user,
+    required this.phone,
+    required this.role,
+    required this.createdAt,
+    required this.profileUrl,
+    required this.clinicId,
+    required this.isVerified,
   });
+
+  factory User.fromMap(Map<String, dynamic> map) {
+    return User(
+      id: map['id'] as String,
+      name: map['name'] as String,
+      email: map['email'] as String,
+      phone: map['phone'] as String,
+      role: map['role'].toString().roleUser,
+      createdAt: map['created_at'].toDate(),
+      profileUrl: map['profile_url'] as String,
+      clinicId: map['clinic_id'] as String,
+      isVerified: map['is_verified'] as bool,
+    );
+  }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
+      'name': name,
       'email': email,
-      'fullname': fullname,
-      'status': status,
-      'role': role,
+      'phone': phone,
+      'role': role.value,
+      'created_at': createdAt,
+      'profile_url': profileUrl,
+      'clinic_id': clinicId,
+      'is_verified': isVerified,
     };
   }
 
-  factory User.fromMap(Map<String, dynamic> map) {
+  factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      id: map['id'] as int,
-      email: map['email'] as String,
-      fullname: map['fullname'] as String,
-      status: map['status'] as StatusUser,
-      role: map['role'] as RoleUser,
+      id: json['id'] as String,
+      name: json['name'] as String,
+      email: json['email'] as String,
+      phone: json['phone'] as String,
+      role: json['role'].toString().roleUser,
+      createdAt: json['created_at'].toDate(),
+      profileUrl: json['profile_url'] as String,
+      clinicId: json['clinic_id'] as String,
+      isVerified: json['is_verified'] as bool,
     );
   }
 
-  String toJson() => json.encode(toMap());
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'id': id,
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'role': role.value,
+      'created_at': createdAt,
+      'profile_url': profileUrl,
+      'clinic_id': clinicId,
+      'is_verified': isVerified,
+    };
+  }
 
-  factory User.fromJson(String source) => User.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  factory User.fromResponse(UserResponse response) {
+  User copyWith({
+    String? id,
+    String? name,
+    String? email,
+    String? phone,
+    RoleUser? role,
+    DateTime? createdAt,
+    String? profileUrl,
+    String? clinicId,
+    bool? isVerified,
+  }) {
     return User(
-      id: response.id ?? 0,
-      email: response.email ?? '',
-      fullname: response.fullname ?? '',
-      status: response.status ?? StatusUser.pending,
-      role: response.role ?? RoleUser.user,
+      id: id ?? this.id,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      phone: phone ?? this.phone,
+      role: role ?? this.role,
+      createdAt: createdAt ?? this.createdAt,
+      profileUrl: profileUrl ?? this.profileUrl,
+      clinicId: clinicId ?? this.clinicId,
+      isVerified: isVerified ?? this.isVerified,
     );
   }
 }

@@ -5,7 +5,6 @@ import 'package:klinnika/src/features/application.dart';
 
 import 'package:klinnika/src/features/presentation.dart';
 import 'package:klinnika/src/routes/app_routes.dart';
-import 'package:klinnika/src/shared/extensions/extensions.dart';
 
 class HomeController extends StateNotifier<HomeState> {
   final CommonService _commonService;
@@ -22,10 +21,20 @@ class HomeController extends StateNotifier<HomeState> {
     );
     final result = await _commonService.fetchHome();
     result.when(
-      success: (data) {
-        state = state.copyWith(
-          home: data,
-          homeValue: AsyncData(data),
+      success: (data) async {
+        final convertResult = await _commonService.fetchHomeConvert(data);
+        convertResult.when(
+          success: (data) {
+            state = state.copyWith(
+              home: data,
+              homeValue: AsyncData(data),
+            );
+          },
+          failure: (error, stackTrace) {
+            state = state.copyWith(
+              homeValue: AsyncError(error, stackTrace),
+            );
+          },
         );
       },
       failure: (error, stackTrace) {
@@ -57,8 +66,9 @@ class HomeController extends StateNotifier<HomeState> {
   }
 
   void logout() {
-    setPage(0);
     _commonService.logout();
+    navigatorKey.currentContext!.goNamed(Routes.login.name);
+    setPage(0);
     state = state.copyWith(
       user: null,
       userValue: const AsyncData(null),
@@ -97,13 +107,16 @@ class HomeController extends StateNotifier<HomeState> {
     }
   }
 
-  bool checkUser() {
-    if (state.userValue.hasError || state.userValue.value.isNull()) {
-      navigatorKey.currentContext!.goNamed(Routes.login.name);
-      return false;
-    }
-
-    return true;
+  Future<void> checkUsers() async {
+    final result = await _commonService.getProfile();
+    result.when(
+      success: (data) {
+        return navigatorKey.currentContext!.goNamed(Routes.home.name);
+      },
+      failure: (error, stackTrace) {
+        return navigatorKey.currentContext!.goNamed(Routes.login.name);
+      },
+    );
   }
 }
 
