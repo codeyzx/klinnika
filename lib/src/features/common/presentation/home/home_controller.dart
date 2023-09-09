@@ -11,15 +11,17 @@ class HomeController extends StateNotifier<HomeState> {
 
   HomeController(
     this._commonService,
-  ) : super(HomeState()) {
-    fetchHome();
-  }
+  ) : super(HomeState());
 
-  void fetchHome() async {
+  void fetchHome(
+    String docterId,
+    DateTime startDate,
+    DateTime endDate,
+  ) async {
     state = state.copyWith(
       homeValue: const AsyncLoading(),
     );
-    final result = await _commonService.fetchHome();
+    final result = await _commonService.fetchHome(docterId, startDate, endDate);
     result.when(
       success: (data) async {
         final convertResult = await _commonService.fetchHomeConvert(data);
@@ -111,6 +113,10 @@ class HomeController extends StateNotifier<HomeState> {
     final result = await _commonService.getProfile();
     result.when(
       success: (data) {
+        state = state.copyWith(
+          user: data,
+          userValue: AsyncData(data),
+        );
         return navigatorKey.currentContext!.goNamed(Routes.home.name);
       },
       failure: (error, stackTrace) {

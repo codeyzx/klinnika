@@ -1,42 +1,42 @@
 class Queue {
-  final String id;
-  final String userId;
-  final String doctorId;
-  final DateTime appointmentDate;
-  final DateTime finishAt;
-  final DateTime createdAt;
-  final String polyId;
-  final String complaintType;
-  final String complaintDesc;
-  final String clinicId;
-  final String type;
+  final String? id;
+  final String? userId;
+  final String? doctorId;
+  final DateTime? appointmentDate;
+  final DateTime? finishAt;
+  final DateTime? createdAt;
+  final String? polyId;
+  final String? complaintType;
+  final String? complaintDesc;
+  final String? clinicId;
+  final String? type;
 
   Queue({
-    required this.id,
-    required this.userId,
-    required this.doctorId,
-    required this.appointmentDate,
-    required this.finishAt,
-    required this.createdAt,
-    required this.polyId,
-    required this.complaintType,
-    required this.complaintDesc,
-    required this.clinicId,
-    required this.type,
+    this.id,
+    this.userId,
+    this.doctorId,
+    this.appointmentDate,
+    this.finishAt,
+    this.createdAt,
+    this.polyId,
+    this.complaintType,
+    this.complaintDesc,
+    this.clinicId,
+    this.type,
   });
 
   factory Queue.fromMap(Map<String, dynamic> map) {
     return Queue(
       id: map['id'] as String,
-      userId: map['userId'] as String,
-      doctorId: map['doctorId'] as String,
-      appointmentDate: map['appointmentDate'] as DateTime,
-      finishAt: map['finishAt'] as DateTime,
-      createdAt: map['createdAt'] as DateTime,
-      polyId: map['polyId'] as String,
-      complaintType: map['complaintType'] as String,
-      complaintDesc: map['complaintDesc'] as String,
-      clinicId: map['clinicId'] as String,
+      userId: map['user_id'] as String,
+      doctorId: map['doctor_id'] as String,
+      appointmentDate: map['appointment_date'].toDate(),
+      finishAt: map['finish_at'].toDate(),
+      createdAt: map['created_at'].toDate(),
+      polyId: map['poly_id'] as String,
+      complaintType: map['complaint_type'] as String,
+      complaintDesc: map['complaint_desc'] as String,
+      clinicId: map['clinic_id'] as String,
       type: map['type'] as String,
     );
   }
@@ -44,46 +44,46 @@ class Queue {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'userId': userId,
-      'doctorId': doctorId,
-      'appointmentDate': appointmentDate,
-      'finishAt': finishAt,
-      'createdAt': createdAt,
-      'polyId': polyId,
-      'complaintType': complaintType,
-      'complaintDesc': complaintDesc,
-      'clinicId': clinicId,
+      'user_id': userId,
+      'doctor_id': doctorId,
+      'appointment_date': appointmentDate,
+      'finish_at': finishAt,
+      'created_at': createdAt,
+      'poly_id': polyId,
+      'complaint_type': complaintType,
+      'complaint_desc': complaintDesc,
+      'clinic_id': clinicId,
       'type': type,
     };
   }
 
   factory Queue.fromJson(Map<String, dynamic> json) {
     return Queue(
-      id: json['id'] as String,
-      userId: json['userId'] as String,
-      doctorId: json['doctorId'] as String,
-      appointmentDate: json['appointmentDate'].toDate(),
-      finishAt: json['finishAt'].toDate(),
-      createdAt: json['createdAt'].toDate(),
-      polyId: json['polyId'] as String,
-      complaintType: json['complaintType'] as String,
-      complaintDesc: json['complaintDesc'] as String,
-      clinicId: json['clinicId'] as String,
-      type: json['type'] as String,
+      id: json['id'] ?? '',
+      userId: json['user_id'] ?? '',
+      doctorId: json['doctor_id'] ?? '',
+      appointmentDate: json['appointment_date']?.toDate(),
+      finishAt: json['finish_at']?.toDate(),
+      createdAt: json['created_at']?.toDate(),
+      polyId: json['poly_id'] ?? '',
+      complaintType: json['complaint_type'] ?? '',
+      complaintDesc: json['complaint_desc'] ?? '',
+      clinicId: json['clinic_id'] ?? '',
+      type: json['type'] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'userId': userId,
-        'doctorId': doctorId,
-        'appointmentDate': appointmentDate,
-        'finishAt': finishAt,
-        'createdAt': createdAt,
-        'polyId': polyId,
-        'complaintType': complaintType,
-        'complaintDesc': complaintDesc,
-        'clinicId': clinicId,
+        'user_id': userId,
+        'doctor_id': doctorId,
+        'appointment_date': appointmentDate,
+        'finish_at': finishAt,
+        'created_at': createdAt,
+        'poly_id': polyId,
+        'complaint_type': complaintType,
+        'complaint_desc': complaintDesc,
+        'clinic_id': clinicId,
         'type': type,
       };
 

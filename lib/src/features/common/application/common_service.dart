@@ -13,8 +13,12 @@ class CommonService {
     this._commonRepository,
   );
 
-  Future<Result<List<Queue>>> fetchHome() async {
-    final resultEvents = await _commonRepository.fetchQueues(doctorId: '567890123');
+  Future<Result<List<Queue>>> fetchHome(
+    String doctorId,
+    DateTime startDate,
+    DateTime endDate,
+  ) async {
+    final resultEvents = await _commonRepository.fetchQueues(doctorId: doctorId, startDate: startDate, endDate: endDate);
     return resultEvents;
   }
 
@@ -23,8 +27,8 @@ class CommonService {
     return CommonMapper.mapToHome(resultEvents);
   }
 
-  Future<Result<String?>> createQueue(Queue queue) async {
-    final result = await _commonRepository.postQueue(queue);
+  Future<Result<String?>> addQueue(Queue queue) async {
+    final result = await _commonRepository.addQueue(queue);
     return result.when(
       success: (data) {
         return Result.success(data);
@@ -33,11 +37,6 @@ class CommonService {
         return Result.failure(error, stackTrace);
       },
     );
-  }
-
-  Future<Result<Event>> getEventById(int id) async {
-    final result = await _commonRepository.fetchDetail(id);
-    return CommonMapper.mapToEventDetail(result);
   }
 
   Future<Result<List<EventResponse>>> getEventList() async {

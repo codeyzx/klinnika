@@ -10,13 +10,32 @@ import 'package:klinnika/src/features/queue/presentation/detail_patient/detail_p
 import 'package:klinnika/src/routes/routes.dart';
 import 'package:klinnika/src/shared/extensions/build_context.dart';
 
-class HomePage extends ConsumerWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeControllerProvider);
-    final controller = ref.read(homeControllerProvider.notifier);
+  ConsumerState<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends ConsumerState<HomePage> {
+  HomeController get controller => ref.read(homeControllerProvider.notifier);
+  HomeState get state => ref.watch(homeControllerProvider);
+  CheckupController get queueController => ref.read(checkupControllerProvider.notifier);
+
+  @override
+  void initState() {
+    safeRebuild(() {
+      controller.fetchHome(
+        '${state.user?.id}',
+        DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+        DateTime.now().add(const Duration(days: 1)),
+      );
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final queue = state.home?.queueList;
     return AsyncValueWidget(
       value: state.homeValue,
@@ -340,15 +359,24 @@ class HomePage extends ConsumerWidget {
                           children: [
                             ElevatedButton(
                                 onPressed: () {
-                                  context.pushNamed(Routes.login.name);
+                                  queueController.addQueue('${state.user?.id}');
+                                  controller.fetchHome(
+                                    '${state.user?.id}',
+                                    DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+                                    DateTime.now().add(const Duration(days: 1)),
+                                  );
                                 },
-                                child: const Text('Go to Login')),
+                                child: const Text('Add Data Queue')),
                             const SizedBox(width: 10),
                             ElevatedButton(
                                 onPressed: () {
-                                  controller.logout();
+                                  controller.fetchHome(
+                                    '${state.user?.id}',
+                                    DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+                                    DateTime.now().add(const Duration(days: 1)),
+                                  );
                                 },
-                                child: const Text('Logout')),
+                                child: const Text('Refresh')),
                           ],
                         ),
                         ListView.builder(
@@ -380,7 +408,7 @@ class HomePage extends ConsumerWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          item?.user.name ?? '',
+                                          item?.user?.name ?? '',
                                           style: TypographyApp.text1,
                                         ),
                                         Text(

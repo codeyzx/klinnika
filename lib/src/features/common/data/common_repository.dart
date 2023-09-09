@@ -12,13 +12,24 @@ class CommonRepository {
         toFirestore: (Queue queue, _) => queue.toJson(),
       );
 
-  Future<Result<List<Queue>>> fetchQueues({required String doctorId}) async {
+  Future<Result<List<Queue>>> fetchQueues({
+    required String doctorId,
+    required DateTime startDate,
+    required DateTime endDate,
+  }) async {
     try {
-      final data = await queueDb.where('doctorId', isEqualTo: doctorId).get();
+      final data = await queueDb
+          .where('finish_at', isNull: true)
+          .where('doctor_id', isEqualTo: doctorId)
+          .where('appointment_date', isGreaterThanOrEqualTo: startDate)
+          .where('appointment_date', isLessThan: endDate)
+          .orderBy('appointment_date')
+          .get();
       final queueList = data.docs.map((e) => e.data()).toList();
       return Result.success(queueList);
     } catch (e, st) {
-      return Result.failure(NetworkExceptions.getFirebaseException(e), st);
+      final error = NetworkExceptions.getFirebaseException(e);
+      return Result.failure(error, st);
     }
   }
 
@@ -27,7 +38,7 @@ class CommonRepository {
       List<QueueConvert> convertedList = [];
 
       for (var queue in queueList) {
-        User user = await fetchUsers(queue.userId);
+        User user = await fetchUsers(queue.userId.toString());
         convertedList.add(QueueConvert.fromQueue(queue, user));
       }
 
@@ -47,7 +58,7 @@ class CommonRepository {
     }
   }
 
-  Future<Result<String?>> postQueue(Queue queue) async {
+  Future<Result<String?>> addQueue(Queue queue) async {
     try {
       final ref = queueDb.doc();
       final temp = queue.copyWith(id: ref.id);
