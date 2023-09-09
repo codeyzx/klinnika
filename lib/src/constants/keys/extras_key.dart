@@ -1,4 +1,5 @@
 class ExtrasKey {
   static const id = 'id';
-  static const ticket = 'ticket';
+  static const index = 'index';
+  static const queue = 'queue';
 }

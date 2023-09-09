@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:klinnika/src/constants/constants.dart';
+import 'package:klinnika/src/features/common/domain/queue_convert.dart';
 
-class DetailPatientPage extends StatefulWidget {
-  const DetailPatientPage({super.key});
+class DetailPatientPage extends ConsumerWidget {
+  final QueueConvert item;
+  final int index;
+  const DetailPatientPage({
+    required this.item,
+    required this.index,
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<DetailPatientPage> createState() => _DetailPatientPageState();
-}
-
-class _DetailPatientPageState extends State<DetailPatientPage> {
-  String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -49,7 +49,7 @@ class _DetailPatientPageState extends State<DetailPatientPage> {
                 children: [
                   CircleAvatar(
                     radius: 30.r,
-                    backgroundImage: NetworkImage(
+                    backgroundImage: const NetworkImage(
                         "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&w=1000&q=80"),
                   ),
                   SizedBox(
@@ -59,14 +59,14 @@ class _DetailPatientPageState extends State<DetailPatientPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Ahmad Joni",
+                        '${item.user?.name}',
                         style: TypographyApp.queueDetName,
                       ),
                       SizedBox(
                         height: 6.h,
                       ),
                       Text(
-                        "Antrian nomor 1",
+                        "Antrian nomor $index",
                         style: TypographyApp.queueDetNum,
                       ),
                     ],
@@ -85,10 +85,6 @@ class _DetailPatientPageState extends State<DetailPatientPage> {
                 height: 16.h,
               ),
               ElevatedButton(
-                child: Text(
-                  'Cek Rekam Medis',
-                  style: TypographyApp.queueOnWhiteBtn,
-                ),
                 style: ElevatedButton.styleFrom(
                   elevation: 0,
                   fixedSize: Size(344.w, 50.h),
@@ -98,10 +94,13 @@ class _DetailPatientPageState extends State<DetailPatientPage> {
                   ),
                   shadowColor: ColorApp.black.withOpacity(0.20),
                   backgroundColor: ColorApp.white,
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 87.w, vertical: 12.h),
+                  padding: EdgeInsets.symmetric(horizontal: 87.w, vertical: 12.h),
                 ),
                 onPressed: () {},
+                child: Text(
+                  'Cek Rekam Medis',
+                  style: TypographyApp.queueOnWhiteBtn,
+                ),
               ),
               SizedBox(
                 height: 16.h,
@@ -122,7 +121,7 @@ class _DetailPatientPageState extends State<DetailPatientPage> {
                     style: TypographyApp.queueDetLabel,
                   ),
                   Text(
-                    "Ahmad Joni",
+                    "${item.user?.name}",
                     style: TypographyApp.queueDetValue,
                   ),
                 ],
@@ -224,12 +223,15 @@ class _DetailPatientPageState extends State<DetailPatientPage> {
                     ),
                     child: Center(
                       child: Text(
-                        "Pusing",
+                        // "Pusing",
+                        "${item.complaintType}",
                         style: TypographyApp.queueDetIll,
                       ),
                     ),
                   ),
-                  SizedBox(width: 12.w,),
+                  SizedBox(
+                    width: 12.w,
+                  ),
                   Container(
                     width: 75.w,
                     height: 29.h,
@@ -246,45 +248,52 @@ class _DetailPatientPageState extends State<DetailPatientPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 24.w,),
+              SizedBox(
+                height: 24.w,
+              ),
               Text(
                 "Deskripsi Keluhan",
                 style: TypographyApp.queueDetTitle,
               ),
-              SizedBox(height: 12.h,),
+              SizedBox(
+                height: 12.h,
+              ),
               SizedBox(
                 width: 323.w,
                 child: Text(
-                  loremIpsum,
+                  // 'lorem ipsum dolor sit amet, consectetur adipiscing eli',
+                  '${item.complaintDesc}',
                   style: TypographyApp.queueDesc,
                   textAlign: TextAlign.justify,
                 ),
               ),
-              SizedBox(height: 20.h,),
+              SizedBox(
+                height: 20.h,
+              ),
             ],
           ),
         ),
       ),
       bottomNavigationBar: Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         height: 98.h,
         decoration: BoxDecoration(color: Colors.white, boxShadow: [
           BoxShadow(
             color: HexColor('#929DAB').withOpacity(0.10),
             blurRadius: 5,
-            offset: Offset(0, -3),
+            offset: const Offset(0, -3),
           ),
         ]),
         child: ElevatedButton(
-          child: Text(
-            'Selesai Pemeriksaan',
-            style: TypographyApp.queueOnBtn,
-          ),
           style: ElevatedButton.styleFrom(
             backgroundColor: ColorApp.primary,
             padding: EdgeInsets.symmetric(horizontal: 87.w, vertical: 18.h),
           ),
           onPressed: () {},
+          child: Text(
+            'Selesai Pemeriksaan',
+            style: TypographyApp.queueOnBtn,
+          ),
         ),
       ),
     );

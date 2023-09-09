@@ -9,6 +9,8 @@ class HomeState {
   final bool isEventsActive;
   final bool isProfileActive;
   final bool isLastPage;
+  final String startDate;
+  final String endDate;
   final int currentIndex;
   final Widget currentScreen;
   final AsyncValue<Home?> homeValue;
@@ -22,6 +24,8 @@ class HomeState {
     this.isEventsActive = false,
     this.isProfileActive = false,
     this.isLastPage = false,
+    this.startDate = '',
+    this.endDate = '',
     this.currentIndex = 0,
     this.currentScreen = const HomePage(),
     this.homeValue = const AsyncLoading(),
@@ -36,6 +40,8 @@ class HomeState {
     bool? isEventsActive,
     bool? isProfileActive,
     bool? isLastPage,
+    String? startDate,
+    String? endDate,
     int? currentIndex,
     Widget? currentScreen,
     AsyncValue<Home?>? homeValue,
@@ -49,6 +55,8 @@ class HomeState {
       isEventsActive: isEventsActive ?? this.isEventsActive,
       isProfileActive: isProfileActive ?? this.isProfileActive,
       isLastPage: isLastPage ?? this.isLastPage,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
       currentIndex: currentIndex ?? this.currentIndex,
       currentScreen: currentScreen ?? this.currentScreen,
       homeValue: homeValue ?? this.homeValue,

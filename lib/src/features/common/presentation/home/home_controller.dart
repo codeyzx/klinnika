@@ -30,6 +30,8 @@ class HomeController extends StateNotifier<HomeState> {
             state = state.copyWith(
               home: data,
               homeValue: AsyncData(data),
+              startDate: startDate.toString(),
+              endDate: endDate.toString(),
             );
           },
           failure: (error, stackTrace) {

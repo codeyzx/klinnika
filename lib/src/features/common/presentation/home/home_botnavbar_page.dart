@@ -54,7 +54,12 @@ class _HomeBotNavBarScreenState extends ConsumerState<HomeBotNavBarScreen> {
               //   label: 'Queue',
               // ),
               BottomNavigationBarItem(
-                icon: !state.isHomeActive ? Icon(Icons.featured_play_list_rounded) : Icon(Icons.featured_play_list_rounded, color: ColorApp.primary,),
+                icon: !state.isHomeActive
+                    ? const Icon(Icons.featured_play_list_rounded)
+                    : Icon(
+                        Icons.featured_play_list_rounded,
+                        color: ColorApp.primary,
+                      ),
                 label: 'Queue',
               ),
               BottomNavigationBarItem(
