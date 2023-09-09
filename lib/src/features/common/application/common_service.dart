@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:klinnika/src/features/application.dart';
+import 'package:klinnika/src/features/common/domain/queue.dart';
 import 'package:klinnika/src/features/data.dart';
 import 'package:klinnika/src/features/domain.dart';
 import 'package:klinnika/src/services/services.dart';
@@ -11,9 +12,26 @@ class CommonService {
     this._commonRepository,
   );
 
-  Future<Result<Home>> fetchHome() async {
-    final resultEvents = await _commonRepository.fetchEvents();
+  Future<Result<List<Queue>>> fetchHome() async {
+    final resultEvents = await _commonRepository.fetchQueues(doctorId: '567890123');
+    return resultEvents;
+  }
+
+  Future<Result<Home>> fetchHomeConvert(List<Queue> queue) async {
+    final resultEvents = await _commonRepository.fetchQueuesConvert(queue);
     return CommonMapper.mapToHome(resultEvents);
+  }
+
+  Future<Result<String?>> createQueue(Queue queue) async {
+    final result = await _commonRepository.postQueue(queue);
+    return result.when(
+      success: (data) {
+        return Result.success(data);
+      },
+      failure: (error, stackTrace) {
+        return Result.failure(error, stackTrace);
+      },
+    );
   }
 
   Future<Result<Event>> getEventById(int id) async {

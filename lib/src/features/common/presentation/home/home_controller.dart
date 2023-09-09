@@ -22,10 +22,20 @@ class HomeController extends StateNotifier<HomeState> {
     );
     final result = await _commonService.fetchHome();
     result.when(
-      success: (data) {
-        state = state.copyWith(
-          home: data,
-          homeValue: AsyncData(data),
+      success: (data) async {
+        final convertResult = await _commonService.fetchHomeConvert(data);
+        convertResult.when(
+          success: (data) {
+            state = state.copyWith(
+              home: data,
+              homeValue: AsyncData(data),
+            );
+          },
+          failure: (error, stackTrace) {
+            state = state.copyWith(
+              homeValue: AsyncError(error, stackTrace),
+            );
+          },
         );
       },
       failure: (error, stackTrace) {

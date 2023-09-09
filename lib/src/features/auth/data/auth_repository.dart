@@ -14,7 +14,7 @@ class AuthRepository {
       // return const Result.success();
       return const Result.success(true);
     } catch (e, stackTrace) {
-      return Result.failure(NetworkExceptions.getDioException(e), stackTrace);
+      return Result.failure(NetworkExceptions.getFirebaseException(e), stackTrace);
     }
   }
 
@@ -29,7 +29,7 @@ class AuthRepository {
 
       return const Result.success(true);
     } catch (e, stackTrace) {
-      return Result.failure(NetworkExceptions.getDioException(e), stackTrace);
+      return Result.failure(NetworkExceptions.getFirebaseException(e), stackTrace);
     }
   }
 }

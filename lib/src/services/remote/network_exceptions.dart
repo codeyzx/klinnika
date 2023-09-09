@@ -48,7 +48,7 @@ abstract class NetworkExceptions with _$NetworkExceptions {
     String errorMessage,
   ) = UnProcessableEntity;
 
-  static NetworkExceptions getDioException(error) {
+  static NetworkExceptions getFirebaseException(error) {
     if (error is Exception) {
       try {
         late NetworkExceptions networkExceptions;
