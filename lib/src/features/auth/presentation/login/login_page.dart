@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:klinnika/gen/assets.gen.dart';
 import 'package:klinnika/src/common_widgets/common_widgets.dart';
@@ -23,7 +24,8 @@ class LoginPage extends ConsumerWidget {
             }
           },
           error: (error, stackTrace) {
-            final message = NetworkExceptions.getErrorMessage(error as NetworkExceptions);
+            final message =
+                NetworkExceptions.getErrorMessage(error as NetworkExceptions);
             appSnackBar(context, ColorApp.red, message);
           },
         );
@@ -32,46 +34,59 @@ class LoginPage extends ConsumerWidget {
 
     return StatusBarWidget(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
-          child: PaddingWidget(
-            child: Column(
-              children: [
-                Gap.customGapHeight(context.screenHeightPercentage(.15)),
-                Center(
-                  child: Assets.icons.klinnikaLogo.svg(
-                    width: context.screenWidthPercentage(0.4),
-                    fit: BoxFit.fitWidth,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Image.asset(
+                    "assets/images/login_bg_img.png",
+                    height: 220.h,
                   ),
-                ),
-                Gap.h56,
-                const LoginFormSection(),
-                Gap.h32,
-                const LoginButtonSection(),
-                Gap.h48,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                ],
+              ),
+              SizedBox(
+                height: 40.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Assets.icons.klinnikaLogo.svg(
+                    width: 45.w,
+                    height: 45.h,
+                  ),
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  Text(
+                    "Klinnika",
+                    style: TypographyApp.loginAppName,
+                  ),
+                ],
+              ),
+              SizedBox(height: 80.h,),
+              const LoginFormSection(),
+              SizedBox(height: 16.h,),
+              const LoginButtonSection(),
+              SizedBox(height: 5.h,),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(
-                      'Don\'t have an account?',
-                      style: TypographyApp.headline3,
-                    ),
-                    Gap.w8,
-                    GestureDetector(
-                      onTap: () {
-                        context.pushNamed(Routes.register.name);
-                      },
+                    TextButton(
+                      onPressed: () {},
                       child: Text(
-                        'Sign Up',
-                        style: TypographyApp.headline3.copyWith(
-                          color: ColorApp.primary,
-                        ),
+                        'Lupa Password?',
+                        style: TypographyApp.loginForgot,
                       ),
                     ),
                   ],
                 ),
-                Gap.h36
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

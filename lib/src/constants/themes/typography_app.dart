@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:klinnika/src/constants/constants.dart';
 
 class TypographyApp {
@@ -72,6 +73,42 @@ class TypographyApp {
   static TextStyle onBoardUnBtnText = TextStyle(
     color: ColorApp.primary,
     fontWeight: FontWeight.w600,
+    fontSize: 16.sp,
+  );
+
+  static TextStyle loginAppName = TextStyle(
+    color: ColorApp.secondaryBlue,
+    fontWeight: FontWeight.w700,
+    fontSize: 30.sp,
+  );
+
+  static TextStyle loginTitle = TextStyle(
+    color: ColorApp.black,
+    fontWeight: FontWeight.w500,
+    fontSize: 30.sp,
+  );
+
+  static TextStyle loginBtn= TextStyle(
+    color: ColorApp.white,
+    fontWeight: FontWeight.w600,
+    fontSize: 16.sp,
+  );
+
+  static TextStyle loginOffInput= TextStyle(
+    color: HexColor('#9D9D9D'),
+    fontWeight: FontWeight.w500,
+    fontSize: 14.sp,
+  );
+
+  static TextStyle loginOnInput= TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.w500,
+    fontSize: 14.sp,
+  );
+
+  static TextStyle loginForgot= TextStyle(
+    color: ColorApp.primary,
+    fontWeight: FontWeight.w500,
     fontSize: 16.sp,
   );
 }
