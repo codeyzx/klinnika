@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:klinnika/src/features/application.dart';
 import 'package:klinnika/src/features/common/domain/queue.dart';
@@ -57,19 +58,28 @@ class CommonService {
   // }
 
   Future<Result<User>> getProfile() async {
-    // if (token == null) {
-    return Result.failure(
-      const NetworkExceptions.notFound('Token is null'),
-      StackTrace.current,
-    );
-    // }
+    String? uid = auth.FirebaseAuth.instance.currentUser?.uid;
 
-    // final result = await _commonRepository.fetchProfile(token);
-    // return CommonMapper.mapToProfile(result);
+    if (uid == null) {
+      return Result.failure(
+        const NetworkExceptions.notFound('USER IS NOT LOGIN'),
+        StackTrace.current,
+      );
+    }
+
+    final result = await _commonRepository.fetchProfile(uid);
+    return result.when(
+      success: (data) {
+        return Result.success(data);
+      },
+      failure: (error, stackTrace) {
+        return Result.failure(error, stackTrace);
+      },
+    );
   }
 
   void logout() {
-    // _hiveService.logout();
+    auth.FirebaseAuth.instance.signOut();
   }
 
   // Future<Result<MyEvents>> getMyEvents() async {

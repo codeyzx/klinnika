@@ -8,7 +8,6 @@ import 'package:klinnika/src/constants/constants.dart';
 import 'package:klinnika/src/features/presentation.dart';
 import 'package:klinnika/src/routes/routes.dart';
 import 'package:klinnika/src/services/services.dart';
-import 'package:klinnika/src/shared/extensions/extensions.dart';
 
 class LoginPage extends ConsumerWidget {
   const LoginPage({super.key});
@@ -24,8 +23,7 @@ class LoginPage extends ConsumerWidget {
             }
           },
           error: (error, stackTrace) {
-            final message =
-                NetworkExceptions.getErrorMessage(error as NetworkExceptions);
+            final message = NetworkExceptions.getErrorMessage(error as NetworkExceptions);
             appSnackBar(context, ColorApp.red, message);
           },
         );
@@ -66,11 +64,11 @@ class LoginPage extends ConsumerWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 80.h,),
+              SizedBox(height: 80.h),
               const LoginFormSection(),
-              SizedBox(height: 16.h,),
+              SizedBox(height: 16.h),
               const LoginButtonSection(),
-              SizedBox(height: 5.h,),
+              SizedBox(height: 5.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.w),
                 child: Row(

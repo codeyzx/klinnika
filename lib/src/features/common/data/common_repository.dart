@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:klinnika/src/features/auth/data/responses/responses.dart';
 import 'package:klinnika/src/features/auth/domain/user.dart';
 import 'package:klinnika/src/features/common/data/responses/responses.dart';
 import 'package:klinnika/src/features/common/domain/queue.dart';
@@ -29,7 +28,6 @@ class CommonRepository {
 
       for (var queue in queueList) {
         User user = await fetchUsers(queue.userId);
-        print('user Jadi $user');
         convertedList.add(QueueConvert.fromQueue(queue, user));
       }
 
@@ -102,17 +100,12 @@ class CommonRepository {
   //   }
   // }
 
-  Future<Result<UserResponse>> fetchProfile(String token) async {
+  Future<Result<User>> fetchProfile(String uid) async {
     try {
-      // final result = await _dioClientTmdb.get(
-      //   Endpoint.profile,
-      //   options: Options(
-      //     headers: {'Authorization': 'Bearer $token'},
-      //   ),
-      // );
-      // final resultBody = result['body']['body'];
-      // final user = UserResponse.fromJson(resultBody);
-      return const Result.success(UserResponse());
+      final result = await FirebaseFirestore.instance.collection('user').doc(uid).get();
+      final resultBody = result.data();
+      final user = User.fromJson(resultBody!);
+      return Result.success(user);
     } catch (e, st) {
       return Result.failure(NetworkExceptions.getFirebaseException(e), st);
     }

@@ -4,8 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:klinnika/src/common_widgets/common_widgets.dart';
 import 'package:klinnika/src/constants/constants.dart';
 import 'package:klinnika/src/features/presentation.dart';
-import 'package:klinnika/src/shared/extensions/extensions.dart';
-import 'package:email_validator/email_validator.dart';
 
 class LoginFormSection extends ConsumerWidget {
   const LoginFormSection({super.key});
@@ -26,7 +24,9 @@ class LoginFormSection extends ConsumerWidget {
               'Masuk',
               style: TypographyApp.loginTitle,
             ),
-            SizedBox(height: 24.h,),
+            SizedBox(
+              height: 24.h,
+            ),
             InputFormWidget(
               controller: controller.emailController,
               onChanged: (value) {},
@@ -34,7 +34,9 @@ class LoginFormSection extends ConsumerWidget {
               prefixIcon: Icons.email_outlined,
               validator: controller.validateEmail,
             ),
-            SizedBox(height: 16.h,),
+            SizedBox(
+              height: 16.h,
+            ),
             InputFormWidget.password(
               controller: controller.passwordController,
               onChanged: (value) {},

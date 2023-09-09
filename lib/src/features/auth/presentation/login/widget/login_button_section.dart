@@ -20,23 +20,9 @@ class LoginButtonSection extends ConsumerWidget {
         width: 1.sw,
         height: 48.h,
         child: ElevatedButton(
-            onPressed: controller.login,
-            child: Text("Masuk", style: TypographyApp.loginBtn,),
-        ),
+            onPressed: state.isLoading ? null : controller.login,
+            child: state.isLoading ? const LoadingWidget() : Text("Masuk", style: TypographyApp.loginBtn)),
       ),
     );
-    // return Padding(
-    //   padding: EdgeInsets.symmetric(horizontal: 16.w),
-    //   child: Column(
-    //     mainAxisSize: MainAxisSize.min,
-    //     children: [
-    //       ButtonWidget.primary(
-    //         text: 'Masuk',
-    //         onTap: controller.login,
-    //         isLoading: state.isLoading,
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 }

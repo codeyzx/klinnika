@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:klinnika/gen/assets.gen.dart';
 import 'package:klinnika/src/common_widgets/common_widgets.dart';
 import 'package:klinnika/src/constants/constants.dart';
-import 'package:klinnika/src/routes/routes.dart';
+import 'package:klinnika/src/features/common/presentation/home/home_controller.dart';
 import 'package:klinnika/src/shared/extensions/extensions.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
@@ -15,6 +14,8 @@ class SplashPage extends ConsumerStatefulWidget {
 }
 
 class SplashPageState extends ConsumerState<SplashPage> {
+  HomeController get controller => ref.read(homeControllerProvider.notifier);
+
   @override
   initState() {
     _navigateOtherScreen();
@@ -23,7 +24,7 @@ class SplashPageState extends ConsumerState<SplashPage> {
 
   void _navigateOtherScreen() {
     Future.delayed(const Duration(seconds: 3)).then((_) async {
-      context.goNamed(Routes.home.name);
+      await controller.checkUsers();
     });
   }
 
