@@ -162,4 +162,49 @@ class TypographyApp {
     fontWeight: FontWeight.w400,
     fontSize: 14.sp,
   );
+  static TextStyle queueBigTitle = GoogleFonts.montserrat(
+    color: ColorApp.secondaryBlue,
+    fontWeight: FontWeight.w700,
+    fontSize: 24.sp,
+  );
+  static TextStyle queueScheduleToday = GoogleFonts.montserrat(
+    color: ColorApp.secondaryBlue,
+    fontWeight: FontWeight.w500,
+    fontSize: 12.sp,
+  );
+  static TextStyle queueScheduleSelect = GoogleFonts.montserrat(
+    color: ColorApp.secondaryBlue,
+    fontWeight: FontWeight.w600,
+    fontSize: 14.sp,
+  );
+  static TextStyle queueScheduleLabel = GoogleFonts.montserrat(
+    color: HexColor('#FFFFFE'),
+    fontWeight: FontWeight.w600,
+    fontSize: 12.sp,
+  );
+  static TextStyle queueListNameOn = GoogleFonts.montserrat(
+    color: Colors.white,
+    fontWeight: FontWeight.w600,
+    fontSize: 20.sp,
+  );
+  static TextStyle queueListNumOn= GoogleFonts.montserrat(
+    color: Colors.white.withOpacity(0.80),
+    fontWeight: FontWeight.w500,
+    fontSize: 12.sp,
+  );
+  static TextStyle queueListNameOff = GoogleFonts.montserrat(
+    color: HexColor('#5F6C7B'),
+    fontWeight: FontWeight.w500,
+    fontSize: 14.sp,
+  );
+  static TextStyle queueListNumOffLabel= GoogleFonts.montserrat(
+    color: HexColor('#929DAB'),
+    fontWeight: FontWeight.w500,
+    fontSize: 10.sp,
+  );
+  static TextStyle queueListNumOffValue= GoogleFonts.montserrat(
+    color: HexColor('#5F6C7B'),
+    fontWeight: FontWeight.w500,
+    fontSize: 10.sp,
+  );
 }
