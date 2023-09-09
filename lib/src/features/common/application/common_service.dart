@@ -12,8 +12,13 @@ class CommonService {
     this._commonRepository,
   );
 
-  Future<Result<Home>> fetchHome() async {
+  Future<Result<List<Queue>>> fetchHome() async {
     final resultEvents = await _commonRepository.fetchQueues(doctorId: '567890123');
+    return resultEvents;
+  }
+
+  Future<Result<Home>> fetchHomeConvert(List<Queue> queue) async {
+    final resultEvents = await _commonRepository.fetchQueuesConvert(queue);
     return CommonMapper.mapToHome(resultEvents);
   }
 

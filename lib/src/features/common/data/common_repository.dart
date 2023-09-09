@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:klinnika/src/features/auth/data/responses/responses.dart';
+import 'package:klinnika/src/features/auth/domain/user.dart';
 import 'package:klinnika/src/features/common/data/responses/responses.dart';
 import 'package:klinnika/src/features/common/domain/queue.dart';
+import 'package:klinnika/src/features/common/domain/queue_convert.dart';
 import 'package:klinnika/src/services/services.dart';
 
 class CommonRepository {
@@ -18,6 +20,32 @@ class CommonRepository {
       return Result.success(queueList);
     } catch (e, st) {
       return Result.failure(NetworkExceptions.getFirebaseException(e), st);
+    }
+  }
+
+  Future<Result<List<QueueConvert>>> fetchQueuesConvert(List<Queue> queueList) async {
+    try {
+      List<QueueConvert> convertedList = [];
+
+      for (var queue in queueList) {
+        User user = await fetchUsers(queue.userId);
+        print('user Jadi $user');
+        convertedList.add(QueueConvert.fromQueue(queue, user));
+      }
+
+      return Result.success(convertedList);
+    } catch (e, st) {
+      return Result.failure(NetworkExceptions.getFirebaseException(e), st);
+    }
+  }
+
+  Future<User> fetchUsers(String userId) async {
+    try {
+      final data = await FirebaseFirestore.instance.collection('user').doc(userId).get();
+      final userList = data.data();
+      return User.fromJson(userList!);
+    } catch (e) {
+      throw NetworkExceptions.getFirebaseException(e);
     }
   }
 

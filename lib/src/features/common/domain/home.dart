@@ -1,7 +1,7 @@
-import 'package:klinnika/src/features/common/domain/queue.dart';
+import 'package:klinnika/src/features/common/domain/queue_convert.dart';
 
 class Home {
-  final List<Queue> queueList;
+  final List<QueueConvert> queueList;
   Home({
     required this.queueList,
   });

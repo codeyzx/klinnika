@@ -4,51 +4,47 @@ import 'dart:convert';
 import 'package:klinnika/src/features/auth/data/responses/responses.dart';
 
 class User {
-  final int id;
+  final String id;
   final String email;
-  final String fullname;
-  final StatusUser status;
-  final RoleUser role;
+  final String name;
 
   User({
     required this.id,
     required this.email,
-    required this.fullname,
-    this.status = StatusUser.pending,
-    this.role = RoleUser.user,
+    required this.name,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
       'email': email,
-      'fullname': fullname,
-      'status': status,
-      'role': role,
+      'name': name,
     };
   }
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      id: map['id'] as int,
+      id: map['id'] as String,
       email: map['email'] as String,
-      fullname: map['fullname'] as String,
-      status: map['status'] as StatusUser,
-      role: map['role'] as RoleUser,
+      name: map['name'] as String,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory User.fromJson(String source) => User.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      id: json['id'] as String,
+      email: json['email'] as String,
+      name: json['name'] as String,
+    );
+  }
 
   factory User.fromResponse(UserResponse response) {
     return User(
-      id: response.id ?? 0,
+      id: response.id ?? '',
       email: response.email ?? '',
-      fullname: response.fullname ?? '',
-      status: response.status ?? StatusUser.pending,
-      role: response.role ?? RoleUser.user,
+      name: response.fullname ?? '',
     );
   }
 }
