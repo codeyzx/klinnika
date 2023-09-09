@@ -49,9 +49,13 @@ class _HomeBotNavBarScreenState extends ConsumerState<HomeBotNavBarScreen> {
             currentIndex: currentIndex,
             onTap: (index) => controller.setPage(index),
             items: [
+              // BottomNavigationBarItem(
+              //   icon: !state.isHomeActive ? Assets.icons.icHomeDeactive.svg() : Assets.icons.icHomeActive.svg(),
+              //   label: 'Queue',
+              // ),
               BottomNavigationBarItem(
-                icon: !state.isHomeActive ? Assets.icons.icHomeDeactive.svg() : Assets.icons.icHomeActive.svg(),
-                label: 'Home',
+                icon: !state.isHomeActive ? Icon(Icons.featured_play_list_rounded) : Icon(Icons.featured_play_list_rounded, color: ColorApp.primary,),
+                label: 'Queue',
               ),
               BottomNavigationBarItem(
                 icon: !state.isExploreActive ? Assets.icons.icExploreDeactive.svg() : Assets.icons.icExploreActive.svg(),
