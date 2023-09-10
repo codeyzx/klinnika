@@ -212,4 +212,9 @@ class TypographyApp {
     fontWeight: FontWeight.w500,
     fontSize: 10.sp,
   );
+  static TextStyle queueMRTitle= GoogleFonts.montserrat(
+    color: ColorApp.secondaryBlue,
+    fontWeight: FontWeight.w600,
+    fontSize: 16.sp,
+  );
 }

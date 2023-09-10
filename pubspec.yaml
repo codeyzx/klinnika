@@ -9,6 +9,7 @@ environment:
   sdk: ">=3.0.5 <4.0.0"
 
 dependencies:
+  accordion: ^2.6.0
   cloud_firestore: ^4.9.1
   cupertino_icons: ^1.0.2
   email_validator: ^2.1.17
