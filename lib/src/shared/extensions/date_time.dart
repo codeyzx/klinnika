@@ -9,4 +9,5 @@ extension XDateTime on DateTime {
   String get dayName => DateFormat('EEEE').format(this);
   String get monthName => DateFormat('MMMM').format(this);
   String get time => DateFormat('jm').format(this);
+  String get age => (DateTime.now().year - year).toString();
 }

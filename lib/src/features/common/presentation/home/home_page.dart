@@ -143,9 +143,14 @@ class _HomePageState extends ConsumerState<HomePage> {
                         ),
                         queue!.isEmpty
                             ? Center(
-                                child: Text(
-                                  'Tidak ada antrian',
-                                  style: TypographyApp.queueScheduleSelect,
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'Tidak ada antrian',
+                                      style: TypographyApp.queueScheduleSelect,
+                                    ),
+                                    ElevatedButton(onPressed: () {}, child: const Text('Add Data'))
+                                  ],
                                 ),
                               )
                             : ListView.builder(
@@ -223,7 +228,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                                             SizedBox(
                                                               width: 200.w,
                                                               child: Text(
-                                                                '${item.user?.name}',
+                                                                '${item.patient?.name}',
                                                                 style: TypographyApp.queueListNameOn,
                                                                 overflow: TextOverflow.ellipsis,
                                                               ),
@@ -310,7 +315,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                                             SizedBox(
                                                               width: 200.w,
                                                               child: Text(
-                                                                '${item.user?.name}',
+                                                                '${item.patient?.name}',
                                                                 style: TypographyApp.queueListNameOff,
                                                                 overflow: TextOverflow.ellipsis,
                                                               ),
