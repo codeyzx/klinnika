@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:klinnika/src/constants/constants.dart';
 import 'package:accordion/accordion.dart';
+import 'package:klinnika/src/features/common/presentation/history_detail/history_detail_page.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
@@ -85,7 +86,12 @@ class _HistoryPageState extends State<HistoryPage> {
               Padding(
                 padding: EdgeInsets.only(top: 12.h),
                 child: ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HistoryDetailPage()),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     elevation: 0,
                     fixedSize: Size(344.w, 65.h),
@@ -149,7 +155,12 @@ class _HistoryPageState extends State<HistoryPage> {
               Padding(
                 padding: EdgeInsets.only(top: 12.h),
                 child: ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HistoryDetailPage()),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     elevation: 0,
                     fixedSize: Size(344.w, 65.h),
@@ -213,7 +224,12 @@ class _HistoryPageState extends State<HistoryPage> {
               Padding(
                 padding: EdgeInsets.only(top: 12.h),
                 child: ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HistoryDetailPage()),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     elevation: 0,
                     fixedSize: Size(344.w, 65.h),
