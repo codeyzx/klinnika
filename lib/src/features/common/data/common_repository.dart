@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:klinnika/src/features/auth/domain/user.dart';
-import 'package:klinnika/src/features/common/data/responses/responses.dart';
+import 'package:klinnika/src/features/common/domain/medical_record.dart';
+import 'package:klinnika/src/features/common/domain/medical_record_convert.dart';
+import 'package:klinnika/src/features/common/domain/medicals.dart';
 import 'package:klinnika/src/features/common/domain/patient.dart';
 import 'package:klinnika/src/features/common/domain/queue.dart';
 import 'package:klinnika/src/features/common/domain/queue_convert.dart';
@@ -11,6 +13,26 @@ class CommonRepository {
   final queueDb = FirebaseFirestore.instance.collection('queue').withConverter(
         fromFirestore: (snapshot, _) => Queue.fromJson(snapshot.data()!),
         toFirestore: (Queue queue, _) => queue.toJson(),
+      );
+
+  final medicalRecordDb = FirebaseFirestore.instance.collection('medical_record').withConverter(
+        fromFirestore: (snapshot, _) => MedicalRecord.fromJson(snapshot.data()!),
+        toFirestore: (MedicalRecord medicalRecord, _) => medicalRecord.toJson(),
+      );
+
+  final medicalDb = FirebaseFirestore.instance.collection('medical').withConverter(
+        fromFirestore: (snapshot, _) => Medicals.fromJson(snapshot.data()!),
+        toFirestore: (Medicals medicals, _) => medicals.toJson(),
+      );
+
+  final patientDb = FirebaseFirestore.instance.collection('patient').withConverter(
+        fromFirestore: (snapshot, _) => Patient.fromJson(snapshot.data()!),
+        toFirestore: (Patient patient, _) => patient.toJson(),
+      );
+
+  final userDb = FirebaseFirestore.instance.collection('user').withConverter(
+        fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!),
+        toFirestore: (User user, _) => user.toJson(),
       );
 
   Future<Result<List<Queue>>> fetchQueues({
@@ -51,9 +73,46 @@ class CommonRepository {
 
   Future<Patient> fetchPatient(String patientId) async {
     try {
-      final data = await FirebaseFirestore.instance.collection('patient').doc(patientId).get();
-      final patient = data.data();
-      return Patient.fromJson(patient!);
+      final data = await patientDb.doc(patientId).get();
+      final patient = data.data()!;
+      return patient;
+    } catch (e) {
+      throw NetworkExceptions.getFirebaseException(e);
+    }
+  }
+
+  Future<Result<List<MedicalRecordConvert>>> getMedicalRecord(String queueId) async {
+    try {
+      final data = await medicalRecordDb.where('queue_id', isEqualTo: queueId).get();
+      final medicalRecordList = data.docs.map((e) => e.data()).toList();
+      final medicalRecordConvert = await getMedical(medicalRecordList);
+      return Result.success(medicalRecordConvert);
+    } catch (e, st) {
+      final error = NetworkExceptions.getFirebaseException(e);
+      return Result.failure(error, st);
+    }
+  }
+
+  Future<List<MedicalRecordConvert>> getMedical(List<MedicalRecord> medicalRecordList) async {
+    try {
+      List<MedicalRecordConvert> result = [];
+
+      for (var medicalRecord in medicalRecordList) {
+        Medicals medicals = await fetchMedical(medicalRecord.medicalId.toString());
+        result.add(MedicalRecordConvert.fromMedicalRecord(medicalRecord, medicals));
+      }
+
+      return result;
+    } catch (e) {
+      throw NetworkExceptions.getFirebaseException(e);
+    }
+  }
+
+  Future<Medicals> fetchMedical(String medicalId) async {
+    try {
+      final data = await medicalDb.doc(medicalId).get();
+      final medical = data.data()!;
+      return medical;
     } catch (e) {
       throw NetworkExceptions.getFirebaseException(e);
     }
@@ -72,13 +131,7 @@ class CommonRepository {
 
   Future<Result<String?>> addPatient(Patient patient) async {
     try {
-      final ref = FirebaseFirestore.instance
-          .collection('patient')
-          .withConverter(
-            fromFirestore: (snapshot, _) => Patient.fromJson(snapshot.data()!),
-            toFirestore: (Patient queue, _) => queue.toJson(),
-          )
-          .doc();
+      final ref = patientDb.doc();
       final temp = patient.copyWith(id: ref.id);
       await ref.set(temp);
       return const Result.success('Success');
@@ -87,71 +140,11 @@ class CommonRepository {
     }
   }
 
-  Future<Result<List<EventResponse>>> fetchEvents() async {
-    try {
-      // final result = await _dioClientTmdb.get(Endpoint.event);
-      // final resultBody = result['body']['body'];
-      // final eventList = resultBody.map<EventResponse>((e) => EventResponse.fromJson(e)).toList();
-      // return Result.success(eventList);
-
-      return const Result.success([]);
-    } catch (e, st) {
-      return Result.failure(NetworkExceptions.getFirebaseException(e), st);
-    }
-  }
-
-  Future<Result<EventResponse>> fetchDetail(int id) async {
-    try {
-      // final result = await _dioClientTmdb.get('${Endpoint.event}/$id');
-      // final resultBody = result['body']['body'];
-      // final event = EventResponse.fromJson(resultBody);
-      // return Result.success(event);
-
-      return const Result.success(EventResponse());
-    } catch (e, st) {
-      return Result.failure(NetworkExceptions.getFirebaseException(e), st);
-    }
-  }
-
-  // Future<Result<ApiResponse>> postTicket(RequestTicket data) async {
-  //   try {
-  //     // final response =
-  //     //     await _dioClientTmdb.post(Endpoint.ticket, data: data.toJson());
-
-  //     // return Result.success(ApiResponse.fromJson(response['body']));
-
-  //     // final ref = db.doc();
-  //     // final temp = data.copyWith(eventId: ref.id);
-  //     // await ref.set(temp);
-  //     return const Result.success(ApiResponse(message: 'Success'));
-  //   } catch (e, st) {
-  //     return Result.failure(NetworkExceptions.getFirebaseException(e), st);
-  //   }
-  // }
-
   Future<Result<User>> fetchProfile(String uid) async {
     try {
-      final result = await FirebaseFirestore.instance.collection('user').doc(uid).get();
-      final resultBody = result.data();
-      final user = User.fromJson(resultBody!);
+      final result = await userDb.doc(uid).get();
+      final user = result.data()!;
       return Result.success(user);
-    } catch (e, st) {
-      return Result.failure(NetworkExceptions.getFirebaseException(e), st);
-    }
-  }
-
-  Future<Result<MyEventResponse>> fetchMyEvents(String token) async {
-    try {
-      // final result = await _dioClientTmdb.get(
-      //   Endpoint.myEvents,
-      //   options: Options(
-      //     headers: {'Authorization': 'Bearer $token'},
-      //   ),
-      // );
-      // final resultBody = result['body']['body'];
-      // final user = MyEventResponse.fromJson(resultBody);
-      // return Result.success(user);
-      return const Result.success(MyEventResponse());
     } catch (e, st) {
       return Result.failure(NetworkExceptions.getFirebaseException(e), st);
     }

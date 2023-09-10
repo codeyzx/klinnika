@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:klinnika/src/features/application.dart';
+import 'package:klinnika/src/features/common/domain/medical_record_convert.dart';
 import 'package:klinnika/src/features/common/domain/patient.dart';
 import 'package:klinnika/src/features/common/domain/queue.dart';
 import 'package:klinnika/src/features/data.dart';
@@ -52,22 +53,10 @@ class CommonService {
     );
   }
 
-  Future<Result<List<EventResponse>>> getEventList() async {
-    final result = await _commonRepository.fetchEvents();
+  Future<Result<List<MedicalRecordConvert>>> getMedicalRecord(String queueId) async {
+    final result = await _commonRepository.getMedicalRecord(queueId);
     return result;
   }
-
-  // Future<Result<String?>> createTicket(RequestTicket ticket) async {
-  //   final result = await _commonRepository.postTicket(ticket);
-  //   return result.when(
-  //     success: (data) {
-  //       return Result.success(data.message);
-  //     },
-  //     failure: (error, stackTrace) {
-  //       return Result.failure(error, stackTrace);
-  //     },
-  //   );
-  // }
 
   Future<Result<User>> getProfile() async {
     String? uid = auth.FirebaseAuth.instance.currentUser?.uid;
@@ -93,24 +82,10 @@ class CommonService {
   void logout() {
     auth.FirebaseAuth.instance.signOut();
   }
-
-  // Future<Result<MyEvents>> getMyEvents() async {
-  //   // String? token = _hiveService.getToken();
-
-  //   // if (token == null) {
-  //   return Result.failure(
-  //     const NetworkExceptions.notFound('Token is null'),
-  //     StackTrace.current,
-  //   );
-  //   // }
-
-  //   // final result = await _commonRepository.fetchMyEvents(token);
-  //   // return CommonMapper.mapToMyEvents(result);
-  // }
 }
 
 final commonServiceProvider = Provider<CommonService>((ref) {
   final commonRepository = ref.read(commonRepositoryProvider);
-  // final hiveService = ref.read(hiveServiceProvider);
+
   return CommonService(commonRepository);
 });
