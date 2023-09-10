@@ -28,9 +28,9 @@ class MedicalRecordController extends StateNotifier<MedicalRecordState> {
       },
     );
   }
-
-  final medicalDetailControllerProvider = StateNotifierProvider<MedicalRecordController, MedicalRecordState>((ref) {
-    final commonService = ref.read(commonServiceProvider);
-    return MedicalRecordController(commonService);
-  });
 }
+
+final medicalRecordControllerProvider = StateNotifierProvider<MedicalRecordController, MedicalRecordState>((ref) {
+  final commonService = ref.read(commonServiceProvider);
+  return MedicalRecordController(commonService);
+});

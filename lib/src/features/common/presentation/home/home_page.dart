@@ -6,9 +6,9 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:klinnika/src/common_widgets/common_widgets.dart';
 import 'package:klinnika/src/constants/constants.dart';
 import 'package:klinnika/src/features/common/presentation/checkup/checkup_controller.dart';
+import 'package:klinnika/src/features/common/presentation/checkup/checkup_state.dart';
 import 'package:klinnika/src/features/common/presentation/home/home_controller.dart';
 import 'package:klinnika/src/features/common/presentation/home/home_state.dart';
-import 'package:klinnika/src/features/queue/presentation/medical_record/medical_record_page.dart';
 import 'package:klinnika/src/routes/app_routes.dart';
 import 'package:klinnika/src/routes/extras.dart';
 import 'package:klinnika/src/shared/extensions/extensions.dart';
@@ -23,7 +23,8 @@ class HomePage extends ConsumerStatefulWidget {
 class _HomePageState extends ConsumerState<HomePage> {
   HomeController get controller => ref.read(homeControllerProvider.notifier);
   HomeState get state => ref.watch(homeControllerProvider);
-  CheckupController get queueController => ref.read(checkupControllerProvider.notifier);
+  CheckupController get checkupController => ref.read(checkupControllerProvider.notifier);
+  CheckupState get checkupState => ref.watch(checkupControllerProvider);
 
   @override
   void initState() {
@@ -150,7 +151,14 @@ class _HomePageState extends ConsumerState<HomePage> {
                                       'Tidak ada antrian',
                                       style: TypographyApp.queueScheduleSelect,
                                     ),
-                                    ElevatedButton(onPressed: () {}, child: const Text('Add Data'))
+                                    ElevatedButton(
+                                        onPressed: () async {
+                                          // await checkupController.addMedical();
+                                          // await checkupController.addMedicalRecord(checkupState.medicalId.toString());
+                                          // await checkupController.addPatient();
+                                          // await checkupController.addQueue('Hy9jrTiXmqZ3aXuEBVOvqZz3THV2');
+                                        },
+                                        child: const Text('Add Data'))
                                   ],
                                 ),
                               )
@@ -361,12 +369,6 @@ class _HomePageState extends ConsumerState<HomePage> {
                                         );
                                 },
                               ),
-                        ElevatedButton(onPressed: (){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => MedicalRecordPage()),
-                          );
-                        }, child: Text("Rekam Medis Page"),),
                       ],
                     ),
                   ),

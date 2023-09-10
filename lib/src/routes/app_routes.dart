@@ -10,7 +10,7 @@ import 'package:klinnika/src/features/common/presentation/onboard/onboard_page.d
 import 'package:klinnika/src/features/common/presentation/splash/splash_page.dart';
 
 import 'package:klinnika/src/features/presentation.dart';
-import 'package:klinnika/src/features/queue/presentation/detail_patient/detail_patient_page.dart';
+import 'package:klinnika/src/features/common/presentation/detail_patient/detail_patient_page.dart';
 import 'package:klinnika/src/routes/routes.dart';
 
 enum Routes {
@@ -19,6 +19,7 @@ enum Routes {
   login,
   home,
   patientDetail,
+  medicalRecord,
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -63,6 +64,18 @@ final goRouterProvider = Provider<GoRouter>(
             return DetailPatientPage(
               item: item,
               index: index,
+            );
+          },
+          routes: const [],
+        ),
+        GoRoute(
+          path: '/medical-record',
+          name: Routes.medicalRecord.name,
+          builder: (context, state) {
+            final extras = state.extra as Extras;
+            final queueId = extras.datas[ExtrasKey.id] as String;
+            return MedicalRecordPage(
+              queueId: queueId,
             );
           },
           routes: const [],

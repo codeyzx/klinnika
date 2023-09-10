@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:klinnika/src/constants/constants.dart';
 import 'package:klinnika/src/features/common/domain/queue_convert.dart';
+import 'package:klinnika/src/routes/routes.dart';
 import 'package:klinnika/src/shared/extensions/extensions.dart';
 
 class DetailPatientPage extends ConsumerWidget {
@@ -98,7 +100,16 @@ class DetailPatientPage extends ConsumerWidget {
                   backgroundColor: ColorApp.white,
                   padding: EdgeInsets.symmetric(horizontal: 87.w, vertical: 12.h),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  context.pushNamed(
+                    Routes.medicalRecord.name,
+                    extra: Extras(
+                      datas: {
+                        ExtrasKey.id: item.id,
+                      },
+                    ),
+                  );
+                },
                 child: Text(
                   'Cek Rekam Medis',
                   style: TypographyApp.queueOnWhiteBtn,

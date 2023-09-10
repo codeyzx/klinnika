@@ -1,14 +1,14 @@
-class Medicals {
+class Medical {
   final String? id;
   final List<String>? medicals;
 
-  Medicals({
+  Medical({
     this.id,
     this.medicals,
   });
 
-  factory Medicals.fromMap(Map<String, dynamic> map) {
-    return Medicals(
+  factory Medical.fromMap(Map<String, dynamic> map) {
+    return Medical(
       id: map['id'] as String,
       medicals: List<String>.from(map['medicals']),
     );
@@ -21,8 +21,8 @@ class Medicals {
     };
   }
 
-  factory Medicals.fromJson(Map<String, dynamic> json) {
-    return Medicals(
+  factory Medical.fromJson(Map<String, dynamic> json) {
+    return Medical(
       id: json['id'] ?? '',
       medicals: List<String>.from(json['medicals'] ?? []),
     );
@@ -33,11 +33,11 @@ class Medicals {
         'medicals': medicals,
       };
 
-  Medicals copyWith({
+  Medical copyWith({
     String? id,
     List<String>? medicals,
   }) {
-    return Medicals(
+    return Medical(
       id: id ?? this.id,
       medicals: medicals ?? this.medicals,
     );

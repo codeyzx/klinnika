@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:klinnika/src/features/auth/domain/user.dart';
 import 'package:klinnika/src/features/common/domain/medical_record.dart';
 import 'package:klinnika/src/features/common/domain/medical_record_convert.dart';
-import 'package:klinnika/src/features/common/domain/medicals.dart';
+import 'package:klinnika/src/features/common/domain/medical.dart';
 import 'package:klinnika/src/features/common/domain/patient.dart';
 import 'package:klinnika/src/features/common/domain/queue.dart';
 import 'package:klinnika/src/features/common/domain/queue_convert.dart';
@@ -21,8 +21,8 @@ class CommonRepository {
       );
 
   final medicalDb = FirebaseFirestore.instance.collection('medical').withConverter(
-        fromFirestore: (snapshot, _) => Medicals.fromJson(snapshot.data()!),
-        toFirestore: (Medicals medicals, _) => medicals.toJson(),
+        fromFirestore: (snapshot, _) => Medical.fromJson(snapshot.data()!),
+        toFirestore: (Medical medical, _) => medical.toJson(),
       );
 
   final patientDb = FirebaseFirestore.instance.collection('patient').withConverter(
@@ -98,8 +98,8 @@ class CommonRepository {
       List<MedicalRecordConvert> result = [];
 
       for (var medicalRecord in medicalRecordList) {
-        Medicals medicals = await fetchMedical(medicalRecord.medicalId.toString());
-        result.add(MedicalRecordConvert.fromMedicalRecord(medicalRecord, medicals));
+        Medical medical = await fetchMedical(medicalRecord.medicalId.toString());
+        result.add(MedicalRecordConvert.fromMedicalRecord(medicalRecord, medical));
       }
 
       return result;
@@ -108,7 +108,7 @@ class CommonRepository {
     }
   }
 
-  Future<Medicals> fetchMedical(String medicalId) async {
+  Future<Medical> fetchMedical(String medicalId) async {
     try {
       final data = await medicalDb.doc(medicalId).get();
       final medical = data.data()!;
@@ -135,6 +135,28 @@ class CommonRepository {
       final temp = patient.copyWith(id: ref.id);
       await ref.set(temp);
       return const Result.success('Success');
+    } catch (e, st) {
+      return Result.failure(NetworkExceptions.getFirebaseException(e), st);
+    }
+  }
+
+  Future<Result<String?>> addMedicalRecord(MedicalRecord medicalRecord) async {
+    try {
+      final ref = medicalRecordDb.doc();
+      final temp = medicalRecord.copyWith(id: ref.id);
+      await ref.set(temp);
+      return const Result.success('Success');
+    } catch (e, st) {
+      return Result.failure(NetworkExceptions.getFirebaseException(e), st);
+    }
+  }
+
+  Future<Result<String?>> addMedical(Medical medical) async {
+    try {
+      final ref = medicalDb.doc();
+      final temp = medical.copyWith(id: ref.id);
+      await ref.set(temp);
+      return Result.success(ref.id);
     } catch (e, st) {
       return Result.failure(NetworkExceptions.getFirebaseException(e), st);
     }

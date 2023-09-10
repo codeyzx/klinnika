@@ -1,5 +1,5 @@
 import 'package:klinnika/src/features/common/domain/medical_record.dart';
-import 'package:klinnika/src/features/common/domain/medicals.dart';
+import 'package:klinnika/src/features/common/domain/medical.dart';
 
 class MedicalRecordConvert {
   final String? id;
@@ -11,7 +11,7 @@ class MedicalRecordConvert {
   final String? diagnose;
   final String? actType;
   final String? medicalId;
-  final Medicals? medicals;
+  final Medical? medical;
 
   MedicalRecordConvert({
     this.id,
@@ -23,10 +23,10 @@ class MedicalRecordConvert {
     this.diagnose,
     this.actType,
     this.medicalId,
-    this.medicals,
+    this.medical,
   });
 
-  factory MedicalRecordConvert.fromMedicalRecord(MedicalRecord medicalRecord, Medicals medicals) {
+  factory MedicalRecordConvert.fromMedicalRecord(MedicalRecord medicalRecord, Medical medical) {
     return MedicalRecordConvert(
       id: medicalRecord.id,
       queueId: medicalRecord.queueId,
@@ -37,7 +37,7 @@ class MedicalRecordConvert {
       diagnose: medicalRecord.diagnose,
       actType: medicalRecord.actType,
       medicalId: medicalRecord.medicalId,
-      medicals: medicals,
+      medical: medical,
     );
   }
 
@@ -51,7 +51,7 @@ class MedicalRecordConvert {
     String? diagnose,
     String? actType,
     String? medicalId,
-    Medicals? medicals,
+    Medical? medical,
   }) {
     return MedicalRecordConvert(
       id: id ?? this.id,
@@ -63,7 +63,7 @@ class MedicalRecordConvert {
       diagnose: diagnose ?? this.diagnose,
       actType: actType ?? this.actType,
       medicalId: medicalId ?? this.medicalId,
-      medicals: medicals ?? this.medicals,
+      medical: medical ?? this.medical,
     );
   }
 }
