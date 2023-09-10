@@ -8,6 +8,7 @@ import 'package:klinnika/src/constants/constants.dart';
 import 'package:klinnika/src/features/common/presentation/checkup/checkup_controller.dart';
 import 'package:klinnika/src/features/common/presentation/home/home_controller.dart';
 import 'package:klinnika/src/features/common/presentation/home/home_state.dart';
+import 'package:klinnika/src/features/history/presentation/hisotry/history_page.dart';
 import 'package:klinnika/src/features/queue/presentation/medical_record/medical_record_page.dart';
 import 'package:klinnika/src/routes/app_routes.dart';
 import 'package:klinnika/src/routes/extras.dart';
@@ -367,6 +368,12 @@ class _HomePageState extends ConsumerState<HomePage> {
                             MaterialPageRoute(builder: (context) => MedicalRecordPage()),
                           );
                         }, child: Text("Rekam Medis Page"),),
+                        ElevatedButton(onPressed: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HistoryPage()),
+                          );
+                        }, child: Text("History Page"),),
                       ],
                     ),
                   ),
