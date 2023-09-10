@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:klinnika/src/features/auth/domain/user.dart';
 import 'package:klinnika/src/features/common/data/responses/responses.dart';
+import 'package:klinnika/src/features/common/domain/patient.dart';
 import 'package:klinnika/src/features/common/domain/queue.dart';
 import 'package:klinnika/src/features/common/domain/queue_convert.dart';
 import 'package:klinnika/src/services/services.dart';
@@ -38,8 +39,8 @@ class CommonRepository {
       List<QueueConvert> convertedList = [];
 
       for (var queue in queueList) {
-        User user = await fetchUsers(queue.userId.toString());
-        convertedList.add(QueueConvert.fromQueue(queue, user));
+        Patient patient = await fetchPatient(queue.patientId.toString());
+        convertedList.add(QueueConvert.fromQueue(queue, patient));
       }
 
       return Result.success(convertedList);
@@ -48,11 +49,11 @@ class CommonRepository {
     }
   }
 
-  Future<User> fetchUsers(String userId) async {
+  Future<Patient> fetchPatient(String patientId) async {
     try {
-      final data = await FirebaseFirestore.instance.collection('user').doc(userId).get();
-      final userList = data.data();
-      return User.fromJson(userList!);
+      final data = await FirebaseFirestore.instance.collection('patient').doc(patientId).get();
+      final patient = data.data();
+      return Patient.fromJson(patient!);
     } catch (e) {
       throw NetworkExceptions.getFirebaseException(e);
     }
@@ -62,6 +63,23 @@ class CommonRepository {
     try {
       final ref = queueDb.doc();
       final temp = queue.copyWith(id: ref.id);
+      await ref.set(temp);
+      return const Result.success('Success');
+    } catch (e, st) {
+      return Result.failure(NetworkExceptions.getFirebaseException(e), st);
+    }
+  }
+
+  Future<Result<String?>> addPatient(Patient patient) async {
+    try {
+      final ref = FirebaseFirestore.instance
+          .collection('patient')
+          .withConverter(
+            fromFirestore: (snapshot, _) => Patient.fromJson(snapshot.data()!),
+            toFirestore: (Patient queue, _) => queue.toJson(),
+          )
+          .doc();
+      final temp = patient.copyWith(id: ref.id);
       await ref.set(temp);
       return const Result.success('Success');
     } catch (e, st) {
