@@ -237,4 +237,19 @@ class TypographyApp {
     fontWeight: FontWeight.w500,
     fontSize: 12.sp,
   );
+  static TextStyle historyDetBigLabel= GoogleFonts.montserrat(
+    color: HexColor('#434343'),
+    fontWeight: FontWeight.w600,
+    fontSize: 14.sp,
+  );
+  static TextStyle historyDetBigValue= GoogleFonts.montserrat(
+    color: HexColor('#5F6C7B'),
+    fontWeight: FontWeight.w600,
+    fontSize: 12.sp,
+  );
+  static TextStyle historyDetDesc = GoogleFonts.montserrat(
+    color: HexColor('#5F6C7B'),
+    fontWeight: FontWeight.w400,
+    fontSize: 12.sp,
+  );
 }
