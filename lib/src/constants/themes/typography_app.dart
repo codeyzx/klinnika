@@ -252,4 +252,34 @@ class TypographyApp {
     fontWeight: FontWeight.w400,
     fontSize: 12.sp,
   );
+  static TextStyle invenSearchHint = GoogleFonts.montserrat(
+    color: HexColor('#929DAB'),
+    fontWeight: FontWeight.w500,
+    fontSize: 14.sp,
+  );
+  static TextStyle invenSearchOn = GoogleFonts.montserrat(
+    color: HexColor('#5F6C7B'),
+    fontWeight: FontWeight.w500,
+    fontSize: 14.sp,
+  );
+  static TextStyle invenListType = GoogleFonts.montserrat(
+    color: ColorApp.primary,
+    fontWeight: FontWeight.w600,
+    fontSize: 10.sp,
+  );
+  static TextStyle invenListItem = GoogleFonts.montserrat(
+    color: HexColor('#5F6C7B'),
+    fontWeight: FontWeight.w600,
+    fontSize: 14.sp,
+  );
+  static TextStyle invenListLabel = GoogleFonts.montserrat(
+    color: HexColor('#929DAB'),
+    fontWeight: FontWeight.w500,
+    fontSize: 10.sp,
+  );
+  static TextStyle invenListValue = GoogleFonts.montserrat(
+    color: HexColor('#5F6C7B'),
+    fontWeight: FontWeight.w500,
+    fontSize: 10.sp,
+  );
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:klinnika/src/constants/constants.dart';
-import 'package:accordion/accordion.dart';
 import 'package:klinnika/src/features/common/presentation/history_detail/history_detail_page.dart';
 
 class HistoryPage extends StatefulWidget {

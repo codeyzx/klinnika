@@ -11,6 +11,7 @@ import 'package:klinnika/src/features/common/presentation/history_detail/history
 import 'package:klinnika/src/features/common/presentation/home/home_controller.dart';
 import 'package:klinnika/src/features/common/presentation/home/home_state.dart';
 import 'package:klinnika/src/features/history/presentation/hisotry/history_page.dart';
+import 'package:klinnika/src/features/inventory/presentation/inventory/inventory_page.dart';
 import 'package:klinnika/src/routes/app_routes.dart';
 import 'package:klinnika/src/routes/extras.dart';
 import 'package:klinnika/src/shared/extensions/extensions.dart';
@@ -388,6 +389,15 @@ class _HomePageState extends ConsumerState<HomePage> {
                             );
                           },
                           child: const Text("History Detail Page"),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const InventoryPage()),
+                            );
+                          },
+                          child: const Text("Inventory Page"),
                         ),
                       ],
                     ),
