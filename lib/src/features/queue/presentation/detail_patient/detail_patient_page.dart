@@ -18,6 +18,7 @@ class DetailPatientPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      backgroundColor: ColorApp.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
