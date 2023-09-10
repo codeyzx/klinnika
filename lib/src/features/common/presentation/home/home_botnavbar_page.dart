@@ -62,9 +62,18 @@ class _HomeBotNavBarScreenState extends ConsumerState<HomeBotNavBarScreen> {
                       ),
                 label: 'Queue',
               ),
+              // BottomNavigationBarItem(
+              //   icon: !state.isExploreActive ? Assets.icons.icExploreDeactive.svg() : Assets.icons.icExploreActive.svg(),
+              //   label: 'Explore',
+              // ),
               BottomNavigationBarItem(
-                icon: !state.isExploreActive ? Assets.icons.icExploreDeactive.svg() : Assets.icons.icExploreActive.svg(),
-                label: 'Explore',
+                icon: !state.isExploreActive
+                    ? const Icon(Icons.history)
+                    : Icon(
+                  Icons.history,
+                  color: ColorApp.primary,
+                ),
+                label: 'History',
               ),
               BottomNavigationBarItem(
                 icon: !state.isEventsActive ? Assets.icons.icEventsDeactive.svg() : Assets.icons.icEventsActive.svg(),

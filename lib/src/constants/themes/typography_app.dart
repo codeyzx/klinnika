@@ -217,4 +217,24 @@ class TypographyApp {
     fontWeight: FontWeight.w600,
     fontSize: 16.sp,
   );
+  static TextStyle historyDay= GoogleFonts.montserrat(
+    color: HexColor('#5F6C7B'),
+    fontWeight: FontWeight.w600,
+    fontSize: 14.sp,
+  );
+  static TextStyle historyName= GoogleFonts.montserrat(
+    color: ColorApp.secondaryBlue,
+    fontWeight: FontWeight.w700,
+    fontSize: 16.sp,
+  );
+  static TextStyle historyMedRec= GoogleFonts.montserrat(
+    color: ColorApp.secondaryBlue,
+    fontWeight: FontWeight.w500,
+    fontSize: 12.sp,
+  );
+  static TextStyle historyClock= GoogleFonts.montserrat(
+    color: HexColor('#5F6C7B'),
+    fontWeight: FontWeight.w500,
+    fontSize: 12.sp,
+  );
 }
