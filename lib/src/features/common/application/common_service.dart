@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:klinnika/src/features/application.dart';
+import 'package:klinnika/src/features/common/domain/patient.dart';
 import 'package:klinnika/src/features/common/domain/queue.dart';
 import 'package:klinnika/src/features/data.dart';
 import 'package:klinnika/src/features/domain.dart';
@@ -29,6 +30,18 @@ class CommonService {
 
   Future<Result<String?>> addQueue(Queue queue) async {
     final result = await _commonRepository.addQueue(queue);
+    return result.when(
+      success: (data) {
+        return Result.success(data);
+      },
+      failure: (error, stackTrace) {
+        return Result.failure(error, stackTrace);
+      },
+    );
+  }
+
+  Future<Result<String?>> addPatient(Patient patient) async {
+    final result = await _commonRepository.addPatient(patient);
     return result.when(
       success: (data) {
         return Result.success(data);

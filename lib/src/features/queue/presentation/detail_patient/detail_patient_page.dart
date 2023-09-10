@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:klinnika/src/constants/constants.dart';
 import 'package:klinnika/src/features/common/domain/queue_convert.dart';
+import 'package:klinnika/src/shared/extensions/extensions.dart';
 
 class DetailPatientPage extends ConsumerWidget {
   final QueueConvert item;
@@ -60,7 +61,7 @@ class DetailPatientPage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${item.user?.name}',
+                        '${item.patient?.name}',
                         style: TypographyApp.queueDetName,
                       ),
                       SizedBox(
@@ -122,7 +123,7 @@ class DetailPatientPage extends ConsumerWidget {
                     style: TypographyApp.queueDetLabel,
                   ),
                   Text(
-                    "${item.user?.name}",
+                    "${item.patient?.name}",
                     style: TypographyApp.queueDetValue,
                   ),
                 ],
@@ -138,9 +139,20 @@ class DetailPatientPage extends ConsumerWidget {
                     "Tanggal Lahir",
                     style: TypographyApp.queueDetLabel,
                   ),
-                  Text(
-                    "30 Oct 2000",
-                    style: TypographyApp.queueDetValue,
+                  Row(
+                    children: [
+                      Text(
+                        '${item.patient?.birthDate!.dateMonthYear}',
+                        style: TypographyApp.queueDetValue,
+                      ),
+                      SizedBox(
+                        width: 4.w,
+                      ),
+                      Text(
+                        '(${item.patient?.birthDate!.age} thn)',
+                        style: TypographyApp.queueDetValueBirth,
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -156,7 +168,7 @@ class DetailPatientPage extends ConsumerWidget {
                     style: TypographyApp.queueDetLabel,
                   ),
                   Text(
-                    "Pria",
+                    '${item.patient?.gender}',
                     style: TypographyApp.queueDetValue,
                   ),
                 ],
@@ -173,7 +185,7 @@ class DetailPatientPage extends ConsumerWidget {
                     style: TypographyApp.queueDetLabel,
                   ),
                   Text(
-                    "-",
+                    item.patient?.email! == '' ? '-' : item.patient!.email!,
                     style: TypographyApp.queueDetValue,
                   ),
                 ],
@@ -190,7 +202,7 @@ class DetailPatientPage extends ConsumerWidget {
                     style: TypographyApp.queueDetLabel,
                   ),
                   Text(
-                    "0821172121",
+                    item.patient?.phone! == '' ? '-' : item.patient!.phone!,
                     style: TypographyApp.queueDetValue,
                   ),
                 ],
@@ -214,40 +226,24 @@ class DetailPatientPage extends ConsumerWidget {
                 height: 12.h,
               ),
               Row(
-                children: [
-                  Container(
-                    width: 75.w,
-                    height: 29.h,
-                    decoration: BoxDecoration(
-                      color: ColorApp.primary.withOpacity(0.10),
-                      borderRadius: BorderRadius.circular(6.r),
-                    ),
-                    child: Center(
-                      child: Text(
-                        // "Pusing",
-                        "${item.complaintType}",
-                        style: TypographyApp.queueDetIll,
+                children: item.complaintType!.map((complaintType) {
+                  return Expanded(
+                    child: Container(
+                      height: 29.h,
+                      margin: EdgeInsets.only(right: 12.w),
+                      decoration: BoxDecoration(
+                        color: ColorApp.primary.withOpacity(0.10),
+                        borderRadius: BorderRadius.circular(6.r),
+                      ),
+                      child: Center(
+                        child: Text(
+                          complaintType,
+                          style: TypographyApp.queueDetIll,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 12.w,
-                  ),
-                  Container(
-                    width: 75.w,
-                    height: 29.h,
-                    decoration: BoxDecoration(
-                      color: ColorApp.primary.withOpacity(0.10),
-                      borderRadius: BorderRadius.circular(6.r),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Mual",
-                        style: TypographyApp.queueDetIll,
-                      ),
-                    ),
-                  ),
-                ],
+                  );
+                }).toList(),
               ),
               SizedBox(
                 height: 24.w,
@@ -262,7 +258,6 @@ class DetailPatientPage extends ConsumerWidget {
               SizedBox(
                 width: 323.w,
                 child: Text(
-                  // 'lorem ipsum dolor sit amet, consectetur adipiscing eli',
                   '${item.complaintDesc}',
                   style: TypographyApp.queueDesc,
                   textAlign: TextAlign.justify,

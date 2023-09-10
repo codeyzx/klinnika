@@ -89,25 +89,25 @@ class TypographyApp {
     fontSize: 30.sp,
   );
 
-  static TextStyle loginBtn= TextStyle(
+  static TextStyle loginBtn = TextStyle(
     color: ColorApp.white,
     fontWeight: FontWeight.w600,
     fontSize: 16.sp,
   );
 
-  static TextStyle loginOffInput= TextStyle(
+  static TextStyle loginOffInput = TextStyle(
     color: HexColor('#9D9D9D'),
     fontWeight: FontWeight.w500,
     fontSize: 14.sp,
   );
 
-  static TextStyle loginOnInput= TextStyle(
+  static TextStyle loginOnInput = TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.w500,
     fontSize: 14.sp,
   );
 
-  static TextStyle loginForgot= TextStyle(
+  static TextStyle loginForgot = TextStyle(
     color: ColorApp.primary,
     fontWeight: FontWeight.w500,
     fontSize: 14.sp,
@@ -122,7 +122,7 @@ class TypographyApp {
     fontWeight: FontWeight.w600,
     fontSize: 16.sp,
   );
-  static TextStyle queueDetName= GoogleFonts.montserrat(
+  static TextStyle queueDetName = GoogleFonts.montserrat(
     color: ColorApp.secondaryBlue,
     fontWeight: FontWeight.w700,
     fontSize: 16.sp,
@@ -146,6 +146,11 @@ class TypographyApp {
     color: ColorApp.secondaryBlue,
     fontWeight: FontWeight.w600,
     fontSize: 14.sp,
+  );
+  static TextStyle queueDetValueBirth = GoogleFonts.montserrat(
+    color: ColorApp.secondaryBlue,
+    fontWeight: FontWeight.w500,
+    fontSize: 12.sp,
   );
   static TextStyle queueDetTitle = GoogleFonts.montserrat(
     color: ColorApp.secondaryBlue,
@@ -187,7 +192,7 @@ class TypographyApp {
     fontWeight: FontWeight.w600,
     fontSize: 20.sp,
   );
-  static TextStyle queueListNumOn= GoogleFonts.montserrat(
+  static TextStyle queueListNumOn = GoogleFonts.montserrat(
     color: Colors.white.withOpacity(0.80),
     fontWeight: FontWeight.w500,
     fontSize: 12.sp,
@@ -197,12 +202,12 @@ class TypographyApp {
     fontWeight: FontWeight.w500,
     fontSize: 14.sp,
   );
-  static TextStyle queueListNumOffLabel= GoogleFonts.montserrat(
+  static TextStyle queueListNumOffLabel = GoogleFonts.montserrat(
     color: HexColor('#929DAB'),
     fontWeight: FontWeight.w500,
     fontSize: 10.sp,
   );
-  static TextStyle queueListNumOffValue= GoogleFonts.montserrat(
+  static TextStyle queueListNumOffValue = GoogleFonts.montserrat(
     color: HexColor('#5F6C7B'),
     fontWeight: FontWeight.w500,
     fontSize: 10.sp,

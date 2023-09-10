@@ -1,22 +1,22 @@
-import 'package:klinnika/src/features/auth/domain/user.dart';
+import 'package:klinnika/src/features/common/domain/patient.dart';
 import 'package:klinnika/src/features/common/domain/queue.dart';
 
 class QueueConvert {
   final String? id;
-  final User? user;
+  final Patient? patient;
   final String? doctorId;
   final DateTime? appointmentDate;
   final DateTime? finishAt;
   final DateTime? createdAt;
   final String? polyId;
-  final String? complaintType;
+  final List<String>? complaintType;
   final String? complaintDesc;
   final String? clinicId;
   final String? type;
 
   QueueConvert({
     this.id,
-    this.user,
+    this.patient,
     this.doctorId,
     this.appointmentDate,
     this.finishAt,
@@ -28,10 +28,10 @@ class QueueConvert {
     this.type,
   });
 
-  factory QueueConvert.fromQueue(Queue queue, User user) {
+  factory QueueConvert.fromQueue(Queue queue, Patient patient) {
     return QueueConvert(
       id: queue.id,
-      user: user,
+      patient: patient,
       doctorId: queue.doctorId,
       appointmentDate: queue.appointmentDate,
       finishAt: queue.finishAt,
@@ -46,20 +46,20 @@ class QueueConvert {
 
   QueueConvert copyWith({
     String? id,
-    User? user,
+    Patient? patient,
     String? doctorId,
     DateTime? appointmentDate,
     DateTime? finishAt,
     DateTime? createdAt,
     String? polyId,
-    String? complaintType,
+    List<String>? complaintType,
     String? complaintDesc,
     String? clinicId,
     String? type,
   }) {
     return QueueConvert(
       id: id ?? this.id,
-      user: user ?? this.user,
+      patient: patient ?? this.patient,
       doctorId: doctorId ?? this.doctorId,
       appointmentDate: appointmentDate ?? this.appointmentDate,
       finishAt: finishAt ?? this.finishAt,
