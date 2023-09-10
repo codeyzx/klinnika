@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:klinnika/src/constants/constants.dart';
-import 'package:klinnika/src/features/common/presentation/history_detail/history_detail_page.dart';
+import 'package:klinnika/src/features/common/presentation/inventory_detail/inventory_detail_page.dart';
 
 class InventoryPage extends StatefulWidget {
   const InventoryPage({super.key});
@@ -77,7 +77,12 @@ class _InventoryPageState extends State<InventoryPage> {
                   height: 8.h,
                 ),
                 InkWell(
-                  onTap: () {print("tapped");},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const InventoryDetailPage()),
+                    );
+                  },
                   child: Container(
                     width: double.infinity,
                     margin: EdgeInsets.only(top: 16.h),
