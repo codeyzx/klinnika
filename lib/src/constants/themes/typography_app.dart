@@ -317,4 +317,24 @@ class TypographyApp {
     fontWeight: FontWeight.w400,
     fontSize: 14.sp,
   );
+  static TextStyle profileJob =  GoogleFonts.montserrat(
+    color: HexColor('#3DA9FC'),
+    fontWeight: FontWeight.w500,
+    fontSize: 14.sp,
+  );
+  static TextStyle profileItemTitle =  GoogleFonts.montserrat(
+    color: Colors.black.withOpacity(0.70),
+    fontWeight: FontWeight.w600,
+    fontSize: 14.sp,
+  );
+  static TextStyle profileItem =  GoogleFonts.montserrat(
+    color: HexColor('#231F20'),
+    fontWeight: FontWeight.w500,
+    fontSize: 16.sp,
+  );
+  static TextStyle profileItemRed =  GoogleFonts.montserrat(
+    color: HexColor('#DB3F3F'),
+    fontWeight: FontWeight.w500,
+    fontSize: 16.sp,
+  );
 }
