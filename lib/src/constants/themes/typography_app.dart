@@ -282,4 +282,39 @@ class TypographyApp {
     fontWeight: FontWeight.w500,
     fontSize: 10.sp,
   );
+  static TextStyle cdLabel = GoogleFonts.montserrat(
+    color: HexColor('#094067'),
+    fontWeight: FontWeight.w600,
+    fontSize: 14.sp,
+  );
+  static TextStyle cdAddBtn = GoogleFonts.montserrat(
+    color: ColorApp.blue,
+    fontWeight: FontWeight.w600,
+    fontSize: 14.sp,
+  );
+  static TextStyle cdDrug= GoogleFonts.montserrat(
+    color: HexColor('#434343'),
+    fontWeight: FontWeight.w500,
+    fontSize: 14.sp,
+  );
+  static TextStyle cdDrugCount= GoogleFonts.montserrat(
+    color: HexColor('#5F6C7B'),
+    fontWeight: FontWeight.w500,
+    fontSize: 12.sp,
+  );
+  static TextStyle cdDrugHint= GoogleFonts.montserrat(
+    color: HexColor('#3DA9FC'),
+    fontWeight: FontWeight.w400,
+    fontSize: 12.sp,
+  );
+  static TextStyle cdDrugDescValue= GoogleFonts.montserrat(
+    color: HexColor('#5F6C7B'),
+    fontWeight: FontWeight.w400,
+    fontSize: 12.sp,
+  );
+  static TextStyle cdDrugItemCount =  GoogleFonts.montserrat(
+    color: HexColor('#000000'),
+    fontWeight: FontWeight.w400,
+    fontSize: 14.sp,
+  );
 }
