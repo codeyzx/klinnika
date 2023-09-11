@@ -7,11 +7,8 @@ import 'package:klinnika/src/common_widgets/common_widgets.dart';
 import 'package:klinnika/src/constants/constants.dart';
 import 'package:klinnika/src/features/common/presentation/checkup/checkup_controller.dart';
 import 'package:klinnika/src/features/common/presentation/checkup/checkup_state.dart';
-import 'package:klinnika/src/features/common/presentation/history_detail/history_detail_page.dart';
 import 'package:klinnika/src/features/common/presentation/home/home_controller.dart';
 import 'package:klinnika/src/features/common/presentation/home/home_state.dart';
-import 'package:klinnika/src/features/history/presentation/hisotry/history_page.dart';
-import 'package:klinnika/src/features/inventory/presentation/inventory/inventory_page.dart';
 import 'package:klinnika/src/routes/app_routes.dart';
 import 'package:klinnika/src/routes/extras.dart';
 import 'package:klinnika/src/shared/extensions/extensions.dart';
@@ -148,25 +145,14 @@ class _HomePageState extends ConsumerState<HomePage> {
                         ),
                         queue!.isEmpty
                             ? Center(
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      'Tidak ada antrian',
-                                      style: TypographyApp.queueScheduleSelect,
-                                    ),
-                                    ElevatedButton(
-                                        onPressed: () async {
-                                          // await checkupController.addMedical();
-                                          // await checkupController.addMedicalRecord(checkupState.medicalId.toString());
-                                          // await checkupController.addPatient();
-                                          // await checkupController.addQueue('Hy9jrTiXmqZ3aXuEBVOvqZz3THV2');
-                                        },
-                                        child: const Text('Add Data'))
-                                  ],
+                                child: Text(
+                                  'Tidak ada antrian',
+                                  style: TypographyApp.queueScheduleSelect,
                                 ),
                               )
                             : ListView.builder(
                                 shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
                                 itemCount: queue.length,
                                 itemBuilder: (context, index) {
                                   final item = queue[index];
@@ -372,33 +358,6 @@ class _HomePageState extends ConsumerState<HomePage> {
                                         );
                                 },
                               ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const HistoryPage()),
-                            );
-                          },
-                          child: const Text("History Page"),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const HistoryDetailPage()),
-                            );
-                          },
-                          child: const Text("History Detail Page"),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const InventoryPage()),
-                            );
-                          },
-                          child: const Text("Inventory Page"),
-                        ),
                       ],
                     ),
                   ),
