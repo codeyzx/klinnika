@@ -1,12 +1,7 @@
-import 'package:accordion/accordion.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:klinnika/src/common_widgets/async_value/async_value_widget.dart';
 import 'package:klinnika/src/constants/constants.dart';
-import 'package:klinnika/src/features/presentation.dart';
-import 'package:klinnika/src/shared/extensions/extensions.dart';
 
 class HistoryDetailPage extends StatefulWidget {
   const HistoryDetailPage({super.key});
@@ -142,51 +137,91 @@ class _HistoryDetailPageState extends State<HistoryDetailPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 16.h,),
+              SizedBox(
+                height: 16.h,
+              ),
               Container(
                 width: 120.w,
                 height: 0.6.w,
                 color: HexColor('#929DAB'),
               ),
-              SizedBox(height: 16.h,),
+              SizedBox(
+                height: 16.h,
+              ),
               Text(
                 "Obat Diberikan",
                 style: TypographyApp.queueDetTitle,
               ),
-              SizedBox(height: 16.h,),
+              SizedBox(
+                height: 16.h,
+              ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Paracetamol 500mg", style: TypographyApp.historyDetBigLabel,),
-                  Text("Jumlah: 2", style: TypographyApp.historyDetBigValue,),
+                  Text(
+                    "Paracetamol 500mg",
+                    style: TypographyApp.historyDetBigLabel,
+                  ),
+                  Text(
+                    "Jumlah: 2",
+                    style: TypographyApp.historyDetBigValue,
+                  ),
                 ],
               ),
-              SizedBox(height: 8.h,),
-              Text("Spesial tanggal cantik 9 September ini, kamu bisa borong beragam produk menarik yang banting harga mulai jam 14:00 WIB", style: TypographyApp.historyDetDesc, textAlign: TextAlign.justify,),
-              SizedBox(height: 12.h,),
+              SizedBox(
+                height: 8.h,
+              ),
+              Text(
+                "Spesial tanggal cantik 9 September ini, kamu bisa borong beragam produk menarik yang banting harga mulai jam 14:00 WIB",
+                style: TypographyApp.historyDetDesc,
+                textAlign: TextAlign.justify,
+              ),
+              SizedBox(
+                height: 12.h,
+              ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Obat Batuk Berdahak", style: TypographyApp.historyDetBigLabel,),
-                  Text("Jumlah: 2", style: TypographyApp.historyDetBigValue,),
+                  Text(
+                    "Obat Batuk Berdahak",
+                    style: TypographyApp.historyDetBigLabel,
+                  ),
+                  Text(
+                    "Jumlah: 2",
+                    style: TypographyApp.historyDetBigValue,
+                  ),
                 ],
               ),
-              SizedBox(height: 8.h,),
-              Text("-", style: TypographyApp.historyDetDesc, textAlign: TextAlign.justify,),
-              SizedBox(height: 16.h,),
+              SizedBox(
+                height: 8.h,
+              ),
+              Text(
+                "-",
+                style: TypographyApp.historyDetDesc,
+                textAlign: TextAlign.justify,
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
               Container(
                 width: 120.w,
                 height: 0.6.w,
                 color: HexColor('#929DAB'),
               ),
-              SizedBox(height: 16.h,),
+              SizedBox(
+                height: 16.h,
+              ),
               Text(
                 "Diagnosa",
                 style: TypographyApp.queueDetTitle,
               ),
-              Text("Terjadi pembengkakan pada pembuluh mata sebelah kanan, dimana pasien sendiri mengatakan diakibatkan oleh kecelakaan saat berkerja. Tidak ada luka daram yang fatal.", style: TypographyApp.queueDesc, textAlign: TextAlign.justify,),
+              Text(
+                "Terjadi pembengkakan pada pembuluh mata sebelah kanan, dimana pasien sendiri mengatakan diakibatkan oleh kecelakaan saat berkerja. Tidak ada luka daram yang fatal.",
+                style: TypographyApp.queueDesc,
+                textAlign: TextAlign.justify,
+              ),
             ],
           ),
         ),

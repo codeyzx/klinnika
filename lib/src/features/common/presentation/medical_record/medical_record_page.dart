@@ -124,10 +124,13 @@ class _MedicalRecordPageState extends ConsumerState<MedicalRecordPage> {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text("Oleh", style: TypographyApp.queueDetLabel),
-                                      // TODO: fetch doctor collection
-                                      Text(
-                                        'Dokter',
-                                        style: TypographyApp.queueDetValue,
+                                      SizedBox(
+                                        width: 0.5.sw,
+                                        child: Text(
+                                          'Dr. ${e.doctorName}',
+                                          style: TypographyApp.queueDetValue,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
                                       )
                                     ],
                                   ),

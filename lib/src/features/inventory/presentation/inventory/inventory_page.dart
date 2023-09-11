@@ -58,8 +58,7 @@ class _InventoryPageState extends State<InventoryPage> {
                   decoration: InputDecoration(
                     hintText: 'Cari Sesuatu',
                     hintStyle: TypographyApp.invenSearchHint,
-                    contentPadding: EdgeInsets.symmetric(
-                        vertical: 15.5.h, horizontal: 12.w),
+                    contentPadding: EdgeInsets.symmetric(vertical: 15.5.h, horizontal: 12.w),
                     prefixIcon: Icon(
                       Icons.search_rounded,
                       color: HexColor('#929DAB'),
@@ -86,7 +85,7 @@ class _InventoryPageState extends State<InventoryPage> {
                   child: Container(
                     width: double.infinity,
                     margin: EdgeInsets.only(top: 16.h),
-                    padding: EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       border: Border(
                         bottom: BorderSide(width: 0.2.w, color: HexColor('#929DAB')),
@@ -99,31 +98,47 @@ class _InventoryPageState extends State<InventoryPage> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Obat-obatan", style: TypographyApp.invenListType,),
-                            SizedBox(height: 2.h,),
-                            Text("Paracetamol 500mg", style: TypographyApp.invenListItem,),
-                            SizedBox(height: 6.h,),
+                            Text(
+                              "Obat-obatan",
+                              style: TypographyApp.invenListType,
+                            ),
+                            SizedBox(
+                              height: 2.h,
+                            ),
+                            Text(
+                              "Paracetamol 500mg",
+                              style: TypographyApp.invenListItem,
+                            ),
+                            SizedBox(
+                              height: 6.h,
+                            ),
                             Row(
                               children: [
-                                Text("Stok: ", style: TypographyApp.invenListLabel,),
-                                Text("2", style: TypographyApp.invenListValue,),
+                                Text(
+                                  "Stok: ",
+                                  style: TypographyApp.invenListLabel,
+                                ),
+                                Text(
+                                  "2",
+                                  style: TypographyApp.invenListValue,
+                                ),
                               ],
                             ),
                           ],
                         ),
                         Container(
-                            width: 30.w,
-                            height: 30.h,
-                            margin: EdgeInsets.only(right: 10.w),
-                            decoration: BoxDecoration(
-                              color: ColorApp.primary.withOpacity(0.10),
-                              borderRadius: BorderRadius.circular(4.r),
-                            ),
-                            child: Icon(
-                              Icons.keyboard_arrow_right,
-                              color: ColorApp.secondaryBlue,
-                            ),
+                          width: 30.w,
+                          height: 30.h,
+                          margin: EdgeInsets.only(right: 10.w),
+                          decoration: BoxDecoration(
+                            color: ColorApp.primary.withOpacity(0.10),
+                            borderRadius: BorderRadius.circular(4.r),
                           ),
+                          child: Icon(
+                            Icons.keyboard_arrow_right,
+                            color: ColorApp.secondaryBlue,
+                          ),
+                        ),
                       ],
                     ),
                   ),

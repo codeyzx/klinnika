@@ -99,7 +99,8 @@ class CommonRepository {
 
       for (var medicalRecord in medicalRecordList) {
         Medical medical = await fetchMedical(medicalRecord.medicalId.toString());
-        result.add(MedicalRecordConvert.fromMedicalRecord(medicalRecord, medical));
+        String doctorName = await getDoctorName(medicalRecord.docId.toString());
+        result.add(MedicalRecordConvert.fromMedicalRecord(medicalRecord, medical, doctorName));
       }
 
       return result;
@@ -113,6 +114,16 @@ class CommonRepository {
       final data = await medicalDb.doc(medicalId).get();
       final medical = data.data()!;
       return medical;
+    } catch (e) {
+      throw NetworkExceptions.getFirebaseException(e);
+    }
+  }
+
+  Future<String> getDoctorName(String doctorId) async {
+    try {
+      final data = await userDb.doc(doctorId).get();
+      final user = data.data()!;
+      return user.name;
     } catch (e) {
       throw NetworkExceptions.getFirebaseException(e);
     }

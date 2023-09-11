@@ -4,7 +4,7 @@ import 'package:klinnika/src/features/common/domain/medical.dart';
 class MedicalRecordConvert {
   final String? id;
   final String? queueId;
-  final String? docId;
+  final String? doctorName;
   final String? patientId;
   final String? clinicId;
   final DateTime? createdAt;
@@ -16,7 +16,7 @@ class MedicalRecordConvert {
   MedicalRecordConvert({
     this.id,
     this.queueId,
-    this.docId,
+    this.doctorName,
     this.patientId,
     this.clinicId,
     this.createdAt,
@@ -26,11 +26,11 @@ class MedicalRecordConvert {
     this.medical,
   });
 
-  factory MedicalRecordConvert.fromMedicalRecord(MedicalRecord medicalRecord, Medical medical) {
+  factory MedicalRecordConvert.fromMedicalRecord(MedicalRecord medicalRecord, Medical medical, String doctorName) {
     return MedicalRecordConvert(
       id: medicalRecord.id,
       queueId: medicalRecord.queueId,
-      docId: medicalRecord.docId,
+      doctorName: doctorName,
       patientId: medicalRecord.patientId,
       clinicId: medicalRecord.clinicId,
       createdAt: medicalRecord.createdAt,
@@ -44,7 +44,7 @@ class MedicalRecordConvert {
   MedicalRecordConvert copyWith({
     String? id,
     String? queueId,
-    String? docId,
+    String? doctorName,
     String? patientId,
     String? clinicId,
     DateTime? createdAt,
@@ -56,7 +56,7 @@ class MedicalRecordConvert {
     return MedicalRecordConvert(
       id: id ?? this.id,
       queueId: queueId ?? this.queueId,
-      docId: docId ?? this.docId,
+      doctorName: doctorName ?? this.doctorName,
       patientId: patientId ?? this.patientId,
       clinicId: clinicId ?? this.clinicId,
       createdAt: createdAt ?? this.createdAt,
