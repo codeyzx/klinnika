@@ -7,6 +7,7 @@ import 'package:klinnika/src/common_widgets/common_widgets.dart';
 import 'package:klinnika/src/constants/constants.dart';
 import 'package:klinnika/src/features/common/presentation/checkup/checkup_controller.dart';
 import 'package:klinnika/src/features/common/presentation/checkup/checkup_state.dart';
+import 'package:klinnika/src/features/common/presentation/checkup_done/checkup_done_page.dart';
 import 'package:klinnika/src/features/common/presentation/home/home_controller.dart';
 import 'package:klinnika/src/features/common/presentation/home/home_state.dart';
 import 'package:klinnika/src/routes/app_routes.dart';
@@ -358,6 +359,12 @@ class _HomePageState extends ConsumerState<HomePage> {
                                         );
                                 },
                               ),
+                        ElevatedButton(onPressed: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const CheckupDonePage()),
+                          );
+                        }, child: Text("Checkup Done Page"))
                       ],
                     ),
                   ),
