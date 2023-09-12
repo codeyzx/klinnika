@@ -75,12 +75,30 @@ class _HomeBotNavBarScreenState extends ConsumerState<HomeBotNavBarScreen> {
                 ),
                 label: 'History',
               ),
+              // BottomNavigationBarItem(
+              //   icon: !state.isEventsActive ? Assets.icons.icEventsDeactive.svg() : Assets.icons.icEventsActive.svg(),
+              //   label: 'Events',
+              // ),
               BottomNavigationBarItem(
-                icon: !state.isEventsActive ? Assets.icons.icEventsDeactive.svg() : Assets.icons.icEventsActive.svg(),
-                label: 'Events',
+                icon: !state.isEventsActive
+                    ? const Icon(Icons.inventory_2_rounded)
+                    : Icon(
+                  Icons.inventory_2_rounded,
+                  color: ColorApp.primary,
+                ),
+                label: 'Inventory',
               ),
+              // BottomNavigationBarItem(
+              //   icon: !state.isProfileActive ? Assets.icons.icProfileDeactive.svg() : Assets.icons.icProfileActive.svg(),
+              //   label: 'Profile',
+              // ),
               BottomNavigationBarItem(
-                icon: !state.isProfileActive ? Assets.icons.icProfileDeactive.svg() : Assets.icons.icProfileActive.svg(),
+                icon: !state.isProfileActive
+                    ? const Icon(Icons.person_2_rounded)
+                    : Icon(
+                  Icons.person_2_rounded,
+                  color: ColorApp.primary,
+                ),
                 label: 'Profile',
               ),
             ],

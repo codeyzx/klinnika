@@ -372,6 +372,12 @@ class _HomePageState extends ConsumerState<HomePage> {
                             MaterialPageRoute(builder: (context) => const ProfilePage()),
                           );
                         }, child: Text("Profile Page"),),
+                        ElevatedButton(onPressed: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const ProfilePage()),
+                          );
+                        }, child: Text("Profile Schedule Page"),),
                       ],
                     ),
                   ),

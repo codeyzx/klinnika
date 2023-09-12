@@ -337,4 +337,14 @@ class TypographyApp {
     fontWeight: FontWeight.w500,
     fontSize: 16.sp,
   );
+  static TextStyle scheduleDay =  GoogleFonts.montserrat(
+    color: HexColor('#929DAB'),
+    fontWeight: FontWeight.w600,
+    fontSize: 16.sp,
+  );
+  static TextStyle scheduleClock =  GoogleFonts.montserrat(
+    color: HexColor('#094067'),
+    fontWeight: FontWeight.w700,
+    fontSize: 16.sp,
+  );
 }

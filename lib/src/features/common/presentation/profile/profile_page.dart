@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:klinnika/src/constants/constants.dart';
+import 'package:klinnika/src/features/common/presentation/schedule/schedule_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -154,7 +155,12 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               SizedBox(height: 18.h,),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SchedulePage()),
+                  );
+                },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
