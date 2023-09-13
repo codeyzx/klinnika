@@ -114,18 +114,28 @@ class _CheckupDonePageState extends State<CheckupDonePage> {
                             ),
                             child: SingleChildScrollView(
                               child: Padding(
-                                padding: EdgeInsets.all(12),
+                                padding: const EdgeInsets.all(12),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text("Tambah Obat", style: TypographyApp.cdDrug,),
-                                        IconButton(onPressed: ()=> Navigator.pop(context), icon: Icon(Icons.close_rounded, color: HexColor('#5F6C7B'),))
+                                        Text(
+                                          "Tambah Obat",
+                                          style: TypographyApp.cdDrug,
+                                        ),
+                                        IconButton(
+                                            onPressed: () => Navigator.pop(context),
+                                            icon: Icon(
+                                              Icons.close_rounded,
+                                              color: HexColor('#5F6C7B'),
+                                            ))
                                       ],
                                     ),
-                                    SizedBox(height: 12.h,),
+                                    SizedBox(
+                                      height: 12.h,
+                                    ),
                                     TextFormField(
                                       style: TypographyApp.invenSearchOn,
                                       controller: searchController,
@@ -147,11 +157,11 @@ class _CheckupDonePageState extends State<CheckupDonePage> {
                                       ),
                                     ),
                                     InkWell(
-                                      onTap: (){},
+                                      onTap: () {},
                                       child: Container(
                                         margin: EdgeInsets.only(top: 12.h),
                                         width: double.infinity,
-                                        padding: EdgeInsets.all(12),
+                                        padding: const EdgeInsets.all(12),
                                         decoration: BoxDecoration(
                                           border: Border(
                                             bottom: BorderSide(width: 0.2.w, color: HexColor('#929DAB')),
@@ -201,7 +211,7 @@ class _CheckupDonePageState extends State<CheckupDonePage> {
                     SizedBox(
                       width: 2.w,
                     ),
-                    Icon(
+                    const Icon(
                       Icons.add_rounded,
                       color: ColorApp.blue,
                     ),
@@ -308,7 +318,7 @@ class _CheckupDonePageState extends State<CheckupDonePage> {
                 decoration: InputDecoration(
                     hintText: '...',
                     hintStyle: TypographyApp.cdDrugDescValue,
-                    contentPadding: EdgeInsets.all(12),
+                    contentPadding: const EdgeInsets.all(12),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(6.r),
                       borderSide: BorderSide(

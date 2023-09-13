@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:klinnika/gen/assets.gen.dart';
 import 'package:klinnika/src/constants/constants.dart';
 import 'package:klinnika/src/features/presentation.dart';
 import 'package:klinnika/src/shared/extensions/extensions.dart';
@@ -70,9 +69,9 @@ class _HomeBotNavBarScreenState extends ConsumerState<HomeBotNavBarScreen> {
                 icon: !state.isExploreActive
                     ? const Icon(Icons.history)
                     : Icon(
-                  Icons.history,
-                  color: ColorApp.primary,
-                ),
+                        Icons.history,
+                        color: ColorApp.primary,
+                      ),
                 label: 'History',
               ),
               // BottomNavigationBarItem(
@@ -83,9 +82,9 @@ class _HomeBotNavBarScreenState extends ConsumerState<HomeBotNavBarScreen> {
                 icon: !state.isEventsActive
                     ? const Icon(Icons.inventory_2_rounded)
                     : Icon(
-                  Icons.inventory_2_rounded,
-                  color: ColorApp.primary,
-                ),
+                        Icons.inventory_2_rounded,
+                        color: ColorApp.primary,
+                      ),
                 label: 'Inventory',
               ),
               // BottomNavigationBarItem(
@@ -96,9 +95,9 @@ class _HomeBotNavBarScreenState extends ConsumerState<HomeBotNavBarScreen> {
                 icon: !state.isProfileActive
                     ? const Icon(Icons.person_2_rounded)
                     : Icon(
-                  Icons.person_2_rounded,
-                  color: ColorApp.primary,
-                ),
+                        Icons.person_2_rounded,
+                        color: ColorApp.primary,
+                      ),
                 label: 'Profile',
               ),
             ],
