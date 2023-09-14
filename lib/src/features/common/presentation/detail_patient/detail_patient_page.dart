@@ -30,7 +30,7 @@ class DetailPatientPage extends ConsumerWidget {
             color: ColorApp.secondaryBlue,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            context.pop();
           },
         ),
         title: Text(
@@ -238,22 +238,45 @@ class DetailPatientPage extends ConsumerWidget {
               ),
               Row(
                 children: item.complaintType!.map((complaintType) {
-                  return Expanded(
-                    child: Container(
-                      height: 29.h,
-                      margin: EdgeInsets.only(right: 12.w),
-                      decoration: BoxDecoration(
-                        color: ColorApp.primary.withOpacity(0.10),
-                        borderRadius: BorderRadius.circular(6.r),
-                      ),
-                      child: Center(
-                        child: Text(
-                          complaintType,
-                          style: TypographyApp.queueDetIll,
-                        ),
-                      ),
-                    ),
-                  );
+                  return item.complaintType!.length == 1
+                      ? Container(
+                          height: 29.h,
+                          margin: EdgeInsets.only(right: 12.w),
+                          padding: EdgeInsets.symmetric(horizontal: 4.w),
+                          decoration: BoxDecoration(
+                            color: ColorApp.primary.withOpacity(0.10),
+                            borderRadius: BorderRadius.circular(6.r),
+                          ),
+                          child: Center(
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                complaintType,
+                                style: TypographyApp.queueDetIll,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Expanded(
+                          child: Container(
+                            height: 29.h,
+                            margin: EdgeInsets.only(right: 12.w),
+                            padding: EdgeInsets.symmetric(horizontal: 4.w),
+                            decoration: BoxDecoration(
+                              color: ColorApp.primary.withOpacity(0.10),
+                              borderRadius: BorderRadius.circular(6.r),
+                            ),
+                            child: Center(
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  complaintType,
+                                  style: TypographyApp.queueDetIll,
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
                 }).toList(),
               ),
               SizedBox(
@@ -296,7 +319,16 @@ class DetailPatientPage extends ConsumerWidget {
             backgroundColor: ColorApp.primary,
             padding: EdgeInsets.symmetric(horizontal: 87.w, vertical: 18.h),
           ),
-          onPressed: () {},
+          onPressed: () {
+            context.pushNamed(
+              Routes.checkup.name,
+              extra: Extras(
+                datas: {
+                  ExtrasKey.queue: item,
+                },
+              ),
+            );
+          },
           child: Text(
             'Selesai Pemeriksaan',
             style: TypographyApp.queueOnBtn,

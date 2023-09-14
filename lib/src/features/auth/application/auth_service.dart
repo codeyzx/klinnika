@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:klinnika/src/features/data.dart';
 import 'package:klinnika/src/features/domain.dart';
@@ -17,18 +15,6 @@ class AuthService {
     return result.when(
       success: (data) {
         return const Result.success('Login Success!');
-      },
-      failure: (error, stackTrace) {
-        return Result.failure(error, stackTrace);
-      },
-    );
-  }
-
-  Future<Result<String?>> register(RequestRegister requestRegister) async {
-    final result = await _authRepository.register(requestRegister);
-    return result.when(
-      success: (data) {
-        return const Result.success('Register Success!');
       },
       failure: (error, stackTrace) {
         return Result.failure(error, stackTrace);

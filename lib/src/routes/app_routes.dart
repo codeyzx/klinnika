@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:klinnika/src/constants/constants.dart';
 import 'package:klinnika/src/features/common/domain/queue_convert.dart';
+import 'package:klinnika/src/features/common/presentation/checkup/checkup_page.dart';
 
 import 'package:klinnika/src/features/common/presentation/home/home_botnavbar_page.dart';
 import 'package:klinnika/src/features/common/presentation/onboard/onboard_page.dart';
@@ -20,6 +21,7 @@ enum Routes {
   home,
   patientDetail,
   medicalRecord,
+  checkup,
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -52,7 +54,6 @@ final goRouterProvider = Provider<GoRouter>(
           path: '/home',
           name: Routes.home.name,
           builder: (context, state) => const HomeBotNavBarScreen(),
-          routes: const [],
         ),
         GoRoute(
           path: '/patient-detail',
@@ -66,7 +67,6 @@ final goRouterProvider = Provider<GoRouter>(
               index: index,
             );
           },
-          routes: const [],
         ),
         GoRoute(
           path: '/medical-record',
@@ -78,7 +78,17 @@ final goRouterProvider = Provider<GoRouter>(
               queueId: queueId,
             );
           },
-          routes: const [],
+        ),
+        GoRoute(
+          path: '/checkup',
+          name: Routes.checkup.name,
+          builder: (context, state) {
+            final extras = state.extra as Extras;
+            final item = extras.datas[ExtrasKey.queue] as QueueConvert;
+            return CheckupPage(
+              item: item,
+            );
+          },
         ),
       ],
       errorBuilder: (context, state) => ErrorPage(

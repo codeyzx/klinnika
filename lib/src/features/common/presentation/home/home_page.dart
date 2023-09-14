@@ -99,14 +99,38 @@ class _HomePageState extends ConsumerState<HomePage> {
                           onPressed: () async {
                             final result = await showDateRangePicker(
                               context: context,
-                              firstDate: DateTime(DateTime.now().year - 1),
+                              // firstDate: DateTime(DateTime.now().day - 1),
+                              firstDate: DateTime.now(),
                               lastDate: DateTime(DateTime.now().year + 1),
                               initialDateRange: DateTimeRange(
+                                // start: DateTime(DateTime.now().day - 1),
                                 start: DateTime.now(),
                                 end: DateTime.now().add(
-                                  const Duration(days: 7),
+                                  const Duration(days: 1),
                                 ),
                               ),
+                              builder: (context, child) {
+                                return Theme(
+                                  data: ThemeData.light().copyWith(
+                                    colorScheme: ColorScheme.light(
+                                      primary: ColorApp.primary,
+                                      onPrimary: ColorApp.white,
+                                      surface: ColorApp.white,
+                                      onSurface: ColorApp.black,
+                                    ),
+                                    dialogBackgroundColor: ColorApp.white,
+                                    textButtonTheme: TextButtonThemeData(
+                                      style: TextButton.styleFrom(
+                                        foregroundColor: ColorApp.primary,
+                                      ),
+                                    ),
+                                    buttonTheme: const ButtonThemeData(
+                                      textTheme: ButtonTextTheme.primary,
+                                    ),
+                                  ),
+                                  child: child!,
+                                );
+                              },
                             );
                             if (result != null) controller.fetchHome(state.user!.id, result.start, result.end.toEndOfDay);
                           },

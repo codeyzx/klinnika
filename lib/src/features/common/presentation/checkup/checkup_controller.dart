@@ -1,15 +1,22 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:klinnika/src/features/application.dart';
 import 'package:klinnika/src/features/common/domain/medical.dart';
 import 'package:klinnika/src/features/common/domain/medical_record.dart';
+import 'package:klinnika/src/features/common/domain/medicine.dart';
 import 'package:klinnika/src/features/common/domain/patient.dart';
 import 'package:klinnika/src/features/common/domain/queue.dart';
+import 'package:klinnika/src/features/common/domain/queue_convert.dart';
 
 import 'package:klinnika/src/features/common/presentation/checkup/checkup_state.dart';
+import 'package:logger/logger.dart';
 
 class CheckupController extends StateNotifier<CheckupState> {
   final CommonService _commonService;
   CheckupController(this._commonService) : super(CheckupState());
+
+  final diagnosaController = TextEditingController();
+  final searchController = TextEditingController();
 
   Future<void> addQueue(String doctorId) async {
     state = state.copyWith(
@@ -97,6 +104,10 @@ class CheckupController extends StateNotifier<CheckupState> {
   }
 
   Future<void> addMedicalRecord(String medicalId) async {
+    if (!state.formKey.currentState!.validate()) {
+      return;
+    }
+
     state = state.copyWith(
       checkupValue: const AsyncLoading(),
     );
@@ -159,9 +170,154 @@ class CheckupController extends StateNotifier<CheckupState> {
       },
     );
   }
+
+  void searchMedicine(String query) {
+    // if (query.isEmpty) return;
+    // List<String> medicine = state.queue?.complaintType ?? [];
+    // List<String> result = medicine.where((element) => element.toLowerCase().contains(query.toLowerCase())).toList();
+    // state = state.copyWith(
+    //   searchResult: result,
+    // );
+  }
+
+  void addMedicine(Medicine medicine) {
+    state = state.copyWith(
+      medicine: [...state.medicine ?? [], medicine],
+      medicineController: [...state.medicineController ?? [], TextEditingController()],
+    );
+  }
+
+  void removeMedicine(int index) {
+    final medicine = state.medicine;
+    final medicineController = state.medicineController;
+
+    if (medicine != null && medicineController != null) {
+      final newMedicine = medicine.asMap().entries.map((e) {
+        final key = e.key;
+        final value = e.value;
+
+        if (key == index) {
+          return null;
+        }
+
+        return value;
+      }).toList();
+
+      final newMedicineController = medicineController.asMap().entries.map((e) {
+        final key = e.key;
+        final value = e.value;
+
+        if (key == index) {
+          return null;
+        }
+
+        return value;
+      }).toList();
+
+      state = state.copyWith(
+        medicine: newMedicine.where((element) => element != null).toList().cast<Medicine>(),
+        medicineController: newMedicineController.where((element) => element != null).toList().cast<TextEditingController>(),
+      );
+    }
+  }
+
+  void setActType(String? actType) {
+    state = state.copyWith(
+      actType: actType,
+    );
+  }
+
+  void addQty(int index) {
+    final medicine = state.medicine;
+    final newMedicine = medicine?.asMap().entries.map((e) {
+      final key = e.key;
+      final value = e.value;
+
+      if (key == index) {
+        return value.copyWith(
+          qty: (value.qty ?? 0) + 1,
+        );
+      }
+
+      return value;
+    }).toList();
+
+    state = state.copyWith(
+      medicine: newMedicine,
+    );
+  }
+
+  void removeQty(int index) {
+    final medicine = state.medicine;
+    final newMedicine = medicine?.asMap().entries.map((e) {
+      final key = e.key;
+      final value = e.value;
+
+      if (key == index) {
+        return value.copyWith(
+          qty: value.qty == 1 ? 1 : (value.qty ?? 0) - 1,
+        );
+      }
+
+      return value;
+    }).toList();
+
+    state = state.copyWith(
+      medicine: newMedicine,
+    );
+  }
+
+  void setMedicine() {
+    final medicine = state.medicine;
+    final medicineController = state.medicineController;
+
+    if (medicine != null && medicineController != null) {
+      final newMedicine = medicine.asMap().entries.map((e) {
+        final index = e.key;
+        final value = e.value;
+        final controller = medicineController[index];
+
+        return value.copyWith(
+          note: controller.text,
+        );
+      }).toList();
+
+      state = state.copyWith(
+        medicine: newMedicine,
+      );
+    }
+  }
+
+  void check({required QueueConvert queue}) {
+    final medicalRecord = MedicalRecord(
+      actType: state.actType,
+      diagnose: diagnosaController.text,
+      createdAt: DateTime.now(),
+      clinicId: queue.clinicId.toString(),
+      docId: queue.doctorId.toString(),
+      patientId: queue.patient?.id.toString(),
+      queueId: queue.id.toString(),
+      medicalId: state.medicalId,
+    );
+
+    final medical = state.medicine;
+
+    Logger().i('medical record ${medicalRecord.toJson()}');
+    Logger().i('medical ${medical?.map((e) => e.toJson()).toList()}');
+  }
+
+  @override
+  void dispose() {
+    diagnosaController.dispose();
+    searchController.dispose();
+    state.medicineController?.forEach((element) {
+      element.dispose();
+    });
+    super.dispose();
+  }
 }
 
-final checkupControllerProvider = StateNotifierProvider<CheckupController, CheckupState>((ref) {
+final checkupControllerProvider = StateNotifierProvider.autoDispose<CheckupController, CheckupState>((ref) {
   final commonService = ref.read(commonServiceProvider);
   return CheckupController(commonService);
 });

@@ -17,24 +17,8 @@ class AuthRepository {
       return Result.failure(NetworkExceptions.getFirebaseException(e), stackTrace);
     }
   }
-
-  Future<Result> register(RequestRegister requestRegister) async {
-    try {
-      // final response = await _dioClient.post(
-      //   Endpoint.register,
-      //   data: requestRegister.toJson(),
-      // );
-
-      // return Result.success(fromJson(response['body']));
-
-      return const Result.success(true);
-    } catch (e, stackTrace) {
-      return Result.failure(NetworkExceptions.getFirebaseException(e), stackTrace);
-    }
-  }
 }
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
-  // final dio = ref.read(dioClientProvider);
   return AuthRepository();
 });
