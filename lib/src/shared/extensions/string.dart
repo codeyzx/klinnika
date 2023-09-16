@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:klinnika/src/features/auth/domain/user.dart';
-import 'package:klinnika/src/features/data.dart';
 
 extension XString on String {
   String get trimList => replaceAll('[', '').replaceAll(']', '');
@@ -10,6 +9,29 @@ extension XString on String {
   bool get isPasswordValid => length > 8;
 
   String get capitalize => "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
+
+  String get removeLast => length > 3 ? substring(0, length - 3) : '';
+
+  String get ind {
+    switch (this) {
+      case 'Monday':
+        return 'Senin';
+      case 'Tuesday':
+        return 'Selasa';
+      case 'Wednesday':
+        return 'Rabu';
+      case 'Thursday':
+        return 'Kamis';
+      case 'Friday':
+        return 'Jumat';
+      case 'Saturday':
+        return 'Sabtu';
+      case 'Sunday':
+        return 'Minggu';
+      default:
+        return 'Senin';
+    }
+  }
 
   IconData get filterIcon {
     switch (this) {
@@ -50,61 +72,6 @@ extension XString on String {
         return RoleUser.doctor;
       default:
         return RoleUser.user;
-    }
-  }
-
-  CategoryEvent get categoryEvent {
-    switch (this) {
-      case 'MUSIC':
-        return CategoryEvent.music;
-      case 'ART':
-        return CategoryEvent.art;
-      case 'SPORTS':
-        return CategoryEvent.sports;
-      case 'CULINARY':
-        return CategoryEvent.culinary;
-      case 'TECH':
-        return CategoryEvent.tech;
-      case 'LIFESTYLE':
-        return CategoryEvent.lifestyle;
-      case 'BUSINESS':
-        return CategoryEvent.business;
-      case 'EDUCATION':
-        return CategoryEvent.education;
-      case 'ENTERTAINMENT':
-        return CategoryEvent.entertainment;
-      case 'CHARITY':
-        return CategoryEvent.charity;
-      case 'OTHER':
-        return CategoryEvent.other;
-      default:
-        return CategoryEvent.other;
-    }
-  }
-
-  CityEvent get cityEvent {
-    switch (this) {
-      case 'BANDUNG':
-        return CityEvent.bandung;
-      case 'JAKARTA':
-        return CityEvent.jakarta;
-      case 'SURABAYA':
-        return CityEvent.surabaya;
-      default:
-        return CityEvent.other;
-    }
-  }
-
-  StatusEvent get statusEvent {
-    switch (this) {
-      case 'VERIFIED':
-        return StatusEvent.verified;
-      case 'REJECTED':
-        return StatusEvent.rejected;
-      case 'PENDING':
-        return StatusEvent.pending;
-      default:
-        return StatusEvent.pending;
     }
   }
 }

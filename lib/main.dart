@@ -7,9 +7,6 @@ import 'package:klinnika/src/constants/constants.dart';
 import 'package:klinnika/src/routes/routes.dart';
 
 void main() async {
-  /// [INFO] Init hive local db
-  // await hiveInit();
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -76,8 +73,7 @@ class CustomErrorWidget extends StatelessWidget {
     return const Card(
       color: Colors.red,
       margin: EdgeInsets.zero,
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
+      child: Center(
         child: Text(
           "Something is not right here...",
           style: TextStyle(

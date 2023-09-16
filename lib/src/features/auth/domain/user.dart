@@ -1,3 +1,4 @@
+import 'package:klinnika/src/features/auth/domain/schedule.dart';
 import 'package:klinnika/src/shared/extensions/extensions.dart';
 
 enum RoleUser {
@@ -19,6 +20,7 @@ class User {
   final String profileUrl;
   final String clinicId;
   final bool isVerified;
+  Schedule? schedule;
 
   User({
     required this.id,
@@ -30,35 +32,8 @@ class User {
     required this.profileUrl,
     required this.clinicId,
     required this.isVerified,
+    this.schedule,
   });
-
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
-      id: map['id'] as String,
-      name: map['name'] as String,
-      email: map['email'] as String,
-      phone: map['phone'] as String,
-      role: map['role'].toString().roleUser,
-      createdAt: map['created_at'].toDate(),
-      profileUrl: map['profile_url'] as String,
-      clinicId: map['clinic_id'] as String,
-      isVerified: map['is_verified'] as bool,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'name': name,
-      'email': email,
-      'phone': phone,
-      'role': role.value,
-      'created_at': createdAt,
-      'profile_url': profileUrl,
-      'clinic_id': clinicId,
-      'is_verified': isVerified,
-    };
-  }
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -98,6 +73,7 @@ class User {
     String? profileUrl,
     String? clinicId,
     bool? isVerified,
+    Schedule? schedule,
   }) {
     return User(
       id: id ?? this.id,
@@ -109,6 +85,7 @@ class User {
       profileUrl: profileUrl ?? this.profileUrl,
       clinicId: clinicId ?? this.clinicId,
       isVerified: isVerified ?? this.isVerified,
+      schedule: schedule ?? this.schedule,
     );
   }
 }

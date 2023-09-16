@@ -29,7 +29,7 @@ class LoginController extends StateNotifier<LoginState> {
     final result = await _authService.login(requestLogin);
 
     result.when(
-      success: (data) {
+      success: (data) async {
         state = state.copyWith(
           loginValue: AsyncData(data),
         );

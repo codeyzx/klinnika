@@ -212,37 +212,37 @@ class TypographyApp {
     fontWeight: FontWeight.w500,
     fontSize: 10.sp,
   );
-  static TextStyle queueMRTitle= GoogleFonts.montserrat(
+  static TextStyle queueMRTitle = GoogleFonts.montserrat(
     color: ColorApp.secondaryBlue,
     fontWeight: FontWeight.w600,
     fontSize: 16.sp,
   );
-  static TextStyle historyDay= GoogleFonts.montserrat(
+  static TextStyle historyDay = GoogleFonts.montserrat(
     color: HexColor('#5F6C7B'),
     fontWeight: FontWeight.w600,
     fontSize: 14.sp,
   );
-  static TextStyle historyName= GoogleFonts.montserrat(
+  static TextStyle historyName = GoogleFonts.montserrat(
     color: ColorApp.secondaryBlue,
     fontWeight: FontWeight.w700,
     fontSize: 16.sp,
   );
-  static TextStyle historyMedRec= GoogleFonts.montserrat(
+  static TextStyle historyMedRec = GoogleFonts.montserrat(
     color: ColorApp.secondaryBlue,
     fontWeight: FontWeight.w500,
     fontSize: 12.sp,
   );
-  static TextStyle historyClock= GoogleFonts.montserrat(
+  static TextStyle historyClock = GoogleFonts.montserrat(
     color: HexColor('#5F6C7B'),
     fontWeight: FontWeight.w500,
     fontSize: 12.sp,
   );
-  static TextStyle historyDetBigLabel= GoogleFonts.montserrat(
+  static TextStyle historyDetBigLabel = GoogleFonts.montserrat(
     color: HexColor('#434343'),
     fontWeight: FontWeight.w600,
     fontSize: 14.sp,
   );
-  static TextStyle historyDetBigValue= GoogleFonts.montserrat(
+  static TextStyle historyDetBigValue = GoogleFonts.montserrat(
     color: HexColor('#5F6C7B'),
     fontWeight: FontWeight.w600,
     fontSize: 12.sp,
@@ -292,57 +292,57 @@ class TypographyApp {
     fontWeight: FontWeight.w600,
     fontSize: 14.sp,
   );
-  static TextStyle cdDrug= GoogleFonts.montserrat(
+  static TextStyle cdDrug = GoogleFonts.montserrat(
     color: HexColor('#434343'),
     fontWeight: FontWeight.w500,
     fontSize: 14.sp,
   );
-  static TextStyle cdDrugCount= GoogleFonts.montserrat(
+  static TextStyle cdDrugCount = GoogleFonts.montserrat(
     color: HexColor('#5F6C7B'),
     fontWeight: FontWeight.w500,
     fontSize: 12.sp,
   );
-  static TextStyle cdDrugHint= GoogleFonts.montserrat(
+  static TextStyle cdDrugHint = GoogleFonts.montserrat(
     color: HexColor('#3DA9FC'),
     fontWeight: FontWeight.w400,
     fontSize: 12.sp,
   );
-  static TextStyle cdDrugDescValue= GoogleFonts.montserrat(
+  static TextStyle cdDrugDescValue = GoogleFonts.montserrat(
     color: HexColor('#5F6C7B'),
     fontWeight: FontWeight.w400,
     fontSize: 12.sp,
   );
-  static TextStyle cdDrugItemCount =  GoogleFonts.montserrat(
+  static TextStyle cdDrugItemCount = GoogleFonts.montserrat(
     color: HexColor('#000000'),
     fontWeight: FontWeight.w400,
     fontSize: 14.sp,
   );
-  static TextStyle profileJob =  GoogleFonts.montserrat(
+  static TextStyle profileJob = GoogleFonts.montserrat(
     color: HexColor('#3DA9FC'),
     fontWeight: FontWeight.w500,
     fontSize: 14.sp,
   );
-  static TextStyle profileItemTitle =  GoogleFonts.montserrat(
+  static TextStyle profileItemTitle = GoogleFonts.montserrat(
     color: Colors.black.withOpacity(0.70),
     fontWeight: FontWeight.w600,
     fontSize: 14.sp,
   );
-  static TextStyle profileItem =  GoogleFonts.montserrat(
+  static TextStyle profileItem = GoogleFonts.montserrat(
     color: HexColor('#231F20'),
     fontWeight: FontWeight.w500,
     fontSize: 16.sp,
   );
-  static TextStyle profileItemRed =  GoogleFonts.montserrat(
+  static TextStyle profileItemRed = GoogleFonts.montserrat(
     color: HexColor('#DB3F3F'),
     fontWeight: FontWeight.w500,
     fontSize: 16.sp,
   );
-  static TextStyle scheduleDay =  GoogleFonts.montserrat(
+  static TextStyle scheduleDay = GoogleFonts.montserrat(
     color: HexColor('#929DAB'),
     fontWeight: FontWeight.w600,
     fontSize: 16.sp,
   );
-  static TextStyle scheduleClock =  GoogleFonts.montserrat(
+  static TextStyle scheduleClock = GoogleFonts.montserrat(
     color: HexColor('#094067'),
     fontWeight: FontWeight.w700,
     fontSize: 16.sp,

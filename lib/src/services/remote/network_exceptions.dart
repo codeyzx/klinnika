@@ -168,7 +168,7 @@ abstract class NetworkExceptions with _$NetworkExceptions {
         errorMessage = reason;
       },
       serviceUnavailable: () {
-        errorMessage = "Service unavailable";
+        errorMessage = "Gagal Memuat";
       },
       methodNotAllowed: () {
         errorMessage = "Method Allowed";

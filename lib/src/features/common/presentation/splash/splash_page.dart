@@ -1,35 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:klinnika/gen/assets.gen.dart';
 import 'package:klinnika/src/common_widgets/common_widgets.dart';
 import 'package:klinnika/src/constants/constants.dart';
-import 'package:klinnika/src/features/common/presentation/home/home_controller.dart';
-import 'package:klinnika/src/shared/extensions/extensions.dart';
+import 'package:klinnika/src/features/common/presentation/common_controller.dart';
+import 'package:klinnika/src/routes/app_routes.dart';
+import 'package:klinnika/src/services/remote/network_exceptions.dart';
+import 'package:klinnika/src/shared/extensions/build_context.dart';
 
-class SplashPage extends ConsumerStatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
-
-  @override
-  ConsumerState createState() => SplashPageState();
-}
-
-class SplashPageState extends ConsumerState<SplashPage> {
-  HomeController get controller => ref.read(homeControllerProvider.notifier);
+class SplashPage extends ConsumerWidget {
+  const SplashPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  initState() {
-    _navigateOtherScreen();
-    super.initState();
-  }
-
-  void _navigateOtherScreen() {
-    Future.delayed(const Duration(seconds: 3)).then((_) async {
-      await controller.checkUsers();
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(commonControllerProvider, (prevState, state) {
+      Future.delayed(const Duration(seconds: 3)).then((_) async {
+        if (prevState?.userValue != state.userValue) {
+          state.userValue.whenOrNull(
+            data: (data) {
+              if (data != null) {
+                context.goNamed(Routes.botNavBar.name);
+              } else {
+                context.goNamed(Routes.login.name);
+              }
+            },
+            error: (error, stackTrace) {
+              final message = NetworkExceptions.getErrorMessage(error as NetworkExceptions);
+              if (message == "User not found") {
+                context.goNamed(Routes.login.name);
+              } else {
+                context.goNamed(Routes.botNavBar.name);
+                appSnackBar(context, Colors.red, message);
+              }
+            },
+          );
+        }
+      });
     });
-  }
 
-  @override
-  Widget build(BuildContext context) {
     return StatusBarWidget(
       child: Scaffold(
         body: SizedBox(

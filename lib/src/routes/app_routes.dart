@@ -2,26 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:klinnika/src/constants/constants.dart';
-import 'package:klinnika/src/features/common/domain/queue_convert.dart';
-import 'package:klinnika/src/features/common/presentation/checkup/checkup_page.dart';
-
-import 'package:klinnika/src/features/common/presentation/home/home_botnavbar_page.dart';
-import 'package:klinnika/src/features/common/presentation/onboard/onboard_page.dart';
-
+import 'package:klinnika/src/features/checkup/presentation/checkup_page.dart';
+import 'package:klinnika/src/features/common/presentation/botnavbar/botnavbar_page.dart';
 import 'package:klinnika/src/features/common/presentation/splash/splash_page.dart';
-
+import 'package:klinnika/src/features/history/domain/inventory_stock_convert.dart';
+import 'package:klinnika/src/features/inventory/presentation/inventory_detail_page.dart';
+import 'package:klinnika/src/features/queue/domain/queue_convert.dart';
+import 'package:klinnika/src/features/patient/presentation/detail_patient_page.dart';
+import 'package:klinnika/src/features/medical_record/presentation/medical_record_page.dart';
+import 'package:klinnika/src/features/common/presentation/onboard/onboard_page.dart';
 import 'package:klinnika/src/features/presentation.dart';
-import 'package:klinnika/src/features/common/presentation/detail_patient/detail_patient_page.dart';
 import 'package:klinnika/src/routes/routes.dart';
 
 enum Routes {
   splash,
   onboard,
   login,
-  home,
+  botNavBar,
   patientDetail,
   medicalRecord,
   checkup,
+  inventoryDetail,
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -51,9 +52,9 @@ final goRouterProvider = Provider<GoRouter>(
           builder: (context, state) => const LoginPage(),
         ),
         GoRoute(
-          path: '/home',
-          name: Routes.home.name,
-          builder: (context, state) => const HomeBotNavBarScreen(),
+          path: '/botnavbar',
+          name: Routes.botNavBar.name,
+          builder: (context, state) => const BotNavBarPage(),
         ),
         GoRoute(
           path: '/patient-detail',
@@ -86,6 +87,17 @@ final goRouterProvider = Provider<GoRouter>(
             final extras = state.extra as Extras;
             final item = extras.datas[ExtrasKey.queue] as QueueConvert;
             return CheckupPage(
+              item: item,
+            );
+          },
+        ),
+        GoRoute(
+          path: '/inventory-detail',
+          name: Routes.inventoryDetail.name,
+          builder: (context, state) {
+            final extras = state.extra as Extras;
+            final item = extras.datas[ExtrasKey.inventory] as InventoryStockConvert;
+            return InventoryDetailPage(
               item: item,
             );
           },

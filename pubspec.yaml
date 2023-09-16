@@ -12,8 +12,6 @@ dependencies:
   accordion: ^2.6.0
   cloud_firestore: ^4.9.1
   cupertino_icons: ^1.0.6
-  email_validator: ^2.1.17
-  equatable: ^2.0.5
   firebase_auth: ^4.9.0
   firebase_core: ^2.15.1
   flutter:
@@ -27,7 +25,7 @@ dependencies:
   hexcolor: ^3.0.1
   intl: ^0.18.1
   logger: ^2.0.2
-  readmore: ^2.2.0
+  quickalert: ^1.0.2
   smooth_page_indicator: ^1.1.0
 
 dev_dependencies:

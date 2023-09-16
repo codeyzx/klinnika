@@ -2,5 +2,4 @@
 export 'auth/application/auth_service.dart';
 
 //* COMMON
-export 'common/application/common_service.dart';
-export 'common/application/common_mapper.dart';
+export 'queue/application/queue_service.dart';

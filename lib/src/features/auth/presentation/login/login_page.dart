@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:klinnika/gen/assets.gen.dart';
 import 'package:klinnika/src/common_widgets/common_widgets.dart';
 import 'package:klinnika/src/constants/constants.dart';
+import 'package:klinnika/src/features/common/presentation/common_controller.dart';
 import 'package:klinnika/src/features/presentation.dart';
 import 'package:klinnika/src/routes/routes.dart';
 import 'package:klinnika/src/services/services.dart';
@@ -17,9 +18,10 @@ class LoginPage extends ConsumerWidget {
     ref.listen(loginControllerProvider, (prevState, state) {
       if (prevState?.loginValue != state.loginValue) {
         state.loginValue.whenOrNull(
-          data: (data) {
+          data: (data) async {
             if (data != null) {
-              context.goNamed(Routes.home.name);
+              ref.read(commonControllerProvider.notifier).getProfile();
+              context.goNamed(Routes.botNavBar.name);
             }
           },
           error: (error, stackTrace) {

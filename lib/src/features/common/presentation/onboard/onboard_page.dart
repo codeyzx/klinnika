@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:klinnika/gen/assets.gen.dart';
 import 'package:klinnika/src/common_widgets/common_widgets.dart';
 import 'package:klinnika/src/constants/constants.dart';
-import 'package:klinnika/src/features/presentation.dart';
+import 'package:klinnika/src/features/common/presentation/common_controller.dart';
 import 'package:klinnika/src/routes/app_routes.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -16,8 +16,8 @@ class OnboardPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeControllerProvider);
-    final controllerState = ref.read(homeControllerProvider.notifier);
+    final state = ref.watch(commonControllerProvider);
+    final controllerState = ref.read(commonControllerProvider.notifier);
     final controller = PageController();
 
     return StatusBarWidget(
