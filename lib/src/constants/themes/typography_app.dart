@@ -347,4 +347,14 @@ class TypographyApp {
     fontWeight: FontWeight.w700,
     fontSize: 16.sp,
   );
+  static TextStyle cdDrugExp = GoogleFonts.montserrat(
+    color: ColorApp.secondaryBlue.withOpacity(0.70),
+    fontWeight: FontWeight.w500,
+    fontSize: 10.sp,
+  );
+  static TextStyle cdDrugList = GoogleFonts.montserrat(
+    color: ColorApp.secondaryBlue,
+    fontWeight: FontWeight.w600,
+    fontSize: 14.sp,
+  );
 }
