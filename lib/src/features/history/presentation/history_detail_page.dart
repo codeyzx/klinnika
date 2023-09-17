@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:klinnika/src/constants/constants.dart';
+import 'package:klinnika/src/features/medical_record/domain/medical_record_convert.dart';
+import 'package:klinnika/src/shared/extensions/extensions.dart';
 
-class HistoryDetailPage extends StatefulWidget {
-  const HistoryDetailPage({super.key});
+class HistoryDetailPage extends StatelessWidget {
+  const HistoryDetailPage({
+    super.key,
+    required this.item,
+  });
 
-  @override
-  State<HistoryDetailPage> createState() => _HistoryDetailPageState();
-}
+  final MedicalRecordConvert item;
 
-class _HistoryDetailPageState extends State<HistoryDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,14 +59,14 @@ class _HistoryDetailPageState extends State<HistoryDetailPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Ahmad Joni',
+                        item.patient?.name ?? '',
                         style: TypographyApp.queueDetName,
                       ),
                       SizedBox(
                         height: 6.h,
                       ),
                       Text(
-                        "RM-28",
+                        'RM-${item.id}',
                         style: TypographyApp.queueDetNum,
                       ),
                     ],
@@ -98,7 +100,7 @@ class _HistoryDetailPageState extends State<HistoryDetailPage> {
                     style: TypographyApp.queueDetLabel,
                   ),
                   Text(
-                    "16 Mei 2004",
+                    item.createdAt?.dateMonthYear ?? '',
                     style: TypographyApp.queueDetValue,
                   ),
                 ],
@@ -115,7 +117,7 @@ class _HistoryDetailPageState extends State<HistoryDetailPage> {
                     style: TypographyApp.queueDetLabel,
                   ),
                   Text(
-                    "Dr. Tirta",
+                    "Dr. ${item.doctorName ?? ''}",
                     style: TypographyApp.queueDetValue,
                   ),
                 ],
@@ -132,7 +134,7 @@ class _HistoryDetailPageState extends State<HistoryDetailPage> {
                     style: TypographyApp.queueDetLabel,
                   ),
                   Text(
-                    "Pemberian Obat",
+                    item.actType ?? '',
                     style: TypographyApp.queueDetValue,
                   ),
                 ],
@@ -152,56 +154,50 @@ class _HistoryDetailPageState extends State<HistoryDetailPage> {
                 "Obat Diberikan",
                 style: TypographyApp.queueDetTitle,
               ),
-              SizedBox(
-                height: 16.h,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Paracetamol 500mg",
-                    style: TypographyApp.historyDetBigLabel,
-                  ),
-                  Text(
-                    "Jumlah: 2",
-                    style: TypographyApp.historyDetBigValue,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 8.h,
-              ),
-              Text(
-                "Spesial tanggal cantik 9 September ini, kamu bisa borong beragam produk menarik yang banting harga mulai jam 14:00 WIB",
-                style: TypographyApp.historyDetDesc,
-                textAlign: TextAlign.justify,
-              ),
-              SizedBox(
-                height: 12.h,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Obat Batuk Berdahak",
-                    style: TypographyApp.historyDetBigLabel,
-                  ),
-                  Text(
-                    "Jumlah: 2",
-                    style: TypographyApp.historyDetBigValue,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 8.h,
-              ),
-              Text(
-                "-",
-                style: TypographyApp.historyDetDesc,
-                textAlign: TextAlign.justify,
-              ),
+              Gap.h12,
+              item.medical!.medicals!.isEmpty
+                  ? Text(
+                      'Tidak ada obat yang diberikan',
+                      style: TypographyApp.historyDetDesc.copyWith(
+                        fontSize: 14.sp,
+                      ),
+                    )
+                  : Column(
+                      children: item.medical!.medicals!
+                          .map(
+                            (medicine) => Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      medicine.name ?? '',
+                                      style: TypographyApp.historyDetBigLabel,
+                                    ),
+                                    Text(
+                                      medicine.quantity.toString(),
+                                      style: TypographyApp.historyDetBigValue,
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 8.h,
+                                ),
+                                Text(
+                                  medicine.desc.toString() == '' ? 'Tidak ada deskripsi' : medicine.desc.toString(),
+                                  style: TypographyApp.historyDetDesc,
+                                  textAlign: TextAlign.justify,
+                                ),
+                                SizedBox(
+                                  height: 12.h,
+                                ),
+                              ],
+                            ),
+                          )
+                          .toList(),
+                    ),
               SizedBox(
                 height: 16.h,
               ),
@@ -217,8 +213,9 @@ class _HistoryDetailPageState extends State<HistoryDetailPage> {
                 "Diagnosa",
                 style: TypographyApp.queueDetTitle,
               ),
+              Gap.h12,
               Text(
-                "Terjadi pembengkakan pada pembuluh mata sebelah kanan, dimana pasien sendiri mengatakan diakibatkan oleh kecelakaan saat berkerja. Tidak ada luka daram yang fatal.",
+                item.diagnose.toString() == '' ? 'Tidak ada deskripsi' : item.diagnose.toString(),
                 style: TypographyApp.queueDesc,
                 textAlign: TextAlign.justify,
               ),

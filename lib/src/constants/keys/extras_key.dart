@@ -3,4 +3,5 @@ class ExtrasKey {
   static const index = 'index';
   static const queue = 'queue';
   static const inventory = 'inventory';
+  static const medicalRecord = 'medicalRecord';
 }

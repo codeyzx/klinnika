@@ -6,7 +6,9 @@ import 'package:klinnika/src/features/checkup/presentation/checkup_page.dart';
 import 'package:klinnika/src/features/common/presentation/botnavbar/botnavbar_page.dart';
 import 'package:klinnika/src/features/common/presentation/splash/splash_page.dart';
 import 'package:klinnika/src/features/history/domain/inventory_stock_convert.dart';
+import 'package:klinnika/src/features/history/presentation/history_detail_page.dart';
 import 'package:klinnika/src/features/inventory/presentation/inventory_detail_page.dart';
+import 'package:klinnika/src/features/medical_record/domain/medical_record_convert.dart';
 import 'package:klinnika/src/features/queue/domain/queue_convert.dart';
 import 'package:klinnika/src/features/patient/presentation/detail_patient_page.dart';
 import 'package:klinnika/src/features/medical_record/presentation/medical_record_page.dart';
@@ -23,6 +25,7 @@ enum Routes {
   medicalRecord,
   checkup,
   inventoryDetail,
+  historyDetail,
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -98,6 +101,17 @@ final goRouterProvider = Provider<GoRouter>(
             final extras = state.extra as Extras;
             final item = extras.datas[ExtrasKey.inventory] as InventoryStockConvert;
             return InventoryDetailPage(
+              item: item,
+            );
+          },
+        ),
+        GoRoute(
+          path: '/history-detail',
+          name: Routes.historyDetail.name,
+          builder: (context, state) {
+            final extras = state.extra as Extras;
+            final item = extras.datas[ExtrasKey.medicalRecord] as MedicalRecordConvert;
+            return HistoryDetailPage(
               item: item,
             );
           },

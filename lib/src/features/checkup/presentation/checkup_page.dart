@@ -443,6 +443,7 @@ class _CheckupPageState extends ConsumerState<CheckupPage> {
                     titleColor: ColorApp.black,
                     confirmBtnColor: ColorApp.primary,
                     onConfirmBtnTap: () async {
+                      context.pop();
                       controller.setMedicine();
                       final medicalId = await controller.addMedical();
                       if (medicalId != null) {

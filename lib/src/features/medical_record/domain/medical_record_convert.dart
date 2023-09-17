@@ -1,11 +1,12 @@
 import 'package:klinnika/src/features/medical_record/domain/medical.dart';
 import 'package:klinnika/src/features/medical_record/domain/medical_record.dart';
+import 'package:klinnika/src/features/patient/domain/patient.dart';
 
 class MedicalRecordConvert {
   final String? id;
   final String? queueId;
   final String? doctorName;
-  final String? patientId;
+  final Patient? patient;
   final String? clinicId;
   final DateTime? createdAt;
   final String? diagnose;
@@ -17,7 +18,7 @@ class MedicalRecordConvert {
     this.id,
     this.queueId,
     this.doctorName,
-    this.patientId,
+    this.patient,
     this.clinicId,
     this.createdAt,
     this.diagnose,
@@ -26,12 +27,13 @@ class MedicalRecordConvert {
     this.medical,
   });
 
-  factory MedicalRecordConvert.fromMedicalRecord(MedicalRecord medicalRecord, Medical medical, String doctorName) {
+  factory MedicalRecordConvert.fromMedicalRecord(
+      MedicalRecord medicalRecord, Medical medical, String doctorName, Patient patient) {
     return MedicalRecordConvert(
       id: medicalRecord.id,
       queueId: medicalRecord.queueId,
       doctorName: doctorName,
-      patientId: medicalRecord.patientId,
+      patient: patient,
       clinicId: medicalRecord.clinicId,
       createdAt: medicalRecord.createdAt,
       diagnose: medicalRecord.diagnose,
@@ -45,7 +47,7 @@ class MedicalRecordConvert {
     String? id,
     String? queueId,
     String? doctorName,
-    String? patientId,
+    Patient? patient,
     String? clinicId,
     DateTime? createdAt,
     String? diagnose,
@@ -57,7 +59,7 @@ class MedicalRecordConvert {
       id: id ?? this.id,
       queueId: queueId ?? this.queueId,
       doctorName: doctorName ?? this.doctorName,
-      patientId: patientId ?? this.patientId,
+      patient: patient ?? this.patient,
       clinicId: clinicId ?? this.clinicId,
       createdAt: createdAt ?? this.createdAt,
       diagnose: diagnose ?? this.diagnose,

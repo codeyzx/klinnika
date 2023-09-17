@@ -14,6 +14,15 @@ class MedicalRecordService {
     final result = await _medicalRecordRepository.getMedicalRecord(queueId);
     return result;
   }
+
+  Future<Result<List<MedicalRecordConvert>>> getListMedicalRecord(
+    String doctorId,
+    DateTime? startDate,
+    DateTime? endDate,
+  ) async {
+    final result = await _medicalRecordRepository.getListMedicalRecord(doctorId, startDate, endDate);
+    return result;
+  }
 }
 
 final medicalRecordServiceProvider = Provider<MedicalRecordService>((ref) {
