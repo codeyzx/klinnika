@@ -29,8 +29,10 @@ class CheckupPage extends ConsumerStatefulWidget {
 }
 
 class _CheckupPageState extends ConsumerState<CheckupPage> {
-  QueueController get queueController => ref.read(queueControllerProvider.notifier);
-  CheckupController get controller => ref.read(checkupControllerProvider.notifier);
+  QueueController get queueController =>
+      ref.read(queueControllerProvider.notifier);
+  CheckupController get controller =>
+      ref.read(checkupControllerProvider.notifier);
   CheckupState get state => ref.watch(checkupControllerProvider);
   CommonState get userState => ref.watch(commonControllerProvider);
   QueueConvert get item => widget.item;
@@ -127,7 +129,8 @@ class _CheckupPageState extends ConsumerState<CheckupPage> {
                       builder: (BuildContext context) {
                         return Consumer(
                           builder: (context, ref, child) {
-                            final controller = ref.watch(checkupControllerProvider.notifier);
+                            final controller =
+                                ref.watch(checkupControllerProvider.notifier);
                             final state = ref.watch(checkupControllerProvider);
                             return Dialog(
                               backgroundColor: Colors.transparent,
@@ -142,17 +145,20 @@ class _CheckupPageState extends ConsumerState<CheckupPage> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(12),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
                                               "Tambah Obat",
                                               style: TypographyApp.cdDrug,
                                             ),
                                             IconButton(
-                                              onPressed: () => Navigator.pop(context),
+                                              onPressed: () =>
+                                                  Navigator.pop(context),
                                               icon: Icon(
                                                 Icons.close_rounded,
                                                 color: HexColor('#5F6C7B'),
@@ -165,18 +171,24 @@ class _CheckupPageState extends ConsumerState<CheckupPage> {
                                         ),
                                         TextFormField(
                                           style: TypographyApp.invenSearchOn,
-                                          controller: controller.searchController,
+                                          controller:
+                                              controller.searchController,
                                           onChanged: controller.searchData,
                                           decoration: InputDecoration(
                                             hintText: 'Cari Sesuatu',
-                                            hintStyle: TypographyApp.invenSearchHint,
-                                            contentPadding: EdgeInsets.symmetric(vertical: 15.5.h, horizontal: 12.w),
+                                            hintStyle:
+                                                TypographyApp.invenSearchHint,
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                                    vertical: 15.5.h,
+                                                    horizontal: 12.w),
                                             prefixIcon: Icon(
                                               Icons.search_rounded,
                                               color: HexColor('#929DAB'),
                                             ),
                                             border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(6.r),
+                                              borderRadius:
+                                                  BorderRadius.circular(6.r),
                                               borderSide: BorderSide(
                                                 color: HexColor('#929DAB'),
                                                 width: 0.5.w,
@@ -191,57 +203,104 @@ class _CheckupPageState extends ConsumerState<CheckupPage> {
                                                 children: state.searchData!
                                                     .map(
                                                       (e) => Material(
-                                                        color: Colors.transparent,
+                                                        color:
+                                                            Colors.transparent,
                                                         child: InkWell(
                                                           onTap: () {
-                                                            final medicine = Medicine(
-                                                              name: e.inventory?.name,
+                                                            final medicine =
+                                                                Medicine(
+                                                              name: e.inventory
+                                                                  ?.name,
                                                               id: e.id,
-                                                              expiredAt: e.expiredAt,
-                                                              inventoryId: e.inventoryId,
+                                                              expiredAt:
+                                                                  e.expiredAt,
+                                                              inventoryId:
+                                                                  e.inventoryId,
                                                               amount: e.amount,
                                                               quantity: 1,
                                                             );
-                                                            controller.addMedicine(medicine);
+                                                            controller
+                                                                .addMedicine(
+                                                                    medicine);
                                                             context.pop();
                                                           },
                                                           child: Container(
-                                                            width: double.infinity,
-                                                            padding: const EdgeInsets.only(
+                                                            width:
+                                                                double.infinity,
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
                                                               top: 18,
                                                               bottom: 12,
                                                               left: 12,
                                                               right: 12,
                                                             ),
-                                                            decoration: BoxDecoration(
+                                                            decoration:
+                                                                BoxDecoration(
                                                               border: Border(
-                                                                bottom: BorderSide(width: 0.2.w, color: HexColor('#929DAB')),
+                                                                bottom: BorderSide(
+                                                                    width:
+                                                                        0.2.w,
+                                                                    color: HexColor(
+                                                                        '#929DAB')),
                                                               ),
                                                             ),
-                                                            child: Row(
-                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                            child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              crossAxisAlignment: CrossAxisAlignment.start,
                                                               children: [
                                                                 Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
                                                                   children: [
                                                                     Text(
                                                                       '${e.inventory?.name}',
-                                                                      style: TypographyApp.cdDrug,
+                                                                      style: TypographyApp
+                                                                          .cdDrugList,
                                                                     ),
-                                                                    //expire
                                                                     Text(
-                                                                      ' (${e.expiredAt?.dateMonthYear})',
-                                                                      style: TypographyApp.cdDrug.copyWith(
-                                                                        fontSize: 8.sp,
-                                                                      ),
+                                                                      'Stok: ${e.amount}',
+                                                                      style: TypographyApp
+                                                                          .cdDrugCount,
                                                                     ),
                                                                   ],
                                                                 ),
-                                                                Text(
-                                                                  '${e.amount}',
-                                                                  style: TypographyApp.cdDrugCount,
+                                                                SizedBox(
+                                                                  height: 3.h,
                                                                 ),
+                                                                Text(
+                                                                    'Exp: ${e.expiredAt?.dateMonthYear}',
+                                                                    style: TypographyApp
+                                                                        .cdDrugExp),
                                                               ],
                                                             ),
+                                                            // child: Row(
+                                                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                            //   children: [
+                                                            //     Row(
+                                                            //       children: [
+                                                            //         Text(
+                                                            //           '${e.inventory?.name}',
+                                                            //           style: TypographyApp.cdDrug,
+                                                            //         ),
+                                                            //         //expire
+                                                            //         Text(
+                                                            //           ' (${e.expiredAt?.dateMonthYear})',
+                                                            //           style: TypographyApp.cdDrug.copyWith(
+                                                            //             fontSize: 8.sp,
+                                                            //           ),
+                                                            //         ),
+                                                            //       ],
+                                                            //     ),
+                                                            //     Text(
+                                                            //       '${e.amount}',
+                                                            //       style: TypographyApp.cdDrugCount,
+                                                            //     ),
+                                                            //   ],
+                                                            // ),
                                                           ),
                                                         ),
                                                       ),
@@ -295,7 +354,8 @@ class _CheckupPageState extends ConsumerState<CheckupPage> {
                     return Container(
                       width: double.infinity,
                       margin: EdgeInsets.only(top: 12.h),
-                      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 12.w, vertical: 12.h),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6.r),
                         border: Border.all(
@@ -447,10 +507,14 @@ class _CheckupPageState extends ConsumerState<CheckupPage> {
                       controller.setMedicine();
                       final medicalId = await controller.addMedical();
                       if (medicalId != null) {
-                        await controller.addMedicalRecord(queue: item, user: userState.user!, medicalId: medicalId);
+                        await controller.addMedicalRecord(
+                            queue: item,
+                            user: userState.user!,
+                            medicalId: medicalId);
                         queueController.fetchQueue(
                           userState.user!.id,
-                          DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+                          DateTime(DateTime.now().year, DateTime.now().month,
+                              DateTime.now().day),
                           DateTime.now().add(const Duration(days: 1)),
                         );
                         Future.delayed(const Duration(seconds: 1)).then((_) {
