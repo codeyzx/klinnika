@@ -19,7 +19,7 @@ class CommonController extends StateNotifier<CommonState> {
     getProfile();
     setPage(0);
   }
-  void getProfile() async {
+  Future<void> getProfile() async {
     state = state.copyWith(
       userValue: const AsyncLoading(),
     );

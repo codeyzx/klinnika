@@ -30,12 +30,34 @@ class CommonRepository {
     }
   }
 
+  Future<List<Schedule>> getScheduleList(String clinicId) async {
+    try {
+      final result = await scheduleDb.where('clinic_id', isEqualTo: clinicId).get();
+      final schedule = result.docs.map((e) => e.data()).toList();
+
+      final day = ['SENIN', 'SELASA', 'RABU', 'KAMIS', 'JUMAT', 'SABTU', 'MINGGU'];
+      final listSort = schedule.map((e) => e.day).toList();
+      listSort.sort((a, b) => day.indexOf(a).compareTo(day.indexOf(b)));
+
+      final listSortDay = listSort.map((e) => Schedule(day: e, endTime: '', startTime: '')).toList();
+      final listSortDayWithTime = listSortDay.map((e) {
+        final sorted = schedule.firstWhere((element) => element.day == e.day);
+        return e.copyWith(day: e.day.capitalize, startTime: sorted.startTime, endTime: sorted.endTime);
+      }).toList();
+
+      return listSortDayWithTime;
+    } catch (e) {
+      throw NetworkExceptions.getFirebaseException(e);
+    }
+  }
+
   Future<Result<User>> getProfile(String uid) async {
     try {
       final result = await userDb.doc(uid).get();
       final user = result.data()!;
       final schedule = await getSchedule(user.clinicId);
-      final userConverted = user.copyWith(schedule: schedule);
+      final scheduleList = await getScheduleList(user.clinicId);
+      final userConverted = user.copyWith(schedule: schedule, scheduleList: scheduleList);
       return Result.success(userConverted);
     } catch (e, st) {
       return Result.failure(NetworkExceptions.getFirebaseException(e), st);

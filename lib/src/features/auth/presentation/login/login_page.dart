@@ -20,7 +20,22 @@ class LoginPage extends ConsumerWidget {
         state.loginValue.whenOrNull(
           data: (data) async {
             if (data != null) {
-              ref.read(commonControllerProvider.notifier).getProfile();
+              await ref.read(commonControllerProvider.notifier).getProfile();
+            }
+          },
+          error: (error, stackTrace) {
+            final message = NetworkExceptions.getErrorMessage(error as NetworkExceptions);
+            appSnackBar(context, ColorApp.red, message);
+          },
+        );
+      }
+    });
+
+    ref.listen(commonControllerProvider, (previous, next) {
+      if (previous?.userValue != next.userValue) {
+        next.userValue.whenOrNull(
+          data: (data) {
+            if (data != null) {
               context.goNamed(Routes.botNavBar.name);
             }
           },

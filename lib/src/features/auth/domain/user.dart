@@ -13,6 +13,7 @@ enum RoleUser {
 class User {
   final String id;
   final String name;
+  final String polyclinic;
   final String email;
   final String phone;
   final RoleUser role;
@@ -21,10 +22,12 @@ class User {
   final String clinicId;
   final bool isVerified;
   Schedule? schedule;
+  List<Schedule>? scheduleList;
 
   User({
     required this.id,
     required this.name,
+    required this.polyclinic,
     required this.email,
     required this.phone,
     required this.role,
@@ -33,19 +36,21 @@ class User {
     required this.clinicId,
     required this.isVerified,
     this.schedule,
+    this.scheduleList,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      id: json['id'] as String,
-      name: json['name'] as String,
-      email: json['email'] as String,
-      phone: json['phone'] as String,
-      role: json['role'].toString().roleUser,
+      id: json['id'] ?? '',
+      name: json['name'] ?? '',
+      polyclinic: json['polyclinic'] ?? '',
+      email: json['email'] ?? '',
+      phone: json['phone'] ?? '',
+      role: json['role'].toString().toUpperCase().roleUser,
       createdAt: json['created_at'].toDate(),
-      profileUrl: json['profile_url'] as String,
-      clinicId: json['clinic_id'] as String,
-      isVerified: json['is_verified'] as bool,
+      profileUrl: json['profile_url'] ?? '',
+      clinicId: json['clinic_id'] ?? '',
+      isVerified: json['is_verified'] ?? false,
     );
   }
 
@@ -53,6 +58,7 @@ class User {
     return <String, dynamic>{
       'id': id,
       'name': name,
+      'polyclinic': polyclinic,
       'email': email,
       'phone': phone,
       'role': role.value,
@@ -66,6 +72,7 @@ class User {
   User copyWith({
     String? id,
     String? name,
+    String? polyclinic,
     String? email,
     String? phone,
     RoleUser? role,
@@ -74,10 +81,12 @@ class User {
     String? clinicId,
     bool? isVerified,
     Schedule? schedule,
+    List<Schedule>? scheduleList,
   }) {
     return User(
       id: id ?? this.id,
       name: name ?? this.name,
+      polyclinic: polyclinic ?? this.polyclinic,
       email: email ?? this.email,
       phone: phone ?? this.phone,
       role: role ?? this.role,
@@ -86,6 +95,7 @@ class User {
       clinicId: clinicId ?? this.clinicId,
       isVerified: isVerified ?? this.isVerified,
       schedule: schedule ?? this.schedule,
+      scheduleList: scheduleList ?? this.scheduleList,
     );
   }
 }
