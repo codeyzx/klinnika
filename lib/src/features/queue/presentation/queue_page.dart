@@ -261,7 +261,7 @@ class _QueuePageState extends ConsumerState<QueuePage> {
                                                               ),
                                                             ),
                                                             Text(
-                                                              "No. antrian: ${index + 1}",
+                                                              "Nomor antrian: ${index + 1}",
                                                               style: TypographyApp.queueListNumOn,
                                                             ),
                                                           ],
@@ -350,7 +350,7 @@ class _QueuePageState extends ConsumerState<QueuePage> {
                                                             Row(
                                                               children: [
                                                                 Text(
-                                                                  "No. antrian: ",
+                                                                  "Nomor antrian: ",
                                                                   style: TypographyApp.queueListNumOffLabel,
                                                                 ),
                                                                 Text(
