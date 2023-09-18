@@ -1,37 +1,37 @@
 class Schedule {
-  final String day;
-  final String endTime;
-  final String startTime;
+  final String? days;
+  final DateTime? endTime;
+  final DateTime? startTime;
 
   Schedule({
-    required this.day,
-    required this.endTime,
-    required this.startTime,
+    this.days,
+    this.endTime,
+    this.startTime,
   });
 
   factory Schedule.fromJson(Map<String, dynamic> json) {
     return Schedule(
-      day: json['day'] ?? '',
-      endTime: json['endTime'] ?? '',
-      startTime: json['startTime'] ?? '',
+      days: json['days'] ?? '',
+      endTime: json['endTime']?.toDate(),
+      startTime: json['startTime']?.toDate(),
     );
   }
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'day': day,
+      'days': days,
       'endTime': endTime,
       'startTime': startTime,
     };
   }
 
   Schedule copyWith({
-    String? day,
-    String? endTime,
-    String? startTime,
+    String? days,
+    DateTime? endTime,
+    DateTime? startTime,
   }) {
     return Schedule(
-      day: day ?? this.day,
+      days: days ?? this.days,
       endTime: endTime ?? this.endTime,
       startTime: startTime ?? this.startTime,
     );

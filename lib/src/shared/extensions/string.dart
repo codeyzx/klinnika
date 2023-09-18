@@ -10,8 +10,6 @@ extension XString on String {
 
   String get capitalize => "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
 
-  String get removeLast => length > 3 ? substring(0, length - 3) : '';
-
   String get ind {
     switch (this) {
       case 'Monday':

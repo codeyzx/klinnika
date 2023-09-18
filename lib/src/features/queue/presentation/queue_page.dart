@@ -72,7 +72,7 @@ class _QueuePageState extends ConsumerState<QueuePage> {
                               height: 6.h,
                             ),
                             Text(
-                              'Jadwal hari ini: ${commonState.user?.schedule?.startTime.removeLast} - ${commonState.user?.schedule?.endTime.removeLast}',
+                              'Jadwal hari ini: ${commonState.user?.schedule?.startTime?.hourWithMinute} - ${commonState.user?.schedule?.endTime?.hourWithMinute}',
                               style: TypographyApp.queueScheduleToday,
                             ),
                             SizedBox(
