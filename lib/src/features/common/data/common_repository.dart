@@ -17,35 +17,42 @@ class CommonRepository {
         toFirestore: (Schedule schedule, _) => schedule.toJson(),
       );
 
-  Future<Schedule> getSchedule(String clinicId) async {
+  Future<Schedule> getSchedule(String uid) async {
     try {
       final day = DateFormat('EEEE').format(DateTime.now());
-      final result =
-          await scheduleDb.where('clinic_id', isEqualTo: clinicId).where('day', isEqualTo: day.ind.toUpperCase()).get();
-
-      final schedule = result.docs.first.data();
+      final result = await userDb.doc(uid).collection('schedules').doc(day.ind.capitalize).get();
+      final temp = result.data()!;
+      final schedule = Schedule.fromJson(temp);
       return schedule;
     } catch (e) {
       throw NetworkExceptions.getFirebaseException(e);
     }
   }
 
-  Future<List<Schedule>> getScheduleList(String clinicId) async {
+  Future<List<Schedule>> getScheduleList(String uid) async {
     try {
-      final result = await scheduleDb.where('clinic_id', isEqualTo: clinicId).get();
-      final schedule = result.docs.map((e) => e.data()).toList();
+      final result = await userDb.doc(uid).collection('schedules').get();
+      final temp = result.docs.map((e) => e.data()).toList();
 
-      final day = ['SENIN', 'SELASA', 'RABU', 'KAMIS', 'JUMAT', 'SABTU', 'MINGGU'];
-      final listSort = schedule.map((e) => e.day).toList();
-      listSort.sort((a, b) => day.indexOf(a).compareTo(day.indexOf(b)));
+      final schedule = temp.map((e) => Schedule.fromJson(e)).toList();
 
-      final listSortDay = listSort.map((e) => Schedule(day: e, endTime: '', startTime: '')).toList();
-      final listSortDayWithTime = listSortDay.map((e) {
-        final sorted = schedule.firstWhere((element) => element.day == e.day);
-        return e.copyWith(day: e.day.capitalize, startTime: sorted.startTime, endTime: sorted.endTime);
-      }).toList();
+      Map<String, int> dayMap = {
+        "Senin": 1,
+        "Selasa": 2,
+        "Rabu": 3,
+        "Kamis": 4,
+        "Jumat": 5,
+        "Sabtu": 6,
+        "Minggu": 7,
+      };
 
-      return listSortDayWithTime;
+      schedule.sort((a, b) {
+        int dayA = dayMap[a.days ?? '']!;
+        int dayB = dayMap[b.days ?? '']!;
+        return dayA.compareTo(dayB);
+      });
+
+      return schedule;
     } catch (e) {
       throw NetworkExceptions.getFirebaseException(e);
     }
@@ -55,8 +62,8 @@ class CommonRepository {
     try {
       final result = await userDb.doc(uid).get();
       final user = result.data()!;
-      final schedule = await getSchedule(user.clinicId);
-      final scheduleList = await getScheduleList(user.clinicId);
+      final schedule = await getSchedule(user.id);
+      final scheduleList = await getScheduleList(user.id);
       final userConverted = user.copyWith(schedule: schedule, scheduleList: scheduleList);
       return Result.success(userConverted);
     } catch (e, st) {

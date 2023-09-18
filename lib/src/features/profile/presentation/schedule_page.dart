@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:klinnika/src/constants/constants.dart';
 import 'package:klinnika/src/features/auth/domain/schedule.dart';
-import 'package:klinnika/src/shared/extensions/extensions.dart';
+import 'package:klinnika/src/shared/extensions/date_time.dart';
 
 class SchedulePage extends StatelessWidget {
   const SchedulePage({super.key, required this.schedule});
@@ -43,7 +43,7 @@ class SchedulePage extends StatelessWidget {
                 children: [
                   Gap.h24,
                   Text(
-                    e.day,
+                    e.days ?? '',
                     style: TypographyApp.scheduleDay,
                   ),
                   Container(
@@ -58,7 +58,7 @@ class SchedulePage extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      "${e.startTime.removeLast} - ${e.endTime.removeLast}",
+                      "${e.startTime?.hourWithMinute} - ${e.endTime?.hourWithMinute}",
                       style: TypographyApp.scheduleClock,
                     ),
                   ),

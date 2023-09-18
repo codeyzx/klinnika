@@ -61,7 +61,7 @@ class _InventoryPageState extends ConsumerState<InventoryPage> {
                       height: 6.h,
                     ),
                     Text(
-                      'Jadwal hari ini: ${userState.user?.schedule?.startTime.removeLast} - ${userState.user?.schedule?.endTime.removeLast}',
+                      'Jadwal hari ini: ${userState.user?.schedule?.startTime?.hourWithMinute} - ${userState.user?.schedule?.endTime?.hourWithMinute}',
                       style: TypographyApp.queueScheduleToday,
                     ),
                     SizedBox(
