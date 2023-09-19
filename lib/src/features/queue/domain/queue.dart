@@ -41,6 +41,23 @@ class Queue {
     );
   }
 
+  factory Queue.fromConvert(Map<String, dynamic> map) {
+    Queue queue = map['data'];
+    return Queue(
+      id: map['id'] ?? '',
+      doctorId: queue.doctorId,
+      appointmentDate: queue.appointmentDate,
+      finishAt: queue.finishAt,
+      createdAt: queue.createdAt,
+      polyId: queue.polyId,
+      complaintType: queue.complaintType,
+      complaintDesc: queue.complaintDesc,
+      clinicId: queue.clinicId,
+      type: queue.type,
+      patientId: queue.patientId,
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,

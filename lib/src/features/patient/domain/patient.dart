@@ -15,6 +15,17 @@ class Patient {
     this.phone,
   });
 
+  factory Patient.fromPatient(Patient patient, String patientId) {
+    return Patient(
+      id: patientId,
+      birthDate: patient.birthDate,
+      email: patient.email,
+      gender: patient.gender,
+      name: patient.name,
+      phone: patient.phone,
+    );
+  }
+
   factory Patient.fromMap(Map<String, dynamic> map) {
     return Patient(
       id: map['id'] as String,

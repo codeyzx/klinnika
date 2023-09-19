@@ -29,8 +29,10 @@ class QueueRepository {
           .where('appointment_date', isLessThan: endDate)
           .orderBy('appointment_date')
           .get();
-      final queueList = data.docs.map((e) => e.data()).toList();
-      return Result.success(queueList);
+      final queueList = data.docs.map((e) => {"id": e.id, "data": e.data()}).toList();
+      List<Queue> quueueListConvert = [];
+      queueList.map((e) => quueueListConvert.add(Queue.fromConvert(e))).toList();
+      return Result.success(quueueListConvert);
     } catch (e, st) {
       final error = NetworkExceptions.getFirebaseException(e);
       return Result.failure(error, st);
@@ -56,7 +58,8 @@ class QueueRepository {
     try {
       final data = await patientDb.doc(patientId).get();
       final patient = data.data()!;
-      return patient;
+      final patientConvert = Patient.fromPatient(patient, data.id);
+      return patientConvert;
     } catch (e) {
       throw NetworkExceptions.getFirebaseException(e);
     }
@@ -64,6 +67,5 @@ class QueueRepository {
 }
 
 final queueRepositoryProvider = Provider<QueueRepository>((ref) {
-  // return QueueRepository(ref.read(dioClientProvider));
   return QueueRepository();
 });

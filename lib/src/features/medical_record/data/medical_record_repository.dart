@@ -42,7 +42,9 @@ class MedicalRecordRepository {
     try {
       final data = await patientDb.doc(patientId).get();
       final patient = data.data()!;
-      return patient;
+      final id = patient.id;
+      final patientConvert = Patient.fromPatient(patient, id.toString());
+      return patientConvert;
     } catch (e) {
       throw NetworkExceptions.getFirebaseException(e);
     }
