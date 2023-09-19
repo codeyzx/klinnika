@@ -357,4 +357,34 @@ class TypographyApp {
     fontWeight: FontWeight.w600,
     fontSize: 14.sp,
   );
+  static TextStyle eprofileBlueBtn = GoogleFonts.montserrat(
+    color: ColorApp.blue,
+    fontWeight: FontWeight.w500,
+    fontSize: 14.sp,
+  );
+  static TextStyle eprofileLabel = GoogleFonts.montserrat(
+    color: ColorApp.black,
+    fontWeight: FontWeight.w500,
+    fontSize: 16.sp,
+  );
+  static TextStyle eprofileValue = GoogleFonts.montserrat(
+    color: HexColor('231F20'),
+    fontWeight: FontWeight.w400,
+    fontSize: 16.sp,
+  );
+  static TextStyle warningTitle = GoogleFonts.montserrat(
+    fontSize: 15.sp,
+    color: Colors.black,
+    fontWeight: FontWeight.w500,
+  );
+  static TextStyle warningDesc= GoogleFonts.montserrat(
+    fontSize: 12.sp,
+    color: HexColor('#929DAB'),
+    fontWeight: FontWeight.w400,
+  );
+  static TextStyle whiteOnBtnSmall = GoogleFonts.poppins(
+    fontSize: 13.sp,
+    color: Colors.white,
+    fontWeight: FontWeight.w500,
+  );
 }
