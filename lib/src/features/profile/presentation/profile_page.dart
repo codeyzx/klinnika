@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,11 +34,22 @@ class ProfilePage extends ConsumerWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    CircleAvatar(
+                    state.user!.profileUrl.toString().isNotEmpty
+                    ? CircleAvatar(
                       radius: 30.r,
-                      backgroundImage: const NetworkImage(
-                          "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&w=1000&q=80"),
+                      backgroundImage: NetworkImage(state.user!.profileUrl),
+                    )
+                    : CircleAvatar(
+                      radius: 30.r,
+                      backgroundImage: AssetImage('assets/images/profile_default_img.png'),
+                      backgroundColor: Colors.white,
                     ),
+                    // CircleAvatar(
+                    //   radius: 30.r,
+                    //   backgroundImage: state.user!.profileUrl.isEmpty
+                    //       ? AssetImage('assets/images/profile_default_img.png')
+                    //       : NetworkImage(state.user!.profileUrl),
+                    // ),
                     SizedBox(
                       width: 14.w,
                     ),
