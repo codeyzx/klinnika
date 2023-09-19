@@ -8,8 +8,11 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:klinnika/src/common_widgets/async_value/async_value_widget.dart';
 import 'package:klinnika/src/constants/constants.dart';
 import 'package:klinnika/src/features/common/presentation/common_controller.dart';
+import 'package:klinnika/src/features/profile/presentation/profile_edit_page.dart';
 import 'package:klinnika/src/routes/app_routes.dart';
 import 'package:klinnika/src/routes/extras.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
@@ -44,12 +47,6 @@ class ProfilePage extends ConsumerWidget {
                       backgroundImage: AssetImage('assets/images/profile_default_img.png'),
                       backgroundColor: Colors.white,
                     ),
-                    // CircleAvatar(
-                    //   radius: 30.r,
-                    //   backgroundImage: state.user!.profileUrl.isEmpty
-                    //       ? AssetImage('assets/images/profile_default_img.png')
-                    //       : NetworkImage(state.user!.profileUrl),
-                    // ),
                     SizedBox(
                       width: 14.w,
                     ),
@@ -99,7 +96,14 @@ class ProfilePage extends ConsumerWidget {
                   height: 18.h,
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push<void>(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => ProfileEditPage(),
+                      ),
+                    );
+                  },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -143,7 +147,9 @@ class ProfilePage extends ConsumerWidget {
                   height: 18.h,
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    buildWarningDialog(context).show();
+                  },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -247,7 +253,9 @@ class ProfilePage extends ConsumerWidget {
                   height: 18.h,
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    buildWarningDialog(context).show();
+                  },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -291,7 +299,9 @@ class ProfilePage extends ConsumerWidget {
                   height: 18.h,
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    buildWarningDialog(context).show();
+                  },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -342,7 +352,9 @@ class ProfilePage extends ConsumerWidget {
                   height: 18.h,
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    buildWarningDialog(context).show();
+                  },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -435,4 +447,23 @@ class ProfilePage extends ConsumerWidget {
       ),
     );
   }
+}
+
+AwesomeDialog buildWarningDialog(BuildContext context) {
+  return AwesomeDialog(
+    context: context,
+    dialogType: DialogType.warning,
+    headerAnimationLoop: false,
+    animType: AnimType.bottomSlide,
+    title: 'Maaf :(',
+    titleTextStyle: TypographyApp.warningTitle,
+    desc: 'Fitur ini masih dalam tahap pengembangan',
+    descTextStyle: TypographyApp.warningDesc,
+    buttonsTextStyle: TypographyApp.whiteOnBtnSmall,
+    buttonsBorderRadius: BorderRadius.circular(6.r),
+    btnOkColor: ColorApp.blue,
+    showCloseIcon: false,
+    btnOkText: 'Kembali',
+    btnOkOnPress: () {},
+  );
 }
