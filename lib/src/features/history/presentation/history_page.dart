@@ -33,146 +33,149 @@ class _HistoryPageState extends ConsumerState<HistoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return AsyncValueWidget(
-      value: state.medicalValue,
-      data: (data) {
-        return Scaffold(
-          backgroundColor: Colors.white,
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 60.h,
-                  ),
-                  Text(
-                    'Riwayat Pemeriksaan',
-                    style: TypographyApp.queueBigTitle,
-                  ),
-                  SizedBox(
-                    height: 6.h,
-                  ),
-                  Text(
-                    'Jadwal hari ini: ${userState.user?.schedule?.startTime?.hourWithMinute} - ${userState.user?.schedule?.endTime?.hourWithMinute}',
-                    style: TypographyApp.queueScheduleToday,
-                  ),
-                  SizedBox(
-                    height: 16.h,
-                  ),
-                  Divider(
-                    thickness: 0.6.h,
-                    color: HexColor('#929DAB'),
-                  ),
-                  SizedBox(
-                    height: 16.h,
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      final result = await showDateRangePicker(
-                        context: context,
-                        firstDate: DateTime(DateTime.now().year - 1),
-                        lastDate: DateTime(DateTime.now().year + 1),
-                        initialDateRange: DateTimeRange(
-                          start: DateTime.now(),
-                          end: DateTime.now().add(
-                            const Duration(days: 1),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 60.h,
+              ),
+              Text(
+                'Riwayat Pemeriksaan',
+                style: TypographyApp.queueBigTitle,
+              ),
+              SizedBox(
+                height: 6.h,
+              ),
+              Text(
+                'Jadwal hari ini: ${userState.user?.schedule?.startTime?.hourWithMinute} - ${userState.user?.schedule?.endTime?.hourWithMinute}',
+                style: TypographyApp.queueScheduleToday,
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
+              Divider(
+                thickness: 0.6.h,
+                color: HexColor('#929DAB'),
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
+              AsyncValueWidget(
+                value: state.medicalValue,
+                data: (data) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () async {
+                        final result = await showDateRangePicker(
+                          context: context,
+                          firstDate: DateTime(DateTime.now().year - 1),
+                          lastDate: DateTime(DateTime.now().year + 1),
+                          initialDateRange: DateTimeRange(
+                            start: DateTime.now(),
+                            end: DateTime.now().add(
+                              const Duration(days: 1),
+                            ),
                           ),
-                        ),
-                        builder: (context, child) {
-                          return Theme(
-                            data: ThemeData.light().copyWith(
-                              colorScheme: ColorScheme.light(
-                                primary: ColorApp.primary,
-                                onPrimary: ColorApp.white,
-                                surface: ColorApp.white,
-                                onSurface: ColorApp.black,
-                              ),
-                              dialogBackgroundColor: ColorApp.white,
-                              textButtonTheme: TextButtonThemeData(
-                                style: TextButton.styleFrom(
-                                  foregroundColor: ColorApp.primary,
+                          builder: (context, child) {
+                            return Theme(
+                              data: ThemeData.light().copyWith(
+                                colorScheme: ColorScheme.light(
+                                  primary: ColorApp.primary,
+                                  onPrimary: ColorApp.white,
+                                  surface: ColorApp.white,
+                                  onSurface: ColorApp.black,
+                                ),
+                                dialogBackgroundColor: ColorApp.white,
+                                textButtonTheme: TextButtonThemeData(
+                                  style: TextButton.styleFrom(
+                                    foregroundColor: ColorApp.primary,
+                                  ),
+                                ),
+                                buttonTheme: const ButtonThemeData(
+                                  textTheme: ButtonTextTheme.primary,
                                 ),
                               ),
-                              buttonTheme: const ButtonThemeData(
-                                textTheme: ButtonTextTheme.primary,
-                              ),
-                            ),
-                            child: child!,
-                          );
-                        },
-                      );
-                      if (result != null) {
-                        controller.getListMedicalRecord(userState.user?.id ?? '', result.start, result.end.toEndOfDay);
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      fixedSize: Size(344.w, 55.h),
-                      side: BorderSide(
-                        color: HexColor('#929DAB'),
-                        width: 0.5.w,
+                              child: child!,
+                            );
+                          },
+                        );
+                        if (result != null) {
+                          controller.getListMedicalRecord(userState.user?.id ?? '', result.start, result.end.toEndOfDay);
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        fixedSize: Size(344.w, 55.h),
+                        side: BorderSide(
+                          color: HexColor('#929DAB'),
+                          width: 0.5.w,
+                        ),
+                        shadowColor: ColorApp.black.withOpacity(0.20),
+                        backgroundColor: ColorApp.white,
+                        padding: EdgeInsets.zero,
                       ),
-                      shadowColor: ColorApp.black.withOpacity(0.20),
-                      backgroundColor: ColorApp.white,
-                      padding: EdgeInsets.zero,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: 14.w,
+                          ),
+                          state.startDate == '' && state.endDate == ''
+                              ? Text(
+                                  'Semua Tanggal',
+                                  style: TypographyApp.queueScheduleSelect,
+                                )
+                              : Text(
+                                  '${DateTime.tryParse(state.startDate.toString())?.dateMonth} - ${DateTime.tryParse(state.endDate.toString())?.dateMonthYear}',
+                                  style: TypographyApp.queueScheduleSelect,
+                                ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.calendar_month,
+                                color: HexColor('#5F6C7B'),
+                              ),
+                              SizedBox(
+                                width: 14.w,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          width: 14.w,
-                        ),
-                        state.startDate == '' && state.endDate == ''
-                            ? Text(
-                                'Semua Tanggal',
-                                style: TypographyApp.queueScheduleSelect,
-                              )
-                            : Text(
-                                '${DateTime.tryParse(state.startDate.toString())?.dateMonth} - ${DateTime.tryParse(state.endDate.toString())?.dateMonthYear}',
+                    state.medical!.isEmpty
+                        ? Container(
+                            margin: EdgeInsets.only(top: 20.h),
+                            child: Center(
+                              child: Text(
+                                'Tidak ada riwayat pemeriksaan',
                                 style: TypographyApp.queueScheduleSelect,
                               ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.calendar_month,
-                              color: HexColor('#5F6C7B'),
                             ),
-                            SizedBox(
-                              width: 14.w,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  state.medical!.isEmpty
-                      ? Container(
-                          margin: EdgeInsets.only(top: 20.h),
-                          child: Center(
-                            child: Text(
-                              'Tidak ada riwayat pemeriksaan',
-                              style: TypographyApp.queueScheduleSelect,
-                            ),
-                          ),
-                        )
-                      : ListView(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          children: [
-                            if (state.todayItems.isNotEmpty) HistoryCardWidget(item: state.todayItems, date: 'Hari ini'),
-                            if (state.yesterdayItems.isNotEmpty)
-                              HistoryCardWidget(item: state.yesterdayItems, date: 'Kemarin'),
-                            if (state.expiredItems.isNotEmpty) HistoryCardWidget(item: state.expiredItems, date: 'Lawas'),
-                          ],
-                        )
-                ],
+                          )
+                        : ListView(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            children: [
+                              if (state.todayItems.isNotEmpty) HistoryCardWidget(item: state.todayItems, date: 'Hari ini'),
+                              if (state.yesterdayItems.isNotEmpty)
+                                HistoryCardWidget(item: state.yesterdayItems, date: 'Kemarin'),
+                              if (state.expiredItems.isNotEmpty) HistoryCardWidget(item: state.expiredItems, date: 'Lawas'),
+                            ],
+                          )
+                  ],
+                ),
               ),
-            ),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

@@ -8,6 +8,7 @@ import 'package:klinnika/src/features/common/presentation/common_controller.dart
 import 'package:klinnika/src/routes/app_routes.dart';
 import 'package:klinnika/src/services/remote/network_exceptions.dart';
 import 'package:klinnika/src/shared/extensions/build_context.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends ConsumerWidget {
   const SplashPage({
@@ -18,25 +19,34 @@ class SplashPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(commonControllerProvider, (prevState, state) {
       Future.delayed(const Duration(seconds: 3)).then((_) async {
-        if (prevState?.userValue != state.userValue) {
-          state.userValue.whenOrNull(
-            data: (data) {
-              if (data != null) {
-                context.goNamed(Routes.botNavBar.name);
-              } else {
-                context.goNamed(Routes.login.name);
-              }
-            },
-            error: (error, stackTrace) {
-              final message = NetworkExceptions.getErrorMessage(error as NetworkExceptions);
-              if (message == "User not found") {
-                context.goNamed(Routes.login.name);
-              } else {
-                context.goNamed(Routes.botNavBar.name);
-                appSnackBar(context, Colors.red, message);
-              }
-            },
-          );
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        final int? session = prefs.getInt('onboard');
+        if (session == null) {
+          await prefs.setInt('onboard', 1);
+          Future.delayed(const Duration(seconds: 1), () {
+            context.goNamed(Routes.onboard.name);
+          });
+        } else {
+          if (prevState?.userValue != state.userValue) {
+            state.userValue.whenOrNull(
+              data: (data) {
+                if (data != null) {
+                  context.goNamed(Routes.botNavBar.name);
+                } else {
+                  context.goNamed(Routes.login.name);
+                }
+              },
+              error: (error, stackTrace) {
+                final message = NetworkExceptions.getErrorMessage(error as NetworkExceptions);
+                if (message == "User not found") {
+                  context.goNamed(Routes.login.name);
+                } else {
+                  context.goNamed(Routes.botNavBar.name);
+                  appSnackBar(context, Colors.red, message);
+                }
+              },
+            );
+          }
         }
       });
     });

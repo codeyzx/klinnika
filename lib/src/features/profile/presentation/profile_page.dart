@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,11 +6,9 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:klinnika/src/common_widgets/async_value/async_value_widget.dart';
 import 'package:klinnika/src/constants/constants.dart';
 import 'package:klinnika/src/features/common/presentation/common_controller.dart';
-import 'package:klinnika/src/features/profile/presentation/profile_edit_page.dart';
 import 'package:klinnika/src/routes/app_routes.dart';
 import 'package:klinnika/src/routes/extras.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
@@ -38,15 +34,22 @@ class ProfilePage extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     state.user!.profileUrl.toString().isNotEmpty
-                    ? CircleAvatar(
-                      radius: 30.r,
-                      backgroundImage: NetworkImage(state.user!.profileUrl),
-                    )
-                    : CircleAvatar(
-                      radius: 30.r,
-                      backgroundImage: AssetImage('assets/images/profile_default_img.png'),
-                      backgroundColor: Colors.white,
-                    ),
+                        ? CachedNetworkImage(
+                            imageUrl: data?.profileUrl ?? '',
+                            progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                CircularProgressIndicator(value: downloadProgress.progress),
+                            errorWidget: (context, url, error) => const Icon(Icons.error),
+                            imageBuilder: (context, imageProvider) => CircleAvatar(
+                              radius: 30.r,
+                              backgroundImage: imageProvider,
+                              backgroundColor: Colors.white,
+                            ),
+                          )
+                        : CircleAvatar(
+                            radius: 30.r,
+                            backgroundImage: const AssetImage('assets/images/profile_default_img.png'),
+                            backgroundColor: Colors.white,
+                          ),
                     SizedBox(
                       width: 14.w,
                     ),
@@ -70,7 +73,7 @@ class ProfilePage extends ConsumerWidget {
                           height: 2.h,
                         ),
                         Text(
-                          state.user!.polyclinic,
+                          'Dokter Poli ${state.user!.polyclinic}',
                           style: TypographyApp.profileJob,
                         ),
                       ],
@@ -97,10 +100,12 @@ class ProfilePage extends ConsumerWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push<void>(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => ProfileEditPage(),
+                    context.pushNamed(
+                      Routes.editProfile.name,
+                      extra: Extras(
+                        datas: {
+                          ExtrasKey.user: state.user,
+                        },
                       ),
                     );
                   },
@@ -147,9 +152,7 @@ class ProfilePage extends ConsumerWidget {
                   height: 18.h,
                 ),
                 InkWell(
-                  onTap: () {
-                    buildWarningDialog(context).show();
-                  },
+                  onTap: () {},
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -253,9 +256,7 @@ class ProfilePage extends ConsumerWidget {
                   height: 18.h,
                 ),
                 InkWell(
-                  onTap: () {
-                    buildWarningDialog(context).show();
-                  },
+                  onTap: () {},
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -299,9 +300,7 @@ class ProfilePage extends ConsumerWidget {
                   height: 18.h,
                 ),
                 InkWell(
-                  onTap: () {
-                    buildWarningDialog(context).show();
-                  },
+                  onTap: () {},
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -352,9 +351,7 @@ class ProfilePage extends ConsumerWidget {
                   height: 18.h,
                 ),
                 InkWell(
-                  onTap: () {
-                    buildWarningDialog(context).show();
-                  },
+                  onTap: () {},
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -447,23 +444,4 @@ class ProfilePage extends ConsumerWidget {
       ),
     );
   }
-}
-
-AwesomeDialog buildWarningDialog(BuildContext context) {
-  return AwesomeDialog(
-    context: context,
-    dialogType: DialogType.warning,
-    headerAnimationLoop: false,
-    animType: AnimType.bottomSlide,
-    title: 'Maaf :(',
-    titleTextStyle: TypographyApp.warningTitle,
-    desc: 'Fitur ini masih dalam tahap pengembangan',
-    descTextStyle: TypographyApp.warningDesc,
-    buttonsTextStyle: TypographyApp.whiteOnBtnSmall,
-    buttonsBorderRadius: BorderRadius.circular(6.r),
-    btnOkColor: ColorApp.blue,
-    showCloseIcon: false,
-    btnOkText: 'Kembali',
-    btnOkOnPress: () {},
-  );
 }

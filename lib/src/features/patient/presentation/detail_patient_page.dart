@@ -53,7 +53,7 @@ class DetailPatientPage extends ConsumerWidget {
                 children: [
                   CircleAvatar(
                     radius: 30.r,
-                    backgroundImage: AssetImage('assets/images/sick_patient_img.jpg'),
+                    backgroundImage: const AssetImage('assets/images/sick_patient_img.jpg'),
                   ),
                   SizedBox(
                     width: 16.w,

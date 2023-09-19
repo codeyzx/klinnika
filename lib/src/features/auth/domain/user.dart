@@ -16,6 +16,7 @@ class User {
   final String polyclinic;
   final String email;
   final String phone;
+  final int price;
   final RoleUser role;
   final DateTime createdAt;
   final String profileUrl;
@@ -30,6 +31,7 @@ class User {
     required this.polyclinic,
     required this.email,
     required this.phone,
+    required this.price,
     required this.role,
     required this.createdAt,
     required this.profileUrl,
@@ -46,6 +48,7 @@ class User {
       polyclinic: json['polyclinic'] ?? '',
       email: json['email'] ?? '',
       phone: json['phone'] ?? '',
+      price: json['price'] ?? 0,
       role: json['role'].toString().toUpperCase().roleUser,
       createdAt: json['created_at'].toDate(),
       profileUrl: json['profile_url'] ?? '',
@@ -61,6 +64,7 @@ class User {
       'polyclinic': polyclinic,
       'email': email,
       'phone': phone,
+      'price': price,
       'role': role.value,
       'created_at': createdAt,
       'profile_url': profileUrl,
@@ -75,6 +79,7 @@ class User {
     String? polyclinic,
     String? email,
     String? phone,
+    int? price,
     RoleUser? role,
     DateTime? createdAt,
     String? profileUrl,
@@ -89,6 +94,7 @@ class User {
       polyclinic: polyclinic ?? this.polyclinic,
       email: email ?? this.email,
       phone: phone ?? this.phone,
+      price: price ?? this.price,
       role: role ?? this.role,
       createdAt: createdAt ?? this.createdAt,
       profileUrl: profileUrl ?? this.profileUrl,
