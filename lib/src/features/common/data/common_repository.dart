@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:klinnika/src/features/auth/domain/request_user.dart';
 import 'package:klinnika/src/features/auth/domain/schedule.dart';
 import 'package:klinnika/src/features/auth/domain/user.dart';
 import 'package:klinnika/src/services/services.dart';
@@ -10,6 +11,11 @@ class CommonRepository {
   final userDb = FirebaseFirestore.instance.collection('user').withConverter(
         fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!),
         toFirestore: (User user, _) => user.toJson(),
+      );
+
+  final requestUserDb = FirebaseFirestore.instance.collection('user').withConverter(
+        fromFirestore: (snapshot, _) => RequestUser.fromJson(snapshot.data()!),
+        toFirestore: (RequestUser user, _) => user.toJson(),
       );
 
   final scheduleDb = FirebaseFirestore.instance.collection('schedule').withConverter(
@@ -66,6 +72,15 @@ class CommonRepository {
       final scheduleList = await getScheduleList(user.id);
       final userConverted = user.copyWith(schedule: schedule, scheduleList: scheduleList);
       return Result.success(userConverted);
+    } catch (e, st) {
+      return Result.failure(NetworkExceptions.getFirebaseException(e), st);
+    }
+  }
+
+  Future<Result<String>> updateProfile(RequestUser user) async {
+    try {
+      await requestUserDb.doc(user.id).update(user.toJson());
+      return const Result.success('Success');
     } catch (e, st) {
       return Result.failure(NetworkExceptions.getFirebaseException(e), st);
     }

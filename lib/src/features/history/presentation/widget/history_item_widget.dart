@@ -53,7 +53,7 @@ class HistoryItemWidget extends StatelessWidget {
                 ),
                 CircleAvatar(
                   radius: 23.r,
-                  backgroundImage: AssetImage('assets/images/sick_patient_img.jpg'),
+                  backgroundImage: const AssetImage('assets/images/sick_patient_img.jpg'),
                 ),
                 SizedBox(
                   width: 12.w,

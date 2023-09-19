@@ -5,4 +5,5 @@ class ExtrasKey {
   static const inventory = 'inventory';
   static const medicalRecord = 'medicalRecord';
   static const schedule = 'schedule';
+  static const user = 'user';
 }

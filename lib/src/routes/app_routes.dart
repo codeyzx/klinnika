@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:klinnika/src/constants/constants.dart';
 import 'package:klinnika/src/features/auth/domain/schedule.dart';
+import 'package:klinnika/src/features/auth/domain/user.dart';
 import 'package:klinnika/src/features/checkup/presentation/checkup_page.dart';
 import 'package:klinnika/src/features/common/presentation/botnavbar/botnavbar_page.dart';
 import 'package:klinnika/src/features/common/presentation/splash/splash_page.dart';
@@ -10,6 +11,7 @@ import 'package:klinnika/src/features/history/domain/inventory_stock_convert.dar
 import 'package:klinnika/src/features/history/presentation/history_detail_page.dart';
 import 'package:klinnika/src/features/inventory/presentation/inventory_detail_page.dart';
 import 'package:klinnika/src/features/medical_record/domain/medical_record_convert.dart';
+import 'package:klinnika/src/features/profile/presentation/profile_edit_page.dart';
 import 'package:klinnika/src/features/profile/presentation/schedule_page.dart';
 import 'package:klinnika/src/features/queue/domain/queue_convert.dart';
 import 'package:klinnika/src/features/patient/presentation/detail_patient_page.dart';
@@ -29,6 +31,7 @@ enum Routes {
   inventoryDetail,
   historyDetail,
   schedule,
+  editProfile,
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -70,6 +73,17 @@ final goRouterProvider = Provider<GoRouter>(
             final schedule = extras.datas[ExtrasKey.schedule] as List<Schedule>;
             return SchedulePage(
               schedule: schedule,
+            );
+          },
+        ),
+        GoRoute(
+          path: '/edit-profile-page',
+          name: Routes.editProfile.name,
+          builder: (context, state) {
+            final extras = state.extra as Extras;
+            final user = extras.datas[ExtrasKey.user] as User;
+            return ProfileEditPage(
+              user: user,
             );
           },
         ),
