@@ -242,8 +242,7 @@ class _QueuePageState extends ConsumerState<QueuePage> {
                                                         ),
                                                         CircleAvatar(
                                                           radius: 25.r,
-                                                          backgroundImage: const NetworkImage(
-                                                              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&w=1000&q=80"),
+                                                          backgroundImage: AssetImage('assets/images/sick_patient_img.jpg'),
                                                         ),
                                                         SizedBox(
                                                           width: 13.w,
@@ -321,8 +320,7 @@ class _QueuePageState extends ConsumerState<QueuePage> {
                                                         ),
                                                         CircleAvatar(
                                                           radius: 22.r,
-                                                          backgroundImage: const NetworkImage(
-                                                              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww&w=1000&q=80"),
+                                                          backgroundImage: AssetImage('assets/images/sick_patient_img.jpg'),
                                                         ),
                                                         SizedBox(
                                                           width: 10.w,
